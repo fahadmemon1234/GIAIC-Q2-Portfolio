@@ -18,12 +18,12 @@ const TodoList = () => {
   const [editIndex, setEditIndex] = useState<number | null>(null);
   const [editValue, setEditValue] = useState<string>("");
 
-  const handleEdit = (index: any): void => {
+  const handleEdit = (index: number): void => {
     setEditIndex(index);
     setEditValue(todoList[index]);
   };
 
-  const handleSaveEdit = (index: any): void => {
+  const handleSaveEdit = (index: number): void => {
     const updatedList = [...todoList];
     updatedList[index] = editValue;
     setTodoList(updatedList);
@@ -32,7 +32,7 @@ const TodoList = () => {
 
   //   Delete
 
-  const handleDelete = (index: any) => {
+  const handleDelete = (index: number): void => {
     const updatedList = todoList.filter((_, i) => i !== index);
     setTodoList(updatedList);
   };
