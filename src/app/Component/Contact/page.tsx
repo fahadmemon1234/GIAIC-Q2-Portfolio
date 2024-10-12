@@ -22,21 +22,21 @@ const Contact = () => {
                 </h4>
                 <span className="flex items-center mb-9">
                   {" "}
-                  <IoHomeOutline className="icon text-xl" />
+                  <IoHomeOutline className="text-xl text-[#f05223]" />
                   <p className="pl-3">Hyderabad, Qasimabad, Memon Society</p>
                 </span>
 
                 <h4 className="text-1xl font-bold mb-3 text-black">Phone :</h4>
                 <span className="flex items-center mb-9">
                   {" "}
-                  <LuPhone className="icon text-xl" />
+                  <LuPhone className="text-xl text-[#f05223]" />
                   <p className="pl-3">+92 315-3268177</p>
                 </span>
 
                 <h4 className="text-1xl font-bold mb-3 text-black">Email :</h4>
                 <span className="flex items-center mb-9">
                   {" "}
-                  <MdOutlineMail className="icon text-xl" />
+                  <MdOutlineMail className="text-xl text-[#f05223]" />
                   <p className="pl-3">fahadgraphicx11@gmail.com</p>
                 </span>
               </div>
@@ -101,7 +101,7 @@ const Contact = () => {
                         <div className="col-span-12 md:col-span-12 lg:col-span-12 text-end">
                           <a
                             href="#"
-                            className="contactbtn inline-flex font-medium text-white border-0 py-2 px-6 focus:outline-none rounded text-lg"
+                            className="bg-[#f05223] inline-flex font-medium text-white border-0 py-2 px-6 focus:outline-none rounded text-lg"
                           >
                             Send Message
                           </a>

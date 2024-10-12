@@ -22,7 +22,7 @@ export default function RootLayout({
           href="/assets/img/Favicon/fLogoDesign.png"
         />
       </head>
-      <body>
+      <body className="bg-[#2558ab0d]">
         <Navbar />
         {children}
         <Footer />

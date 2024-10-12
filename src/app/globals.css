@@ -61,9 +61,9 @@
   }
 }
 
-body {
-  background-color: rgba(37, 88, 171, 0.05);
-}
+/* body {
+  background-color: #2558ab0d;
+} */
 
 .hover-effect {
   position: relative;
@@ -101,7 +101,7 @@ body {
   padding-bottom: 1rem !important;
 }
 
-#home {
+/* #home {
   background-image: url("/assets/img/bg-home.png");
   min-height: 100vh;
   align-items: center;
@@ -115,15 +115,11 @@ body {
 
 .contactbtn {
   background-color: #f05223 !important;
-}
+} */
 
-.icon {
-  color: rgb(240, 82, 35) !important;
-}
-
-.about {
+/* .about {
   position: relative;
-}
+} */
 
 .image-round::before {
   content: "";
@@ -181,3 +177,8 @@ body {
     border-color: #ffcd00;
   }
 }
+
+/* 
+.icon {
+  color: rgb(240, 82, 35) !important;
+} */
