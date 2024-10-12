@@ -8,7 +8,7 @@ const Navbar = () => {
   const [active, setActive] = useState("Home");
   const [scroll, setScroll] = useState(false);
 
-  const handleSetActive = (section: any) => {
+  const handleSetActive = (section: string) => {
     setActive(section);
   };
 
