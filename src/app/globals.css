@@ -2,26 +2,182 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.close-menu,
+.open-menu {
+  position: absolute;
+  cursor: pointer;
+  display: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.open-menu {
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 25px;
+}
+
+.close-menu {
+  top: 20px;
+  right: 20px;
+}
+
+#check {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .menu {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 73%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    z-index: 100;
+    background-color: #000;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+    text-transform: uppercase;
+    font-size: 24px;
+  }
+
+  .menu li {
+    margin-top: 40px;
+  }
+
+  .menu li a {
+    padding: 10px;
+  }
+
+  .close-menu,
+  .open-menu {
+    display: block;
+  }
+
+  #check:checked ~ .menu {
+    right: 0;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgba(37, 88, 171, 0.05);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.hover-effect {
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.2s ease-in-out;
+  font-weight: bold;
+}
+
+.hover-effect::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgb(249, 143, 104);
+  transition: width 0.3s ease-in-out;
+}
+
+.hover-effect:hover::after {
+  width: 100%;
+}
+
+.active-link {
+  color: orangered;
+  font-weight: bold;
+}
+
+.active-link::after {
+  width: 100%;
+}
+
+.py-8 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+#home {
+  background-image: url("/assets/img/bg-home.png");
+  min-height: 100vh;
+  align-items: center;
+  display: flex;
+  background-color: rgba(37, 88, 171, 0.05);
+}
+
+.hello {
+  color: rgb(240, 82, 35);
+}
+
+.contactbtn {
+  background-color: #f05223 !important;
+}
+
+.icon {
+  color: rgb(240, 82, 35) !important;
+}
+
+.about {
+  position: relative;
+}
+
+.image-round::before {
+  content: "";
+  position: absolute;
+  height: 500px;
+  width: 500px;
+  animation: bg-change 6s linear infinite;
+  border-radius: 100%;
+  opacity: 0.5;
+  left: 30px;
+  top: 30px;
+}
+
+@keyframes bg-change {
+  0%,
+  100% {
+    background-color: #2fb4ae;
+  }
+  25% {
+    background-color: #2558ab;
+  }
+  50% {
+    background-color: #c71f1f;
+  }
+
+  75% {
+    background-color: #ffcd00;
+  }
+}
+
+.custom-form {
+  position: relative;
+  bottom: -80px;
+  box-shadow: 0px 3px 10px 0px rgba(28, 47, 80, 0.2);
+  padding: 40px;
+  border-radius: 20px;
+  background-color: #fff;
+  animation: color-change 6s linear infinite;
+  border-left: solid 4px #ff1493;
+}
+
+@keyframes color-change {
+  0%,
+  100% {
+    border-color: #2fb4ae;
+  }
+
+  25% {
+    border-color: #2558ab;
+  }
+  50% {
+    border-color: #c71f1f;
+  }
+  75% {
+    border-color: #ffcd00;
   }
 }
