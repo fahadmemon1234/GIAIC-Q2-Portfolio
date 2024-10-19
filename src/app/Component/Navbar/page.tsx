@@ -8,6 +8,12 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const [activeLink, setActiveLink] = useState("/");
+
+  const handleSetActive = (href: string) => {
+    setActiveLink(href);
+  };
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -47,8 +53,13 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/"
-                  className="block py-2 px-3 text-white bg-[#FF6464] rounded md:bg-transparent md:text-[#FF6464] md:p-0 dark:text-white"
+                  className={`block py-2 px-3 rounded md:p-0 ${
+                    activeLink === "/"
+                      ? "text-white bg-[#FF6464] md:bg-transparent md:text-[#FF6464]"
+                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#FF6464] dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  }`}
                   aria-current="page"
+                  onClick={() => handleSetActive("/")}
                 >
                   Home
                 </Link>
@@ -56,7 +67,12 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/Component/Work"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  className={`block py-2 px-3 rounded md:p-0 ${
+                    activeLink === "/Component/Work"
+                      ? "text-white bg-[#FF6464] md:bg-transparent md:text-[#FF6464]"
+                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#FF6464] dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  }`}
+                  onClick={() => handleSetActive("/Component/Work")}
                 >
                   Works
                 </Link>
@@ -64,7 +80,12 @@ const Navbar = () => {
               <li>
                 <Link
                   href="/Component/Blog"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  className={`block py-2 px-3 rounded md:p-0 ${
+                    activeLink === "/Component/Blog"
+                      ? "text-white bg-[#FF6464] md:bg-transparent md:text-[#FF6464]"
+                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#FF6464] dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  }`}
+                  onClick={() => handleSetActive("/Component/Blog")}
                 >
                   Blog
                 </Link>
