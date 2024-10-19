@@ -52,7 +52,10 @@ const Main = () => {
               <h4 className="font-medium">Recent posts</h4>
             </div>
             <div className="lg:block lg:col-span-4 md:col-span-4 hidden sm:col-span-12 col-span-12 text-right">
-              <Link href="#" className="font-medium text-[#00A8CC]">
+              <Link
+                href="/Component/Blog"
+                className="font-medium text-[#00A8CC]"
+              >
                 view all
               </Link>
             </div>
