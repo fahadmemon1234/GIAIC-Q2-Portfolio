@@ -24,7 +24,13 @@ const blogData = [
     author: "John Smith",
     date: "Nov 12, 2025",
   },
-  // Additional blog data entries can go here
+  {
+    imageUrl: "/assets/images/Nature.jpg",
+    category: "Architecture",
+    title: "Exploring Minimalist Interior Designs",
+    author: "John Smith",
+    date: "Nov 12, 2025",
+  },
 ];
 
 export default function Home() {
@@ -32,7 +38,7 @@ export default function Home() {
     <>
       <Navbar />
       <section className="bg-[#f9fafb] bottom-0 rounded-b-[50px] w-full h-full">
-        <div className="max-w-screen-xl mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+        <div className="max-w-screen-xl mx-auto p-4 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-8">
           {blogData.map((blog, index) => (
             <BlogCard
               key={index}
