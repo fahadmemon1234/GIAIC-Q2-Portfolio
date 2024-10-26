@@ -13,6 +13,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         fbBlue: "rgb(26 86 219)",
+        textblue: "rgb(45 104 248)",
       },
     },
   },
