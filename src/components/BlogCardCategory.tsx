@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const categories = [
   { name: "All" },
@@ -113,51 +114,53 @@ const BlogCardCategory = () => {
               id={index + "t"}
               className="group bg-white p-4 rounded-lg shadow-lg transition-transform"
             >
-              <div className="mb-6 overflow-hidden rounded-[10px] transition-transform group-hover:scale-105">
-                <Image
-                  src={blog.imageUrl}
-                  alt="Blog image"
-                  className="w-full h-[250px] object-cover transition-transform duration-300"
-                  width={300}
-                  height={500}
-                />
-              </div>
-
-              <h3 className="mb-3.5">
-                <span className="block text-dark font-bold text-xl relative">
-                  <span className="bg-gradient-to-r from-primary/50 to-primary/40 bg-[length:0px_3px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-in-out group-hover:bg-[length:100%_3px]">
-                    {blog.title}
-                  </span>
-                </span>
-              </h3>
-
-              <p className="text-gray-600 mb-4">{blog.previewText}</p>
-
-              <div className="mt-auto pt-4 border-t border-gray-200">
-                <div className="flex flex-wrap gap-3 items-center justify-between mt-4.5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex items-center gap-3">
-                      <div className="flex w-6 h-6 rounded-full overflow-hidden">
-                        <Image
-                          src={blog.imageUrl}
-                          alt="Author"
-                          width={24}
-                          height={24}
-                        />
-                      </div>
-                      <p className="text-sm">{blog.author}</p>
-                    </span>
-
-                    <span className="flex w-[3px] h-[3px] rounded-full bg-dark-2"></span>
-
-                    <p className="text-sm text-gray-400">{blog.date}</p>
-                  </div>
-
-                  <span className="inline-flex text-blue-700 bg-blue-100 font-medium text-sm py-1 px-3 rounded-full">
-                    {blog.category}
-                  </span>
+              <Link href={"./BlogPage"}>
+                <div className="mb-6 overflow-hidden rounded-[10px] transition-transform group-hover:scale-105">
+                  <Image
+                    src={blog.imageUrl}
+                    alt="Blog image"
+                    className="w-full h-[250px] object-cover transition-transform duration-300"
+                    width={300}
+                    height={500}
+                  />
                 </div>
-              </div>
+
+                <h3 className="mb-3.5">
+                  <span className="block text-dark font-bold text-xl relative">
+                    <span className="bg-gradient-to-r from-primary/50 to-primary/40 bg-[length:0px_3px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 ease-in-out group-hover:bg-[length:100%_3px]">
+                      {blog.title}
+                    </span>
+                  </span>
+                </h3>
+
+                <p className="text-gray-600 mb-4">{blog.previewText}</p>
+
+                <div className="mt-auto pt-4 border-t border-gray-200">
+                  <div className="flex flex-wrap gap-3 items-center justify-between mt-4.5">
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex items-center gap-3">
+                        <div className="flex w-6 h-6 rounded-full overflow-hidden">
+                          <Image
+                            src={blog.imageUrl}
+                            alt="Author"
+                            width={24}
+                            height={24}
+                          />
+                        </div>
+                        <p className="text-sm">{blog.author}</p>
+                      </span>
+
+                      <span className="flex w-[3px] h-[3px] rounded-full bg-dark-2"></span>
+
+                      <p className="text-sm text-gray-400">{blog.date}</p>
+                    </div>
+
+                    <span className="inline-flex text-blue-700 bg-blue-100 font-medium text-sm py-1 px-3 rounded-full">
+                      {blog.category}
+                    </span>
+                  </div>
+                </div>
+              </Link>
             </div>
           ))}
         </div>
