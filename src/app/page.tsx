@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
 import BlogCard from "@/components/BlogCard";
 import BlogCardCategory from "@/components/BlogCardCategory";
 
@@ -38,7 +37,6 @@ const blogData = [
 export default function Home() {
   return (
     <>
-      <Navbar />
       <section className="bg-[#f9fafb] bottom-0 rounded-b-[50px] w-full h-full">
         <div className="max-w-screen-xl mx-auto p-4 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-8">
           {blogData.map((blog, index) => (
