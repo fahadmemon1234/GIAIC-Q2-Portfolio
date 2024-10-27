@@ -9,13 +9,13 @@ interface BlogCardProps {
   date: string;
 }
 
-export default function BlogCard({
+const BlogCard = ({
   imageUrl,
   category,
   title,
   author,
   date,
-}: BlogCardProps) {
+}: BlogCardProps) => {
   return (
     <div className="mb-5 flex flex-col sm:flex-row sm:items-center gap-6 bg-white shadow rounded-xl p-4 w-full">
       <div className="sm:max-w-[238px] w-full">
@@ -48,4 +48,6 @@ export default function BlogCard({
       </div>
     </div>
   );
-}
+};
+
+export default BlogCard;
