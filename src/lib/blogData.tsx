@@ -102,6 +102,8 @@ const blogShort = [
     imageUrl: "/assets/images/Human.jpg",
     category: "News",
     title: "Human trafficking: An underreported crime in Pakistan",
+    previewText:
+      "Human trafficking is a grave violation of human rights that persists as a significant issue in Pakistan. Despite its severity, this crime remains largely underreported primarily due to social stigma, lack of awareness, and inadequate law enforcement.",
     author: "Syeda Alizeh",
     date: "June 04, 2024",
     description:
@@ -116,7 +118,7 @@ const blogShort = [
     imageUrl: "/assets/images/makkah.jpeg",
     imageUrl1: "/assets/images/makkah1.jpg",
     previewText:
-      "The government is exploring a new payment plan aimed at reducing the financial burden of Hajj for low-income and middle-class citizens.",
+      "The government is exploring a new payment plan aimed at reducing the financial burden of Hajj for low-income and middle-class citizens. This proposed installment system would allow pilgrims to spread their Hajj payments over three.",
     category: "News",
     title: "Govt Considering New Installment Plan to Ease Hajj Pilgrims",
     author: "Momina",
@@ -133,7 +135,7 @@ const blogShort = [
     imageUrl: "/assets/images/Adele.jpg",
     imageUrl1: "/assets/images/Adele1.jpg",
     previewText:
-      "Adele is head over heels in love with Meryl Streep's most beloved film role.",
+      "Adele is head over heels in love with Meryl Streep's most beloved film role. the 36-year-old songstress impersonated Madeline Ashton, Streep's character from the 1992 film Death Becomes Her as she made her way through the crowd.",
     category: "Entertainment",
     title:
       "Adele shares 'unfiltered' thoughts on her 'most-beloved' 90s' character",

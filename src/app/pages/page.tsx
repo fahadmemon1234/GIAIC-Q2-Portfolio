@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { blogData, blogShort } from "@/lib/blogData";
-import { useRouter } from "next/navigation";
 
 const categories = [
   { name: "All" },
@@ -14,8 +13,7 @@ const categories = [
   { name: "News" },
 ];
 
-const BlogCardCategory = () => {
-  const router = useRouter();
+const AllBlogCard = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const activeClass = "bg-black border-black text-white";
@@ -23,12 +21,11 @@ const BlogCardCategory = () => {
 
   const filteredBlogData =
     selectedCategory === "All"
-      ? blogData
-      : blogData.filter((blog) => blog.category === selectedCategory);
-
-  const handleNext = () => {
-    router.push("/pages");
-  };
+      ? [...blogData, ...blogShort]
+      : [
+          ...blogData.filter((blog) => blog.category === selectedCategory),
+          ...blogShort.filter((blog) => blog.category === selectedCategory),
+        ];
 
   return (
     <>
@@ -111,16 +108,9 @@ const BlogCardCategory = () => {
             </div>
           ))}
         </div>
-
-        <button
-          onClick={handleNext}
-          className="flex justify-center font-medium text-black border border-black rounded-md py-3 px-7 hover:bg-black hover:text-white ease-in duration-200 mx-auto mt-12 lg:mt-17"
-        >
-          Browse all Posts
-        </button>
       </div>
     </>
   );
 };
 
-export default BlogCardCategory;
+export default AllBlogCard;
