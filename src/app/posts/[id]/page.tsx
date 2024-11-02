@@ -1,16 +1,21 @@
 "use client";
 import React from "react";
 import { useParams } from "next/navigation";
-import blogData from "@/lib/blogData";
+import { blogData, blogShort } from "@/lib/blogData";
 import Image from "next/image";
 import CommentSection from "@/components/CommentSection";
 
 const PostId = () => {
   const { id } = useParams();
 
-  const blogPost = blogData.find((post) => post.id === Number(id));
+  const blogPost = React.useMemo(() => {
+    return (
+      blogData.find((post) => post.id === Number(id)) ||
+      blogShort.find((post) => post.id === Number(id))
+    );
+  }, [id]);
 
-  if (!blogPost) return <p>Loading...</p>;
+  if (!blogPost) return <p>Post not found or loading...</p>;
 
   return (
     <>
@@ -59,7 +64,19 @@ const PostId = () => {
 
         <div className="max-w-[900px] mx-auto">
           <p className="mb-5 text-black">{blogPost.description}</p>
+        </div>
+        {blogPost.imageUrl1 && (
+          <Image
+            src={blogPost.imageUrl1}
+            width={900}
+            height={500}
+            alt="img"
+            quality={100}
+            className="mt-10 mb-11 w-[900px] h-[500px] mx-auto rounded shadow object-cover"
+          />
+        )}
 
+        <div className="max-w-[900px] mx-auto">
           <p className="mb-5 text-black">{blogPost.description1}</p>
         </div>
       </div>

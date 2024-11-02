@@ -4,38 +4,7 @@ import React from "react";
 import BlogCard from "@/components/BlogCard";
 import BlogCardCategory from "@/components/BlogCardCategory";
 import Image from "next/image";
-
-const blogData = [
-  {
-    imageUrl: "/assets/images/Human.jpg",
-    category: "News",
-    title: "Human trafficking: An underreported crime in Pakistan",
-    author: "Syeda Alizeh",
-    date: "June 04, 2024",
-  },
-  {
-    imageUrl: "/assets/images/india.png",
-    category: "News",
-    title: "Last-ditch attempt to save India’s democracy",
-    author: "Chris Emmanuel",
-    date: "June 06, 2024",
-  },
-  {
-    imageUrl: "/assets/images/nvidia.jpg",
-    category: "Technology",
-    title: "Nvidia surpasses Apple as 'world’s most valuable company'",
-    author: "News Desk",
-    date: "Oct 26, 2024",
-  },
-  {
-    imageUrl: "/assets/images/Women.jpg",
-    category: " Entertainment",
-    title:
-      "Kate Middleton resumes royal duties after completing cancer treatment",
-    author: "Pop Culture & Art",
-    date: "Sep 18, 2024",
-  },
-];
+import { blogShort } from "@/lib/blogData";
 
 export default function Home() {
   const [email, setEmail] = useState<string>("");
@@ -68,14 +37,16 @@ export default function Home() {
     <>
       <section className="bg-[#f9fafb] bottom-0 rounded-b-[50px] w-full h-full">
         <div className="max-w-screen-xl mx-auto p-4 grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-8">
-          {blogData.map((blog, index) => (
+          {blogShort.map((blog, index) => (
             <BlogCard
               key={index}
               imageUrl={blog.imageUrl}
+              imageUrl1={blog.imageUrl1}
               category={blog.category}
               title={blog.title}
               author={blog.author}
               date={blog.date}
+              id={blog.id}
             />
           ))}
         </div>

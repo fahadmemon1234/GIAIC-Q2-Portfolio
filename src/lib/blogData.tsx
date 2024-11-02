@@ -2,6 +2,7 @@ const blogData = [
   {
     id: 1,
     imageUrl: "/assets/images/james.png",
+    imageUrl1: "",
     title:
       "James Franco opens up about redemption, 'Hey Joe' film, & the end of his friendship with Seth Rogen",
     previewText:
@@ -95,4 +96,73 @@ const blogData = [
   },
 ];
 
-export default blogData;
+const blogShort = [
+  {
+    id: 10,
+    imageUrl: "/assets/images/Human.jpg",
+    category: "News",
+    title: "Human trafficking: An underreported crime in Pakistan",
+    author: "Syeda Alizeh",
+    date: "June 04, 2024",
+    description:
+      "Human trafficking is a grave violation of human rights that persists as a significant issue in Pakistan. Despite its severity, this crime remains largely underreported, primarily due to social stigma, lack of awareness, and inadequate law enforcement. Victims of human trafficking in Pakistan are often lured with false promises of employment, education, or a better life, only to find themselves subjected to forced labor, sexual exploitation, or other forms of abuse. The complex socio-economic factors, including poverty, unemployment, and illiteracy, contribute to the vulnerability of individuals, particularly women and children, making them easy targets for traffickers." +
+      " One of the key challenges in combating human trafficking in Pakistan is the lack of accurate data and reporting mechanisms. Many cases go unreported due to fear of retaliation, cultural taboos, and the stigma associated with being a trafficking victim. Moreover, law enforcement agencies often lack the training and resources necessary to effectively identify and assist victims. The absence of comprehensive national policies and coordinated efforts among various stakeholders further complicates the fight against this heinous crime. Victims frequently remain invisible, suffering in silence without access to justice or support services.",
+    description1:
+      "The impact of human trafficking extends beyond individual victims; it affects families and communities at large. Trafficked individuals often return home traumatized, with physical and psychological scars that impede their reintegration into society. This creates a cycle of vulnerability, where survivors may find themselves at risk of re-trafficking due to lack of economic opportunities and social support. The stigma surrounding trafficking also hinders their ability to rebuild their lives, leading to further marginalization and exclusion." +
+      " To address the issue of human trafficking effectively, a multi-faceted approach is essential. This includes raising public awareness about the realities of trafficking, enhancing law enforcement training, and implementing stronger legal frameworks to protect victims. Collaboration between government agencies, non-governmental organizations, and international bodies is crucial in creating a comprehensive response to this crisis. By prioritizing the fight against human trafficking, Pakistan can take significant steps towards safeguarding the rights and dignity of its most vulnerable populations and ensuring justice for the victims of this underreported crime.",
+  },
+  {
+    id: 23,
+    imageUrl: "/assets/images/makkah.jpeg",
+    imageUrl1: "/assets/images/makkah1.jpg",
+    previewText:
+      "The government is exploring a new payment plan aimed at reducing the financial burden of Hajj for low-income and middle-class citizens.",
+    category: "News",
+    title: "Govt Considering New Installment Plan to Ease Hajj Pilgrims",
+    author: "Momina",
+    date: "Nov 2, 2024",
+    description:
+      "The government is exploring a new payment plan aimed at reducing the financial burden of Hajj for low-income and middle-class citizens. This proposed installment system would allow pilgrims to spread their Hajj payments over three installments, rather than paying the entire cost upfront." +
+      " This initiative has been presented for federal cabinet approval and is expected to be integrated into the governments broader Hajj policy. The Ministry of Religious Affairs, which oversees pilgrimage arrangements, supports the plan, seeing it as a way to make Hajj more accessible for a wider range of Pakistani citizens.",
+    description1:
+      "Under the installment proposal, pilgrims would initially deposit Rs 200,000 with their application. After the lottery selection process, an additional Rs 400,000 would be required, followed by a final payment before departure. This approach would help ease the financial pressure on families, many of whom save for years to afford the pilgrimage." +
+      " Additional guidelines for 2025 include the option of longer or shorter Hajj durations and new age restrictions that prevent children under 12 from joining. These adjustments reflect the government’s broader goal to make the pilgrimage more accessible, organized, and affordable for all eligible Pakistanis.",
+  },
+  {
+    id: 27,
+    imageUrl: "/assets/images/Adele.jpg",
+    imageUrl1: "/assets/images/Adele1.jpg",
+    previewText:
+      "Adele is head over heels in love with Meryl Streep's most beloved film role.",
+    category: "Entertainment",
+    title:
+      "Adele shares 'unfiltered' thoughts on her 'most-beloved' 90s' character",
+    author: "By Web Desk",
+    date: "Nov 02, 2024",
+    description:
+      "During one of her exclusive appearances on Weekends with Adele Las Vegas residency shows, Friday, November 1, the 36-year-old songstress impersonated Madeline Ashton, Streep's character from the 1992 film Death Becomes Her as she made her way through the crowd." +
+      " Paying homage to the 90s' iconic character, the Hello singer sported a silver jacket as well as a blonde wig to stay true to the theme.",
+    description1:
+      "This comes on the heels of the singer's sweet moment with Celion Dion at her Las Vegas residency show on Saturday, October 26." +
+      " The Skyfall singer wrote at the time, I have been performing in Celine Dion's room at the Colosseum for almost 2 years now. It was the only venue I wanted to play in Vegas because it was built for her. I have a picture of her right next to the stage that I touch every night before I walk on and she came to the show this weekend and it was a surprise and it was a MOMENT!",
+  },
+  {
+    id: 29,
+    imageUrl: "/assets/images/business.png",
+    imageUrl1: "/assets/images/business1.webp",
+    previewText:
+      "The seventeenth edition of  SOT Events, organised by Beaconhouse, opened at the Beach Luxury Hotel in Karachi.",
+    category: " Business",
+    title: "SOT Events 2024 Kicks Off in Karachi",
+    author: "Musab Malik",
+    date: "Nov 2, 2024",
+    description:
+      "The seventeenth edition of  SOT Events, organised by Beaconhouse, opened at the Beach Luxury Hotel in Karachi. This years event, titled Guardians of the Future: Shaping Tomorrow with Generative AI, is a future-oriented two-day event. For the past 24 years, SOT Events has been at the forefront of conversations that shape the future of society. The 16th edition in 2023, was about the  transformative power of generative Artificial Intelligence (AI) and its far-reaching impact on the world. This year, SOT explores AIs expanding role further, from reshaping industries and redefining creativity to challenging traditional notions of ownership and responsibility." +
+      " Bringing together thought leaders, experts, and changemakers from diverse fields, SOT XVII offers a platform for deep reflection and forward-looking discussions. Through panel discussions, workshops, debates, interviews, and keynote talks, we seek to uncover insights and solutions for an ever-evolving world. Day 1 featured a wide array of discussion topics, including social issues, health, wellbeing, gender, diversity, climate change, fashion, education, and cyber safety. A unique and exciting feature of the SOT is the inclusion of AI Avatars who participate in the conversations as panellists.",
+    description1:
+      "The event commenced with a keynote speech by Oscar-winning filmmaker, Sharmeen Obaid-Chinoy.  Other participants included Sanam Saeed, Mohib Mirza, Vaneeza Ahmad, Dr Pervez Hoodbhoy, Zoraiz Lashari, Nafisa Shah, Mohsin Naveed Ranjha, and, and Tapu Javeri." +
+      " With over 30 thought-provoking sessions across two days, SOT 2024 features more than 100 influential speakers including social media influencers like Mooro and Faiza Saleem; media personalities such as Tina Sani and Nadeem Baig; distinguished educationists Dr Sohail Naqvi and Dr Arfa Sayeda Zehra; renowned journalists Wusat Ullah Khan and Amber Rahim Shamsi; celebrated athletes Haider Ali and Faiqa Riaz; and IT experts Dr Basit Riaz Sheikh and Jazib Zahir, among many others. This years event also features an immersive science exhibition, developed with MagnifiScience, offering attendees an interactive, hands-on experience.",
+  },
+];
+
+export { blogData, blogShort };
