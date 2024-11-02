@@ -60,7 +60,8 @@ const BlogCardCategory = () => {
                     alt="Blog image"
                     className="w-full h-[250px] object-cover transition-transform duration-300"
                     width={300}
-                    height={500}
+                    height={250}
+                    quality={100}
                   />
                 </div>
 
@@ -84,6 +85,7 @@ const BlogCardCategory = () => {
                             alt="Author"
                             width={24}
                             height={24}
+                            quality={100}
                           />
                         </div>
                         <p className="text-sm">{blog.author}</p>
