@@ -5,7 +5,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { email } = req.body;
+    console.log(req.body);
 
     return res.status(200).json({ message: "Email saved successfully!" });
   } else {

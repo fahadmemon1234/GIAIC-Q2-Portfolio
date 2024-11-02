@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { blogData, blogShort } from "@/lib/blogData";
+import { blogData } from "@/lib/blogData";
 import { useRouter } from "next/navigation";
 
 const categories = [
@@ -54,7 +54,7 @@ const BlogCardCategory = () => {
 
       <div className="max-w-screen-xl mx-auto p-4 gap-y-6 gap-x-8">
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredBlogData.map((blog, index) => (
+          {filteredBlogData.map((blog) => (
             <div
               key={blog.id}
               className="group bg-white p-4 rounded-lg shadow-lg transition-transform"
