@@ -41,7 +41,6 @@ export default function Home() {
             <BlogCard
               key={index}
               imageUrl={blog.imageUrl}
-              imageUrl1={blog.imageUrl1}
               category={blog.category}
               title={blog.title}
               author={blog.author}

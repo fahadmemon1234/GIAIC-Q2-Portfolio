@@ -5,7 +5,6 @@ import Link from "next/link";
 interface BlogCardProps {
   id: number;
   imageUrl: string;
-  imageUrl1?: string | undefined;
   category: string;
   title: string;
   author: string;
@@ -15,7 +14,6 @@ interface BlogCardProps {
 const BlogCard = ({
   id,
   imageUrl,
-  imageUrl1,
   category,
   title,
   author,
