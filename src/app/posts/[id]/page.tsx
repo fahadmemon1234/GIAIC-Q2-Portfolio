@@ -56,6 +56,8 @@ const PostId = () => {
           alt="img"
           className="mt-10 mb-11 w-[1000px] h-[500px] mx-auto rounded shadow object-cover"
         />
+
+        <div className="pt-5"></div>
       </div>
     </>
   );
