@@ -8,6 +8,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -25,9 +26,30 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <nav className="bg-white dark:bg-gray-900 border-b-[1px] border-gray-200">
+      <nav
+        id="topnav"
+        className={`defaultscroll sticky top-0 z-50 transition-all duration-300 ${
+          isSticky ? "bg-white shadow-md" : "bg-[#10b9810d]"
+        }`}
+      >
         <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
           <Link
             href="/"

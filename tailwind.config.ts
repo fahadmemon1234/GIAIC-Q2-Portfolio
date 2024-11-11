@@ -17,6 +17,9 @@ const config: Config = {
       boxShadow: {
         custom: "0px 8px 24px rgba(149, 157, 165, 0.2)",
       },
+      spacing: {
+        "0.2": "0.2rem", // Add custom spacing
+      },
     },
   },
   plugins: [require("flowbite/plugin")],
