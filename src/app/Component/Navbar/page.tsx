@@ -5,8 +5,11 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { FiUser } from "react-icons/fi";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const pathname = usePathname();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
@@ -42,6 +45,15 @@ const Navbar = () => {
     };
   }, []);
 
+  const links = [
+    { name: "Home", href: "/" },
+    { name: "Products", href: "/products" },
+    { name: "Shop", href: "/shop" },
+    { name: "Pages", href: "/pages" },
+    { name: "Sale", href: "/sale" },
+    { name: "Contact Us", href: "/contact-us" },
+  ];
+
   return (
     <>
       <nav
@@ -69,19 +81,21 @@ const Navbar = () => {
             id="navbar-default"
           >
             <ul className="font-medium flex flex-col md:flex-row md:space-x-8 rtl:space-x-reverse p-4 md:p-0 mt-4 md:mt-0 rounded-lg bg-gray-50 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
-              {["Home", "Products", "Shop", "Pages", "Sale", "Contact Us"].map(
-                (link) => (
-                  <li key={link}>
-                    <Link
-                      href={`/${link.toLowerCase().replace(" ", "-")}`}
-                      passHref
-                      className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-orange-500 dark:text-white md:dark:hover:text-orange-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                    >
-                      {link}
-                    </Link>
-                  </li>
-                )
-              )}
+              {links.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    passHref
+                    className={`block py-2 px-3 rounded ${
+                      pathname === link.href
+                        ? "text-orange-500"
+                        : "text-gray-900 dark:text-white hover:bg-gray-100 md:hover:bg-transparent md:border-0 dark:hover:text-white"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

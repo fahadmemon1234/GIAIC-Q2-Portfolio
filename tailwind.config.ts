@@ -18,7 +18,7 @@ const config: Config = {
         custom: "0px 8px 24px rgba(149, 157, 165, 0.2)",
       },
       spacing: {
-        "0.2": "0.2rem", // Add custom spacing
+        "0.2": "0.2rem",
       },
     },
   },

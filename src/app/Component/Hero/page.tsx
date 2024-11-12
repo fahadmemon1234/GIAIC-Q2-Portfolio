@@ -1,4 +1,16 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import Typewriter from "typewriter-effect";
+
 const Hero = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null;
+
   return (
     <>
       <section
@@ -14,7 +26,20 @@ const Hero = () => {
                 New Collection
               </span>
               <h4 className="text-4xl md:text-6xl font-bold my-3 leading-normal md:leading-snug">
-                The Gift Suite
+                <Typewriter
+                  options={{
+                    strings: [
+                      "The Gift Suite",
+                      "Exclusive Offers",
+                      "Special Deals",
+                      "Shop Now!",
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    delay: 75,
+                    deleteSpeed: 50,
+                  }}
+                />
               </h4>
               <p className="text-lg">
                 Our latest collection of essential basics.
