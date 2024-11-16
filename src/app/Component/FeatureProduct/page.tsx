@@ -72,6 +72,9 @@ const FeatureProduct = () => {
 
           <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 pt-6 gap-6">
             {products.slice(0, 4).map((product) => {
+              const finalPrice =
+                product.price * (1 - product.discountPercentage / 100);
+
               const isLiked = likedProducts[product.id] || false;
 
               return (
@@ -86,7 +89,7 @@ const FeatureProduct = () => {
                     />
                     <div className="absolute -bottom-20 group-hover:bottom-3 left-3 right-3 duration-500">
                       <button
-                        onClick={() => addToCart(product.id)}
+                        onClick={() => addToCart(product.id, product.price)}
                         className="py-2 px-5 inline-block font-semibold tracking-wide text-base text-center bg-slate-900 text-white w-full rounded-md duration-500"
                       >
                         Add to Cart
@@ -105,6 +108,17 @@ const FeatureProduct = () => {
                         </button>
                       </li>
                     </ul>
+
+                    <ul className="list-none absolute top-[10px] left-4">
+                      <li>
+                        <Link
+                          href="/"
+                          className="bg-orange-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5"
+                        >
+                          {product.discountPercentage}% Off
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
 
                   <div className="mt-4">
@@ -118,8 +132,9 @@ const FeatureProduct = () => {
                     <div className="flex justify-between items-center mt-1">
                       <div className="flex items-center space-x-2">
                         <span className="text-lg font-semibold">
-                          ${product.price}
+                          ${finalPrice.toFixed(2)}
                         </span>
+                        <del className="text-slate-400">${product.price}</del>
                       </div>
 
                       <ul className="font-medium text-amber-400 list-none flex space-x-1">

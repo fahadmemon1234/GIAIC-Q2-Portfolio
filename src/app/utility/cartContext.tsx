@@ -6,12 +6,13 @@ interface Product {
   name: string;
   image: string;
   price: number;
+  FinalPrice: number;
 }
 
 interface CartContextType {
   cartCount: number;
-  cartItems: number[]; // Store only product IDs
-  addToCart: (productId: number) => void; // Modify the function to accept only the product ID
+  cartItems: number[];
+  addToCart: (productId: number, FinalPrice: number) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);

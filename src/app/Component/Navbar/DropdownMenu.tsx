@@ -27,11 +27,12 @@ const DropdownMenu = () => {
         const response = await axios.get("https://dummyjson.com/products");
         const allProducts = response.data.products;
         setProducts(allProducts);
-
-        const total = cartItems.reduce((acc, itemId) => {
+        debugger;
+        const total = cartItems.reduce((acc, itemId, finalPrice) => {
           const product = allProducts.find((prod: any) => prod.id === itemId);
           return product ? acc + product.price : acc;
         }, 0);
+
         setTotalPrice(total);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -47,7 +48,12 @@ const DropdownMenu = () => {
         {cartItems.length > 0 ? (
           cartItems.slice(0, 3).map((itemId) => {
             const product = products.find((prod) => prod.id === itemId);
+
             if (!product) return null;
+            const finalPrice = (
+              product.price *
+              (1 - product.discountPercentage / 100)
+            ).toFixed(2);
 
             return (
               <li key={product.id} className="ms-0">
@@ -69,7 +75,7 @@ const DropdownMenu = () => {
                       </span>
                     </span>
                   </span>
-                  <span className="font-semibold">${product.price}</span>
+                  <span className="font-semibold">${finalPrice}</span>
                 </Link>
               </li>
             );
@@ -91,7 +97,7 @@ const DropdownMenu = () => {
           <span className="text-center block">
             <Link
               className="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white me-1"
-              href="/product-detail-one/2"
+              href="/Component/ShopCart"
             >
               View Cart
             </Link>
