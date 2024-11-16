@@ -5,6 +5,7 @@ import { FaHeart, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { encryptData } from "@/app/utility/page";
+import { useCart } from "@/app/utility/cartContext";
 
 interface Product {
   id: number;
@@ -16,6 +17,7 @@ interface Product {
 }
 
 const Product = () => {
+  const { addToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -72,12 +74,12 @@ const Product = () => {
                       className="group-hover:scale-110 duration-500"
                     />
                     <div className="absolute -bottom-20 group-hover:bottom-3 left-3 right-3 duration-500">
-                      <Link
-                        href="/shop-cart"
+                      <button
+                        onClick={addToCart}
                         className="py-2 px-5 inline-block font-semibold tracking-wide text-base text-center bg-slate-900 text-white w-full rounded-md duration-500"
                       >
                         Add to Cart
-                      </Link>
+                      </button>
                     </div>
 
                     <ul className="list-none absolute top-[10px] right-4 opacity-0 group-hover:opacity-100 duration-500 space-y-1">
