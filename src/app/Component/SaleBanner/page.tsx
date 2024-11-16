@@ -12,7 +12,6 @@ const SaleBanner = () => {
   });
 
   useEffect(() => {
-    // Set target date (you can replace this with any target date)
     const targetDate = new Date("2024-12-31T00:00:00").getTime();
 
     // Update the countdown every second
@@ -40,7 +39,6 @@ const SaleBanner = () => {
       }
     }, 1000);
 
-    // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, []);
 
