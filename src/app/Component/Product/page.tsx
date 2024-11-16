@@ -1,9 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaHeart, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { encryptData } from "@/app/utility/page";
 
 interface Product {
   id: number;
@@ -106,7 +107,9 @@ const Product = () => {
 
                   <div className="mt-4">
                     <Link
-                      href={`/product-detail-one/${product.id}`}
+                      href={`/Component/ProductDetail?id=${encryptData(
+                        product.id
+                      )}`}
                       className="hover:text-orange-500 text-lg font-medium"
                     >
                       {product.title}
