@@ -107,8 +107,8 @@ const Product = () => {
 
                   <div className="mt-4">
                     <Link
-                      href={`/Component/ProductDetail?id=${encryptData(
-                        product.id
+                      href={`/Component/ProductDetail?id=${encodeURIComponent(
+                        encryptData(product.id.toString())
                       )}`}
                       className="hover:text-orange-500 text-lg font-medium"
                     >

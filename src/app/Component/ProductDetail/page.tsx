@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import { decryptData } from "@/app/utility/page";
 
 interface Review {
   rating: number;
@@ -49,7 +50,23 @@ const ProductDetail = () => {
   };
 
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+  debugger;
+  const ids = searchParams.get("id");
+  let decryptedId: string | number | null = null;
+
+  if (ids) {
+    console.log("Encrypted ID from URL:", ids);
+    const decodedId = decodeURIComponent(ids);
+    decryptedId = decryptData(decodedId);
+
+    if (!decryptedId) {
+      console.log("Failed to decrypt the ID.");
+    } else {
+      console.log("Decrypted ID:", decryptedId);
+    }
+  } else {
+    console.log("ID is null in URL.");
+  }
 
   const [products, setProducts] = useState<Product[]>([]);
   const [product, setProduct] = useState<Product | null>(null);
@@ -60,10 +77,10 @@ const ProductDetail = () => {
         const response = await axios.get("https://dummyjson.com/products");
         const allProducts = response.data.products;
         setProducts(allProducts);
-
-        if (id) {
+        debugger;
+        if (decryptedId) {
           const matchedProduct = allProducts.find(
-            (item: Product) => item.id === parseInt(id, 10)
+            (item: Product) => item.id === parseInt(decryptedId)
           );
           setProduct(matchedProduct || null);
         }
@@ -73,7 +90,7 @@ const ProductDetail = () => {
     };
 
     fetchProducts();
-  }, [id]);
+  }, [decryptedId]);
 
   return (
     <>
