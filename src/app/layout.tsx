@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/app/Component/Navbar/page";
 import Footer from "@/app/Component/Footer/page";
 import BackToTop from "@/app/Component/BottomtoTop/page";
+import { CartProvider } from "./utility/cartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,10 +23,12 @@ export default function RootLayout({
         <link rel="icon" type="image/x-icon" href="/assets/icon/favicon.ico" />
       </head>
       <body className={inter.className}>
+        <CartProvider>
         <Navbar />
         {children}
         <Footer />
         <BackToTop />
+        </CartProvider>
       </body>
     </html>
   );

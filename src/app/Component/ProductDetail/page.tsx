@@ -11,6 +11,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { decryptData } from "@/app/utility/page";
+import { useCart } from "@/app/utility/cartContext";
 
 interface Review {
   rating: number;
@@ -39,6 +40,8 @@ type Product = {
 };
 
 const ProductDetail = () => {
+  const { addToCart } = useCart();
+
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (type: string) => {
@@ -277,18 +280,12 @@ const ProductDetail = () => {
                         </div>
 
                         <div className="mt-4 space-x-1">
-                          <a
-                            className="py-2 px-5 inline-block font-semibold tracking-wide align-middle text-base text-center bg-orange-500 text-white rounded-md mt-2"
-                            href="/product-detail-one/2"
-                          >
-                            Shop Now
-                          </a>
-                          <a
+                          <button
                             className="py-2 px-5 inline-block font-semibold tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white mt-2"
-                            href="/product-detail-one/2"
+                            onClick={addToCart}
                           >
                             Add to Cart
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>
