@@ -17,7 +17,8 @@ interface Product {
 }
 
 const FeatureProduct = () => {
-  const { addToCart } = useCart();
+  const { cartCount, addToCart } = useCart();
+
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -85,7 +86,7 @@ const FeatureProduct = () => {
                     />
                     <div className="absolute -bottom-20 group-hover:bottom-3 left-3 right-3 duration-500">
                       <button
-                        onClick={addToCart}
+                        onClick={() => addToCart(product.id)}
                         className="py-2 px-5 inline-block font-semibold tracking-wide text-base text-center bg-slate-900 text-white w-full rounded-md duration-500"
                       >
                         Add to Cart

@@ -7,16 +7,22 @@ import { FiUser } from "react-icons/fi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/app/utility/cartContext";
+import DropdownMenu from "./DropdownMenu";
 
 const Navbar = () => {
   const pathname = usePathname();
   const { cartCount } = useCart();
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -103,14 +109,26 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-4 md:space-x-6">
             <div className="relative">
-              <HiOutlineShoppingCart
-                className="w-6 h-6 text-orange-500"
-                aria-hidden="true"
-              />
-              {cartCount > 0 && (
-                <span className="absolute top-0 left-1 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-xs font-semibold rounded-full h-4 w-4 flex items-center justify-center">
-                  {cartCount}
-                </span>
+              <button
+                className="relative focus:outline-none"
+                onClick={toggleDropdown}
+                aria-label="Toggle Cart Dropdown"
+              >
+                <HiOutlineShoppingCart
+                  className="w-6 h-6 text-orange-500"
+                  aria-hidden="true"
+                />
+                {cartCount > 0 && (
+                  <span className="absolute top-0 left-1 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-xs font-semibold rounded-full h-4 w-4 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </button>
+
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-64 z-10">
+                  <DropdownMenu />
+                </div>
               )}
             </div>
 
