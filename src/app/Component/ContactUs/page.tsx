@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
-import Link from "next/link";
+import Swal from "sweetalert2";
 
 const ContactUs = () => {
   const [showModal, setShowModal] = useState(false);
@@ -13,6 +13,50 @@ const ContactUs = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    comments: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const { name, email, subject, comments } = formData;
+
+    if (!name || !email || !subject || !comments) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "All fields are required!",
+      });
+      return;
+    }
+
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Your message has been sent!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      comments: "",
+    });
   };
 
   return (
@@ -47,7 +91,7 @@ const ContactUs = () => {
                   <h3 className="mb-6 text-2xl leading-normal font-semibold">
                     Get in touch!
                   </h3>
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="grid lg:grid-cols-12 grid-cols-1 gap-3">
                       <div className="lg:col-span-6">
                         <label htmlFor="name" className="font-semibold">
@@ -59,6 +103,8 @@ const ContactUs = () => {
                           type="text"
                           className="mt-2 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
                           placeholder="Name :"
+                          value={formData.name}
+                          onChange={handleChange}
                         />
                       </div>
 
@@ -72,6 +118,8 @@ const ContactUs = () => {
                           type="email"
                           className="mt-2 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
                           placeholder="Email :"
+                          value={formData.email}
+                          onChange={handleChange}
                         />
                       </div>
 
@@ -84,6 +132,8 @@ const ContactUs = () => {
                           id="subject"
                           className="mt-2 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
                           placeholder="Subject :"
+                          value={formData.subject}
+                          onChange={handleChange}
                         />
                       </div>
 
@@ -96,6 +146,8 @@ const ContactUs = () => {
                           id="comments"
                           className="mt-2 w-full py-2 px-3 h-28 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
                           placeholder="Message :"
+                          value={formData.comments}
+                          onChange={handleChange}
                         ></textarea>
                       </div>
                     </div>
@@ -116,7 +168,6 @@ const ContactUs = () => {
         </div>
         <div className="container lg:mt-24 mt-16">
           <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6">
-            
             <div className="text-center px-6">
               <div className="relative text-transparent">
                 <div className="size-20 bg-orange-500/5 text-orange-500 rounded-xl text-2xl flex align-middle justify-center items-center mx-auto shadow-sm dark:shadow-gray-800">
@@ -140,7 +191,6 @@ const ContactUs = () => {
               </div>
             </div>
 
-            
             <div className="text-center px-6">
               <div className="relative text-transparent">
                 <div className="size-20 bg-orange-500/5 text-orange-500 rounded-xl text-2xl flex align-middle justify-center items-center mx-auto shadow-sm dark:shadow-gray-800">
@@ -164,7 +214,6 @@ const ContactUs = () => {
               </div>
             </div>
 
-         
             <div className="text-center px-6">
               <div className="relative text-transparent">
                 <div className="size-20 bg-orange-500/5 text-orange-500 rounded-xl text-2xl flex align-middle justify-center items-center mx-auto shadow-sm dark:shadow-gray-800">
