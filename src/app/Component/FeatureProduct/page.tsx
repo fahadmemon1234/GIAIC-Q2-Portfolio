@@ -63,7 +63,7 @@ const FeatureProduct = () => {
             <div className="md:text-end hidden md:block">
               <Link
                 className="flex justify-end items-center text-slate-400 hover:text-orange-500"
-                href="/shop-grid"
+                href={"/Component/ProductList"}
               >
                 See More Items <AiOutlineArrowRight className="ml-1" />
               </Link>

@@ -55,11 +55,8 @@ const Navbar = () => {
 
   const links = [
     { name: "Home", href: "/" },
-    { name: "Products", href: "/products" },
-    { name: "Shop", href: "/shop" },
-    { name: "Pages", href: "/pages" },
-    { name: "Sale", href: "/sale" },
-    { name: "Contact Us", href: "/contact-us" },
+    { name: "Products", href: "/Component/ProductList" },
+    { name: "Contact Us", href: "/Component/ContactUs" },
   ];
 
   return (

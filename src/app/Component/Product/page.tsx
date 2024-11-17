@@ -146,12 +146,12 @@ const Product = () => {
           </div>
 
           <div className="flex justify-center">
-            <button
-              type="button"
+            <Link
+              href={"/Component/ProductList"}
               className="mt-11 text-blue-700 border border-blue-700 bg-transparent hover:bg-blue-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-600 dark:text-blue-600 dark:hover:bg-blue-600 dark:hover:text-white dark:focus:ring-blue-800 transition duration-300 ease-in-out"
             >
               See more
-            </button>
+            </Link>
           </div>
         </div>
       </section>

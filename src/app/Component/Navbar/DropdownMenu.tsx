@@ -107,7 +107,7 @@ const DropdownMenu = () => {
             </Link>
             <Link
               className="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white"
-              href="/product-detail-one/2"
+              href="/Component/Checkout"
             >
               Checkout
             </Link>
