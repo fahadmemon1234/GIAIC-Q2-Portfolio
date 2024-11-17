@@ -42,6 +42,8 @@ const DropdownMenu = () => {
     fetchProducts();
   }, [cartItems]);
 
+  let totalFinalPrice = 0;
+
   return (
     <div className="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-64 rounded-md bg-white dark:bg-slate-900 shadow dark:shadow-gray-800">
       <ul className="py-3 text-start" aria-labelledby="dropdownDefault">
@@ -54,6 +56,8 @@ const DropdownMenu = () => {
               product.price *
               (1 - product.discountPercentage / 100)
             ).toFixed(2);
+
+            totalFinalPrice += parseFloat(finalPrice);
 
             return (
               <li key={product.id} className="ms-0">
@@ -90,7 +94,7 @@ const DropdownMenu = () => {
 
         <li className="flex items-center justify-between py-1.5 px-4 ms-0">
           <h6 className="font-semibold mb-0">Total($):</h6>
-          <h6 className="font-semibold mb-0">${totalPrice}</h6>
+          <h6 className="font-semibold mb-0">${totalFinalPrice}</h6>
         </li>
 
         <li className="py-1.5 px-4 ms-0">

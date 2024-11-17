@@ -198,10 +198,10 @@ const ShopCart = () => {
               <div className="lg:col-span-9 md:order-1 order-3">
                 <div className="space-x-1">
                   <Link
-                    className="py-2 px-5 bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white mt-2"
-                    href="/shop-cart"
+                    className="py-2 px-5 inline-block font-semibold tracking-wide align-middle text-base text-center bg-orange-500 text-white rounded-md mt-2"
+                    href="/Component/Checkout"
                   >
-                    Add to Cart
+                    Checkout
                   </Link>
                 </div>
               </div>
