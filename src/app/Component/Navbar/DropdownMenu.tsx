@@ -99,20 +99,40 @@ const DropdownMenu = () => {
 
         <li className="py-1.5 px-4 ms-0">
           <span className="text-center block">
-            <Link
-              className="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white me-1"
-              href="/Component/ShopCart"
-            >
-              View Cart
-            </Link>
-            <Link
-              className="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white"
-              href="/Component/Checkout"
-            >
-              Checkout
-            </Link>
+            {totalFinalPrice === 0 ? (
+              <Link
+                className="disabled py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-gray-400 border border-gray-400 text-white cursor-not-allowed me-1"
+                href="/Component/ShopCart"
+                aria-disabled="true"
+              >
+                View Cart
+              </Link>
+            ) : (
+              <Link
+                className="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white me-1"
+                href="/Component/ShopCart"
+              >
+                View Cart
+              </Link>
+            )}
+
+            {totalFinalPrice === 0 ? (
+              <Link
+                className="disabled py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-gray-400 border border-gray-400 text-white cursor-not-allowed"
+                href="/Component/Checkout"
+                aria-disabled="true"
+              >
+                Checkout
+              </Link>
+            ) : (
+              <Link
+                className="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white"
+                href="/Component/Checkout"
+              >
+                Checkout
+              </Link>
+            )}
           </span>
-          <p className="text-sm text-slate-400 mt-1">*T&amp;C Apply</p>
         </li>
       </ul>
     </div>

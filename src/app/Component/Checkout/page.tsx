@@ -3,9 +3,13 @@ import React, { useState } from "react";
 import { toast, Flip } from "react-toastify";
 import { FiAtSign } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FaChevronRight } from "react-icons/fa";
+import { useCart } from "@/app/utility/cartContext";
 
 const Checkout = () => {
+  const router = useRouter();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userName, setUserName] = useState("");
@@ -148,6 +152,8 @@ const Checkout = () => {
     return true;
   };
 
+  const { cartItems, clearCart } = useCart();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -162,6 +168,10 @@ const Checkout = () => {
         theme: "colored",
         transition: Flip,
       });
+
+      clearCart();
+
+      router.push("/Component/Order");
     }
   };
   return (
