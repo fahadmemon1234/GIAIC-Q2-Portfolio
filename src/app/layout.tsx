@@ -5,6 +5,7 @@ import Navbar from "@/app/Component/Navbar/page";
 import Footer from "@/app/Component/Footer/page";
 import BackToTop from "@/app/Component/BottomtoTop/page";
 import { CartProvider } from "./utility/cartContext";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,10 +25,11 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <CartProvider>
-        <Navbar />
-        {children}
-        <Footer />
-        <BackToTop />
+          <Navbar />
+          <ToastContainer />
+          {children}
+          <Footer />
+          <BackToTop />
         </CartProvider>
       </body>
     </html>

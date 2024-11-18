@@ -12,7 +12,7 @@ interface Product {
 interface CartContextType {
   cartCount: number;
   cartItems: number[];
-  addToCart: (productId: number, FinalPrice: number) => void;
+  addToCart: (productId: number, FinalPrice: number, quantity: number) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -20,10 +20,10 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [cartItems, setCartItems] = useState<number[]>([]); // Store product IDs only
+  const [cartItems, setCartItems] = useState<number[]>([]);
   const [cartCount, setCartCount] = useState(0);
 
-  const addToCart = (productId: number) => {
+  const addToCart = (productId: number, quantity: number) => {
     setCartItems((prev) => [...prev, productId]);
     setCartCount((prev) => prev + 1);
   };

@@ -63,7 +63,7 @@ const DropdownMenu = () => {
               <li key={product.id} className="ms-0">
                 <Link
                   className="flex items-center justify-between py-1.5 px-4"
-                  href={`/product-detail-one/${product.id}`}
+                  href={"#"}
                 >
                   <span className="flex items-center">
                     <Image

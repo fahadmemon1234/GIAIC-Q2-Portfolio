@@ -75,7 +75,7 @@ const Product = () => {
                     />
                     <div className="absolute -bottom-20 group-hover:bottom-3 left-3 right-3 duration-500">
                       <button
-                        onClick={() => addToCart(product.id, finalPrice)}
+                        onClick={() => addToCart(product.id, finalPrice, 1)}
                         className="py-2 px-5 inline-block font-semibold tracking-wide text-base text-center bg-slate-900 text-white w-full rounded-md duration-500"
                       >
                         Add to Cart

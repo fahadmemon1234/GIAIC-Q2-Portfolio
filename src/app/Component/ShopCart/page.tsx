@@ -19,6 +19,16 @@ interface Product {
 const ShopCart = () => {
   const { cartItems } = useCart();
 
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityChange = (type: string) => {
+    if (type === "increment") {
+      setQuantity((prev) => prev + 1);
+    } else if (type === "decrement" && quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
+  };
+
   const [products, setProducts] = useState<Product[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
@@ -49,7 +59,7 @@ const ShopCart = () => {
     if (!product) return acc;
 
     const finalPrice = product.price * (1 - product.discountPercentage / 100);
-    const itemTotal = finalPrice * (product.quantity || 1);
+    const itemTotal = finalPrice * quantity;
     return acc + itemTotal;
   }, 0);
 
@@ -152,7 +162,9 @@ const ShopCart = () => {
                           <td className="p-4 text-center">
                             <div className="qty-icons">
                               <button
-                                disabled
+                                onClick={() =>
+                                  handleQuantityChange("decrement")
+                                }
                                 className="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white minus"
                               >
                                 -
@@ -163,10 +175,15 @@ const ShopCart = () => {
                                 type="number"
                                 readOnly
                                 className="h-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 text-orange-500 pointer-events-none w-16 ps-4 quantity mx-1"
-                                value={product.quantity || 1}
+                                value={quantity}
+                                onChange={(e) =>
+                                  setQuantity(Number(e.target.value))
+                                }
                               />
                               <button
-                                disabled
+                                onClick={() =>
+                                  handleQuantityChange("increment")
+                                }
                                 className="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white plus"
                               >
                                 +
@@ -175,10 +192,7 @@ const ShopCart = () => {
                           </td>
 
                           <td className="p-4 text-end">
-                            $
-                            {Number(
-                              finalPrice * (product.quantity || 1)
-                            ).toFixed(2)}
+                            ${Number(finalPrice * quantity).toFixed(2)}
                           </td>
                         </tr>
                       );

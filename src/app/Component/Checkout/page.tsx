@@ -1,8 +1,169 @@
+"use client";
+import React, { useState } from "react";
+import { toast, Flip } from "react-toastify";
 import { FiAtSign } from "react-icons/fi";
 import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa";
 
 const Checkout = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [accountHolderName, setAccountHolderName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const [cvvCode, setCvvCode] = useState("");
+
+  const validateForm = () => {
+    if (!firstName) {
+      toast.error("First Name is required!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+      return false;
+    }
+
+    if (!lastName) {
+      toast.error("Last Name is required!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+      return false;
+    }
+
+    if (!email) {
+      toast.error("Email is required!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+      return false;
+    }
+
+    if (!address) {
+      toast.error("Address is required!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+      return false;
+    }
+
+    if (!zipCode) {
+      toast.error("Zip Code is required!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+      return false;
+    }
+
+    if (!accountHolderName) {
+      toast.error("Account Holder Name is required!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+      return false;
+    }
+
+    if (!cardNumber) {
+      toast.error("Card Number is required!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+      return false;
+    }
+
+    if (!expirationDate) {
+      toast.error("Expiration Date is required!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+      return false;
+    }
+
+    if (!cvvCode) {
+      toast.error("CVV Code is required!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      toast.success("Form submitted successfully!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Flip,
+      });
+    }
+  };
   return (
     <>
       <section className="relative table w-full py-20 lg:py-24 md:pt-28 bg-gray-50 dark:bg-slate-800">
@@ -50,8 +211,9 @@ const Checkout = () => {
                         type="text"
                         className="w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0 mt-2"
                         placeholder="First Name:"
-                        id="firstname"
-                        name="name"
+                        name="firstname"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
                       />
                     </div>
                     <div className="lg:col-span-6">
@@ -63,7 +225,9 @@ const Checkout = () => {
                         className="w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0 mt-2"
                         placeholder="Last Name:"
                         id="lastname"
-                        name="name"
+                        name="lastname"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                       />
                     </div>
                     <div className="lg:col-span-6">
@@ -81,7 +245,9 @@ const Checkout = () => {
                           type="text"
                           className="ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0"
                           placeholder="Username"
-                          required
+                          name="Username"
+                          value={userName}
+                          onChange={(e) => setUserName(e.target.value)}
                         />
                       </div>
                     </div>
@@ -94,6 +260,8 @@ const Checkout = () => {
                         className="w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0 mt-2"
                         placeholder="Email"
                         name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                     <div className="lg:col-span-12">
@@ -106,6 +274,8 @@ const Checkout = () => {
                         placeholder="Address:"
                         id="address"
                         name="name"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
                       />
                     </div>
                     <div className="lg:col-span-12">
@@ -118,6 +288,8 @@ const Checkout = () => {
                         placeholder="Address:"
                         id="address"
                         name="name"
+                        value={address2}
+                        onChange={(e) => setAddress2(e.target.value)}
                       />
                     </div>
                     <div className="lg:col-span-4">
@@ -146,6 +318,15 @@ const Checkout = () => {
                         placeholder="Zip:"
                         id="zipcode"
                         name="number"
+                        max="99999"
+                        min="10000"
+                        value={zipCode}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          if (value.length <= 5) {
+                            setZipCode(value);
+                          }
+                        }}
                       />
                     </div>
                     <div className="lg:col-span-12">
@@ -243,6 +424,8 @@ const Checkout = () => {
                           placeholder="Name:"
                           id="holdername"
                           name="name"
+                          value={accountHolderName}
+                          onChange={(e) => setAccountHolderName(e.target.value)}
                         />
                       </div>
                       <div className="lg:col-span-6">
@@ -250,10 +433,14 @@ const Checkout = () => {
                           Card Number : <span className="text-red-600">*</span>
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-100 dark:border-gray-800 focus:ring-0 mt-2"
                           placeholder="Card Number:"
                           name="name"
+                          value={cardNumber}
+                          max={9999999999999999999}
+                          min={1000000000000}
+                          onChange={(e) => setCardNumber(e.target.value)}
                         />
                       </div>
                       <div className="lg:col-span-6">
@@ -267,6 +454,8 @@ const Checkout = () => {
                           placeholder="MM/YY"
                           id="expirationdate"
                           name="name"
+                          value={expirationDate}
+                          onChange={(e) => setExpirationDate(e.target.value)}
                         />
                       </div>
                       <div className="lg:col-span-6">
@@ -279,11 +468,14 @@ const Checkout = () => {
                           placeholder="CVC"
                           id="cvvcode"
                           name="name"
+                          value={cvvCode}
+                          onChange={(e) => setCvvCode(e.target.value)}
                         />
                       </div>
                     </div>
                   </div>
                   <button
+                    onClick={handleSubmit}
                     type="submit"
                     className="py-2 mt-5 px-5 inline-block tracking-wide align-middle duration-500 text-base text-center bg-orange-500 text-white rounded-md w-[20%]"
                   >

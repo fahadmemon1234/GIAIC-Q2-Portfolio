@@ -265,6 +265,9 @@ const ProductDetail = () => {
                                 min="0"
                                 className="h-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 pointer-events-none w-16 ps-4"
                                 value={quantity}
+                                onChange={(e) =>
+                                  setQuantity(Number(e.target.value))
+                                }
                                 readOnly
                               />
                               <button
@@ -282,7 +285,9 @@ const ProductDetail = () => {
                         <div className="mt-4 space-x-1">
                           <button
                             className="py-2 px-5 inline-block font-semibold tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white mt-2"
-                            onClick={() => addToCart(product.id, product.price)}
+                            onClick={() =>
+                              addToCart(product.id, product.price, quantity)
+                            }
                           >
                             Add to Cart
                           </button>
