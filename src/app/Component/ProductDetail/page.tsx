@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { decryptData } from "@/app/utility/page";
+import { decryptData } from "@/app/lib/cryptoUtils";
 import { useCart } from "@/app/utility/cartContext";
 
 interface Review {
@@ -305,7 +305,6 @@ const ProductDetail = () => {
                             <div key={index} className="mt-8 first:mt-0">
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                 
                                   <div className="h-11 w-11 rounded-full shadow bg-orange-200 flex items-center justify-center text-lg font-semibold text-white">
                                     {review.reviewerName.charAt(0)}
                                   </div>
@@ -344,7 +343,7 @@ const ProductDetail = () => {
                                   ))}
                                 </ul>
                                 <p className="text-slate-400 italic mt-2">
-                                &quot;{review.comment}&quot;
+                                  &quot;{review.comment}&quot;
                                 </p>
                               </div>
                             </div>

@@ -11,7 +11,7 @@ import {
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
-import { encryptData } from "@/app/utility/page";
+import { encryptData } from "@/app/lib/cryptoUtils";
 import { useCart } from "@/app/utility/cartContext";
 
 interface Product {

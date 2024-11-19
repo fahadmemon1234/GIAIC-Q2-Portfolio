@@ -4,7 +4,7 @@ import axios from "axios";
 import { FaHeart, FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
-import { encryptData } from "@/app/utility/page";
+import { encryptData } from "@/app/lib/cryptoUtils";
 import { useCart } from "@/app/utility/cartContext";
 
 interface Product {
