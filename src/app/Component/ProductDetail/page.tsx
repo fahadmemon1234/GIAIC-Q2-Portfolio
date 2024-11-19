@@ -305,7 +305,7 @@ const ProductDetail = () => {
                             <div key={index} className="mt-8 first:mt-0">
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                  {/* Placeholder avatar */}
+                                 
                                   <div className="h-11 w-11 rounded-full shadow bg-orange-200 flex items-center justify-center text-lg font-semibold text-white">
                                     {review.reviewerName.charAt(0)}
                                   </div>
@@ -344,7 +344,7 @@ const ProductDetail = () => {
                                   ))}
                                 </ul>
                                 <p className="text-slate-400 italic mt-2">
-                                  "{review.comment}"
+                                &quot;{review.comment}&quot;
                                 </p>
                               </div>
                             </div>
