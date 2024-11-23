@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import {
   FaChevronRight,
@@ -39,7 +39,7 @@ type Product = {
   shippingInformation: string;
 };
 
-const ProductDetail = () => {
+function ProductDetail() {
   const { cartCount, addToCart } = useCart();
 
   const [quantity, setQuantity] = useState(1);
@@ -53,9 +53,8 @@ const ProductDetail = () => {
   };
 
   const searchParams = useSearchParams();
-  debugger;
   const ids = searchParams.get("id");
-  let decryptedId: string | number | null = null;
+  let decryptedId = null;
 
   if (ids) {
     console.log("Encrypted ID from URL:", ids);
@@ -363,6 +362,12 @@ const ProductDetail = () => {
       </section>
     </>
   );
-};
+}
 
-export default ProductDetail;
+export default function ProductDetailPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProductDetail />
+    </Suspense>
+  );
+}
