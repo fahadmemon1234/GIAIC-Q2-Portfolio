@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useCart } from "@/app/utility/cartContext";
+import { encryptData } from "@/app/lib/cryptoUtils";
 
 interface Product {
   id: number;
@@ -123,7 +124,9 @@ const FeatureProduct = () => {
 
                   <div className="mt-4">
                     <Link
-                      href={`/product-detail-one/${product.id}`}
+                      href={`/Component/ProductDetail?id=${encodeURIComponent(
+                        encryptData(product.id.toString())
+                      )}`}
                       className="hover:text-orange-500 text-lg font-medium"
                     >
                       {product.title}
