@@ -16,7 +16,7 @@
 
 ## Live This Multiple Pages Blog Website TailwindCSS
 
-<a href="https://todolist-git-blog-website-fahadmemon1234s-projects.vercel.app" target="_blank">Blog Website TailwindCSS Open Click</a>
+<a href="https://my-blog-websitey.netlify.app" target="_blank">Blog Website TailwindCSS Open Click</a>
 
 ## Live This Ecommerce Website TailwindCSS
 
