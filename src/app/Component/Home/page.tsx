@@ -6,6 +6,14 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Carousel from "react-multi-carousel";
 import { FaArrowRight } from "react-icons/fa6";
+import { Playfair_Display } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+});
 
 const Main = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -167,11 +175,25 @@ const Main = () => {
           <div className="text-center">
             <h2 className="flex items-center justify-center">
               <span className="flex-grow border-b-2 border-gray-300 mr-3"></span>
-              <span className="text-xxl font-semibold">Trending News</span>
+              <span
+                className="font-semibold"
+                style={{
+                  fontFamily: playfair.style.fontFamily,
+                  fontSize: "35px",
+                }}
+              >
+                Trending News
+              </span>
               <span className="flex-grow border-b-2 border-gray-300 ml-3"></span>
             </h2>
 
-            <span className="text-base font-normal text-gray-500 tracking-normal block">
+            <span
+              style={{
+                fontFamily: playfair.style.fontFamily,
+                fontSize: "20px",
+              }}
+              className="text-base font-normal text-gray-500 tracking-normal block pt-2"
+            >
               Popular Posts
             </span>
           </div>
@@ -228,11 +250,25 @@ const Main = () => {
           <div className="text-center">
             <h2 className="flex items-center justify-center">
               <span className="flex-grow border-b-2 border-gray-300 mr-3"></span>
-              <span className="text-xxl font-semibold">Latest Posts</span>
+              <span
+                className="font-semibold"
+                style={{
+                  fontFamily: playfair.style.fontFamily,
+                  fontSize: "35px",
+                }}
+              >
+                Latest Posts
+              </span>
               <span className="flex-grow border-b-2 border-gray-300 ml-3"></span>
             </h2>
 
-            <span className="text-base font-normal text-gray-500 tracking-normal block">
+            <span
+              style={{
+                fontFamily: playfair.style.fontFamily,
+                fontSize: "20px",
+              }}
+              className="text-base font-normal text-gray-500 tracking-normal block pt-2"
+            >
               Stay up-to-date
             </span>
           </div>
