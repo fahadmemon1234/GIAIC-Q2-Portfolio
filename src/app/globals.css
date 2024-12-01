@@ -22,13 +22,18 @@
   font-weight: bold;
 }
 
-.badge {
+.badges-detail {
   font-size: 0.8rem;
   padding: 0.4rem 0.6rem;
   width: 100px;
   border-radius: 50px !important;
   background-color: #25211d;
   transition: background-color 0.3s ease-in-out;
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.6rem;
 }
 
 .card-text {
@@ -50,4 +55,33 @@
 
 .card:hover .badge {
   background-color: #f7775e;
+}
+
+.react-multi-carousel-list.carousel-container {
+  padding-bottom: 50px;
+}
+
+.custom-dot-list-style {
+  padding-top: 20px;
+  bottom: -20px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.custom-dot-list-style li {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.custom-dot-list-style li.react-multi-carousel-dot--active {
+  background-color: #f7775e;
+}
+
+.react-multi-carousel-dot button {
+  display: none !important;
 }
