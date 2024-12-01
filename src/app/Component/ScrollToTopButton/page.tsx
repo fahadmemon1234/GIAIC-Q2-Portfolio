@@ -1,17 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa";
 
 function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleScroll = () => {
-    if (window.scrollY > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
+    setIsVisible(window.scrollY > 300);
   };
 
   const scrollToTop = () => {
@@ -21,11 +17,9 @@ function ScrollToTopButton() {
     });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -33,25 +27,24 @@ function ScrollToTopButton() {
       {isVisible && (
         <button
           onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-[#ff7e5f] to-[#feb47b] text-white p-4 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-110 hover:shadow-xl group"
           style={{
-            position: "fixed",
-            bottom: "20px",
-            right: "20px",
-            borderRadius: "50%",
-            padding: "12px",
-            backgroundColor: "#f7775e",
-            color: "#ffffff",
-            border: "none",
-            cursor: "pointer",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-            transition: "transform 0.3s ease, background-color 0.3s ease",
+            boxShadow: "0 10px 20px rgba(0, 0, 0, 0.15)",
           }}
-          className="group"
         >
-          <FaArrowUp
-            className="group-hover:transform group-hover:scale-110 transition-transform duration-300"
-            style={{ fontSize: "20px" }}
-          />
+          <FaArrowUp className="text-xl transition-transform duration-300 group-hover:animate-bounce" />
+          <style>
+            {`
+            @keyframes bounce {
+              0%, 100% {
+                transform: translateY(0);
+              }
+              50% {
+                transform: translateY(-6px);
+              }
+            }
+          `}
+          </style>
         </button>
       )}
     </>
