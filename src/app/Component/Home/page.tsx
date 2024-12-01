@@ -51,81 +51,36 @@ const Main = () => {
       <Container className="mt-5">
         <Row>
           <Col md={4} sm={12}>
-            <div className="group card rounded-none text-white overflow-hidden cursor-pointer mb-3">
-              <Link href={`/Component/blogDetail/${3}`}>
-                <div className="relative">
-                  <Image
-                    src={"/assets/img/Main.jpg"}
-                    alt={"Discover the Northern Lights"}
-                    className="card-img rounded-none group-hover:scale-110 transition-transform duration-300 ease-in-out"
-                    layout="responsive"
-                    width={700}
-                    height={400}
-                  />
-                  <div className="card-img-overlay text-center d-flex flex-column justify-content-end">
-                    <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 m-auto transition-colors duration-300 ease-in-out">
-                      TRAVEL
-                    </span>
-                    <h2 className="card-title">
-                      Is It Worth to Ride to West & North Canada?
-                    </h2>
-                    <div className="card-text">
-                      <Row className="m-auto">
-                        <Col>
-                          <span>
-                            By <strong>DIANA</strong>
-                          </span>
-                        </Col>
-                        <Col>
-                          <span>28 MAR 2008</span>
-                        </Col>
-                        <Col>
-                          <span className="flex items-center gap-2">
-                            <FaRegComment /> 0
-                          </span>
-                        </Col>
-                      </Row>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </Col>
-
-          <Col md={4} sm={12}>
-            <div className="group card rounded-none text-white overflow-hidden cursor-pointer mb-3">
+            <div className="group card rounded-lg overflow-hidden cursor-pointer mb-6 shadow-md hover:shadow-xl transform transition-transform duration-300 hover:scale-105">
               <div className="relative">
                 <Image
                   src={"/assets/img/Main.jpg"}
                   alt={"Discover the Northern Lights"}
-                  className="card-img rounded-none group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                  className="rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
                   layout="responsive"
                   width={700}
                   height={400}
                 />
-                <div className="card-img-overlay text-center d-flex flex-column justify-content-end">
-                  <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 m-auto transition-colors duration-300 ease-in-out">
-                    TRAVEL
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-all duration-500"></div>
+
+                <div className="absolute inset-0 flex flex-col justify-end p-6 text-center">
+                  <span className="inline-block bg-[#f7775e] text-white uppercase text-xs font-semibold tracking-wider py-1 px-3 rounded-full mb-4 shadow-sm group-hover:scale-105 transition-transform">
+                    Travel
                   </span>
-                  <h2 className="card-title">
+
+                  <h2 className="text-white text-lg font-bold leading-snug group-hover:text-[#f7775e] transition-colors duration-300">
                     Is It Worth to Ride to West & North Canada?
                   </h2>
-                  <div className="card-text">
-                    <Row className="m-auto">
-                      <Col>
-                        <span>
-                          By <strong>DIANA</strong>
-                        </span>
-                      </Col>
-                      <Col>
-                        <span>28 MAR 2008</span>
-                      </Col>
-                      <Col>
-                        <span className="flex items-center gap-2">
-                          <FaRegComment /> 0
-                        </span>
-                      </Col>
-                    </Row>
+
+                  <div className="flex justify-center items-center gap-4 text-xs text-gray-300 mt-3">
+                    <span>
+                      By <strong className="text-white">Diana</strong>
+                    </span>
+                    <span>28 Mar 2008</span>
+                    <span className="flex items-center gap-1">
+                      <FaRegComment className="text-[#f7775e]" /> 0
+                    </span>
                   </div>
                 </div>
               </div>
@@ -133,39 +88,73 @@ const Main = () => {
           </Col>
 
           <Col md={4} sm={12}>
-            <div className="group card rounded-none text-white overflow-hidden cursor-pointer mb-3">
+            <div className="group card rounded-lg overflow-hidden cursor-pointer mb-6 shadow-md hover:shadow-xl transform transition-transform duration-300 hover:scale-105">
               <div className="relative">
                 <Image
                   src={"/assets/img/Main.jpg"}
                   alt={"Discover the Northern Lights"}
-                  className="card-img rounded-none group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                  className="rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
                   layout="responsive"
                   width={700}
                   height={400}
                 />
-                <div className="card-img-overlay text-center d-flex flex-column justify-content-end">
-                  <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 m-auto transition-colors duration-300 ease-in-out">
-                    TRAVEL
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-all duration-500"></div>
+
+                <div className="absolute inset-0 flex flex-col justify-end p-6 text-center">
+                  <span className="inline-block bg-[#f7775e] text-white uppercase text-xs font-semibold tracking-wider py-1 px-3 rounded-full mb-4 shadow-sm group-hover:scale-105 transition-transform">
+                    Travel
                   </span>
-                  <h2 className="card-title">
+
+                  <h2 className="text-white text-lg font-bold leading-snug group-hover:text-[#f7775e] transition-colors duration-300">
                     Is It Worth to Ride to West & North Canada?
                   </h2>
-                  <div className="card-text">
-                    <Row className="m-auto">
-                      <Col>
-                        <span>
-                          By <strong>DIANA</strong>
-                        </span>
-                      </Col>
-                      <Col>
-                        <span>28 MAR 2008</span>
-                      </Col>
-                      <Col>
-                        <span className="flex items-center gap-2">
-                          <FaRegComment /> 0
-                        </span>
-                      </Col>
-                    </Row>
+
+                  <div className="flex justify-center items-center gap-4 text-xs text-gray-300 mt-3">
+                    <span>
+                      By <strong className="text-white">Diana</strong>
+                    </span>
+                    <span>28 Mar 2008</span>
+                    <span className="flex items-center gap-1">
+                      <FaRegComment className="text-[#f7775e]" /> 0
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Col>
+
+          <Col md={4} sm={12}>
+            <div className="group card rounded-lg overflow-hidden cursor-pointer mb-6 shadow-md hover:shadow-xl transform transition-transform duration-300 hover:scale-105">
+              <div className="relative">
+                <Image
+                  src={"/assets/img/Main.jpg"}
+                  alt={"Discover the Northern Lights"}
+                  className="rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
+                  layout="responsive"
+                  width={700}
+                  height={400}
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-all duration-500"></div>
+
+                <div className="absolute inset-0 flex flex-col justify-end p-6 text-center">
+                  <span className="inline-block bg-[#f7775e] text-white uppercase text-xs font-semibold tracking-wider py-1 px-3 rounded-full mb-4 shadow-sm group-hover:scale-105 transition-transform">
+                    Travel
+                  </span>
+
+                  <h2 className="text-white text-lg font-bold leading-snug group-hover:text-[#f7775e] transition-colors duration-300">
+                    Is It Worth to Ride to West & North Canada?
+                  </h2>
+
+                  <div className="flex justify-center items-center gap-4 text-xs text-gray-300 mt-3">
+                    <span>
+                      By <strong className="text-white">Diana</strong>
+                    </span>
+                    <span>28 Mar 2008</span>
+                    <span className="flex items-center gap-1">
+                      <FaRegComment className="text-[#f7775e]" /> 0
+                    </span>
                   </div>
                 </div>
               </div>
@@ -277,113 +266,119 @@ const Main = () => {
           </div>
 
           <div className="post pt-10">
-            <Row className="items-center pb-3">
+            <Row className="items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
               <Col md={3} sm={12}>
                 <Image
                   src={"/assets/img/tree.jpeg"}
                   alt={"Discover the Northern Lights"}
-                  className="mb-3 w-[auto] object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                  className="rounded-lg w-full h-[150px] transform group-hover:scale-105 transition-transform duration-500 shadow-md"
                   width={300}
-                  height={50}
+                  layout="responsive"
+                  height={150}
                 />
               </Col>
-              <Col md={9} sm={12}>
-                <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 transition-colors duration-300 ease-in-out">
-                  TRAVEL
+
+              <Col md={9} sm={12} className="mt-4 md:mt-0">
+                <span className="inline-block text-sm uppercase bg-[#f7775e] text-white py-1 px-3 rounded-full tracking-wider mb-3 group-hover:bg-[#e0654c] transition-colors duration-300">
+                  Travel
                 </span>
 
-                <h2 className="card-title">
+                <h2 className="text-2xl font-semibold text-[#25211d] group-hover:text-[#f7775e] transition-colors duration-300">
                   Is It Worth to Ride to West & North Canada?
                 </h2>
-                <div className="card-text pt-3">
-                  <div className="flex flex-wrap items-center gap-4">
-                    <span className="text-[#a5a6aa]">
-                      By <strong className="text-[#25211d]">DIANA</strong>
-                    </span>
-                    <span className="text-[#a5a6aa]">28 MAR 2008</span>
-                    <span className="flex items-center gap-2 text-[#a5a6aa]">
-                      <FaRegComment /> 0
-                    </span>
-                  </div>
+
+                <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
+                  <span>
+                    By <strong className="text-[#25211d]">Diana</strong>
+                  </span>
+                  <span className="text-[#6c757d]">28 Mar 2008</span>
+                  <span className="flex items-center gap-2">
+                    <FaRegComment className="text-[#6c757d]" /> 0
+                  </span>
                 </div>
 
-                <p className="pt-3 text-[#a5a6aa]">
+                <p className="mt-4 text-[#6c757d] leading-relaxed group-hover:text-[#25211d] transition-colors duration-300">
                   People who have traveled around the world are willing to share
-                  their tips and tricks
+                  their tips and tricks to help you explore the best places
+                  while avoiding common mistakes.
                 </p>
               </Col>
             </Row>
 
-            <Row className="items-center border-t-[#eaeaea] border-t-[1px] pt-3 pb-3">
+            <Row className="items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
               <Col md={3} sm={12}>
                 <Image
                   src={"/assets/img/tree.jpeg"}
                   alt={"Discover the Northern Lights"}
-                  className="mb-3 w-[auto] object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                  className="rounded-lg w-full h-[150px] transform group-hover:scale-105 transition-transform duration-500 shadow-md"
                   width={300}
-                  height={50}
+                  layout="responsive"
+                  height={150}
                 />
               </Col>
-              <Col md={9} sm={12}>
-                <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 transition-colors duration-300 ease-in-out">
-                  TRAVEL
+
+              <Col md={9} sm={12} className="mt-4 md:mt-0">
+                <span className="inline-block text-sm uppercase bg-[#f7775e] text-white py-1 px-3 rounded-full tracking-wider mb-3 group-hover:bg-[#e0654c] transition-colors duration-300">
+                  Travel
                 </span>
 
-                <h2 className="card-title">
+                <h2 className="text-2xl font-semibold text-[#25211d] group-hover:text-[#f7775e] transition-colors duration-300">
                   Is It Worth to Ride to West & North Canada?
                 </h2>
-                <div className="card-text pt-3">
-                  <div className="flex flex-wrap items-center gap-4">
-                    <span className="text-[#a5a6aa]">
-                      By <strong className="text-[#25211d]">DIANA</strong>
-                    </span>
-                    <span className="text-[#a5a6aa]">28 MAR 2008</span>
-                    <span className="flex items-center gap-2 text-[#a5a6aa]">
-                      <FaRegComment /> 0
-                    </span>
-                  </div>
+
+                <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
+                  <span>
+                    By <strong className="text-[#25211d]">Diana</strong>
+                  </span>
+                  <span className="text-[#6c757d]">28 Mar 2008</span>
+                  <span className="flex items-center gap-2">
+                    <FaRegComment className="text-[#6c757d]" /> 0
+                  </span>
                 </div>
 
-                <p className="pt-3 text-[#a5a6aa]">
+                <p className="mt-4 text-[#6c757d] leading-relaxed group-hover:text-[#25211d] transition-colors duration-300">
                   People who have traveled around the world are willing to share
-                  their tips and tricks
+                  their tips and tricks to help you explore the best places
+                  while avoiding common mistakes.
                 </p>
               </Col>
             </Row>
 
-            <Row className="items-center border-t-[#eaeaea] border-t-[1px] pt-3 pb-3">
-              <Col md={3}>
+            <Row className="items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
+              <Col md={3} sm={12}>
                 <Image
                   src={"/assets/img/tree.jpeg"}
                   alt={"Discover the Northern Lights"}
-                  className="mb-3 w-[auto] object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                  className="rounded-lg w-full h-[150px] transform group-hover:scale-105 transition-transform duration-500 shadow-md"
                   width={300}
-                  height={50}
+                  layout="responsive"
+                  height={150}
                 />
               </Col>
-              <Col md={9}>
-                <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 transition-colors duration-300 ease-in-out">
-                  TRAVEL
+
+              <Col md={9} sm={12} className="mt-4 md:mt-0">
+                <span className="inline-block text-sm uppercase bg-[#f7775e] text-white py-1 px-3 rounded-full tracking-wider mb-3 group-hover:bg-[#e0654c] transition-colors duration-300">
+                  Travel
                 </span>
 
-                <h2 className="card-title">
+                <h2 className="text-2xl font-semibold text-[#25211d] group-hover:text-[#f7775e] transition-colors duration-300">
                   Is It Worth to Ride to West & North Canada?
                 </h2>
-                <div className="card-text pt-3">
-                  <div className="flex flex-wrap items-center gap-4">
-                    <span className="text-[#a5a6aa]">
-                      By <strong className="text-[#25211d]">DIANA</strong>
-                    </span>
-                    <span className="text-[#a5a6aa]">28 MAR 2008</span>
-                    <span className="flex items-center gap-2 text-[#a5a6aa]">
-                      <FaRegComment /> 0
-                    </span>
-                  </div>
+
+                <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
+                  <span>
+                    By <strong className="text-[#25211d]">Diana</strong>
+                  </span>
+                  <span className="text-[#6c757d]">28 Mar 2008</span>
+                  <span className="flex items-center gap-2">
+                    <FaRegComment className="text-[#6c757d]" /> 0
+                  </span>
                 </div>
 
-                <p className="pt-3 text-[#a5a6aa]">
+                <p className="mt-4 text-[#6c757d] leading-relaxed group-hover:text-[#25211d] transition-colors duration-300">
                   People who have traveled around the world are willing to share
-                  their tips and tricks
+                  their tips and tricks to help you explore the best places
+                  while avoiding common mistakes.
                 </p>
               </Col>
             </Row>
@@ -391,7 +386,7 @@ const Main = () => {
 
           <Button
             variant="dark"
-            className="mb-5"
+            className="mb-5 mt-10 bg-[#25211d] text-white hover:bg-[#f7775e] transition-all duration-300"
             style={{
               borderRadius: "50px",
               paddingLeft: "24px",
@@ -401,31 +396,39 @@ const Main = () => {
               display: "flex",
               alignItems: "center",
               gap: "8px",
+              fontWeight: "bold",
+              fontSize: "14px",
               cursor: "pointer",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
             More Posts{" "}
-            {isHovered && (
+            <span
+              className={`transform transition-transform duration-300 ${
+                isHovered ? "translate-x-1" : ""
+              }`}
+            >
               <FaArrowRight
                 style={{
-                  animation: "jump 0.5s ease-in-out infinite",
-                  transition: "transform 0.3s ease",
+                  animation: isHovered
+                    ? "jump 0.5s ease-in-out infinite"
+                    : "none",
                 }}
               />
-            )}
+            </span>
             <style>
               {`
-          @keyframes jump {
-            0%, 100% {
-              transform: translateY(0);
-            }
-            50% {
-              transform: translateY(-3px);
-            }
-          }
-        `}
+      @keyframes jump {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-3px);
+        }
+      }
+    `}
             </style>
           </Button>
         </section>
