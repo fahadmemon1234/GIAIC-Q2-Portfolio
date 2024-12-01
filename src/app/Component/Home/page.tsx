@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import Carousel from "react-multi-carousel";
 import { FaArrowRight } from "react-icons/fa6";
 import { Playfair_Display } from "next/font/google";
+import Link from "next/link";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -51,41 +52,43 @@ const Main = () => {
         <Row>
           <Col md={4} sm={12}>
             <div className="group card rounded-none text-white overflow-hidden cursor-pointer mb-3">
-              <div className="relative">
-                <Image
-                  src={"/assets/img/Main.jpg"}
-                  alt={"Discover the Northern Lights"}
-                  className="card-img rounded-none group-hover:scale-110 transition-transform duration-300 ease-in-out"
-                  layout="responsive"
-                  width={700}
-                  height={400}
-                />
-                <div className="card-img-overlay text-center d-flex flex-column justify-content-end">
-                  <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 m-auto transition-colors duration-300 ease-in-out">
-                    TRAVEL
-                  </span>
-                  <h2 className="card-title">
-                    Is It Worth to Ride to West & North Canada?
-                  </h2>
-                  <div className="card-text">
-                    <Row className="m-auto">
-                      <Col>
-                        <span>
-                          By <strong>DIANA</strong>
-                        </span>
-                      </Col>
-                      <Col>
-                        <span>28 MAR 2008</span>
-                      </Col>
-                      <Col>
-                        <span className="flex items-center gap-2">
-                          <FaRegComment /> 0
-                        </span>
-                      </Col>
-                    </Row>
+              <Link href={`/Component/blogDetail/${3}`}>
+                <div className="relative">
+                  <Image
+                    src={"/assets/img/Main.jpg"}
+                    alt={"Discover the Northern Lights"}
+                    className="card-img rounded-none group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                    layout="responsive"
+                    width={700}
+                    height={400}
+                  />
+                  <div className="card-img-overlay text-center d-flex flex-column justify-content-end">
+                    <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 m-auto transition-colors duration-300 ease-in-out">
+                      TRAVEL
+                    </span>
+                    <h2 className="card-title">
+                      Is It Worth to Ride to West & North Canada?
+                    </h2>
+                    <div className="card-text">
+                      <Row className="m-auto">
+                        <Col>
+                          <span>
+                            By <strong>DIANA</strong>
+                          </span>
+                        </Col>
+                        <Col>
+                          <span>28 MAR 2008</span>
+                        </Col>
+                        <Col>
+                          <span className="flex items-center gap-2">
+                            <FaRegComment /> 0
+                          </span>
+                        </Col>
+                      </Row>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </Col>
 
@@ -169,33 +172,33 @@ const Main = () => {
             </div>
           </Col>
         </Row>
-
-        {/* Trending News Section */}
-        <section className="pt-14">
+      </Container>
+      {/* Trending News Section */}
+      <section className="mt-10 pt-14 pb-10 bg-[#fbf7f4]">
+        <Container>
           <div className="text-center">
-            <h2 className="flex items-center justify-center">
-              <span className="flex-grow border-b-2 border-gray-300 mr-3"></span>
+            <h2 className="flex items-center justify-center mb-4">
+              <span className="flex-grow border-b-[1px] border-[#f7775e] mr-4"></span>
               <span
-                className="font-semibold"
+                className="font-bold text-[#25211d]"
                 style={{
                   fontFamily: playfair.style.fontFamily,
-                  fontSize: "35px",
+                  fontSize: "36px",
                 }}
               >
                 Trending News
               </span>
-              <span className="flex-grow border-b-2 border-gray-300 ml-3"></span>
+              <span className="flex-grow border-b-[1px] border-[#f7775e] ml-4"></span>
             </h2>
-
-            <span
+            <p
               style={{
                 fontFamily: playfair.style.fontFamily,
                 fontSize: "20px",
               }}
-              className="text-base font-normal text-gray-500 tracking-normal block pt-2"
+              className="text-gray-600 tracking-wide"
             >
               Popular Posts
-            </span>
+            </p>
           </div>
 
           <div className="card-slider pt-10">
@@ -242,35 +245,35 @@ const Main = () => {
               ))}
             </Carousel>
           </div>
-        </section>
+        </Container>
+      </section>
 
-        {/* Latest Posts Section */}
-
+      {/* Latest Posts Section */}
+      <Container>
         <section className="pt-14">
           <div className="text-center">
-            <h2 className="flex items-center justify-center">
-              <span className="flex-grow border-b-2 border-gray-300 mr-3"></span>
+            <h2 className="flex items-center justify-center mb-4">
+              <span className="flex-grow border-b-[1px] border-[#f7775e] mr-4"></span>
               <span
-                className="font-semibold"
+                className="font-bold text-[#25211d]"
                 style={{
                   fontFamily: playfair.style.fontFamily,
-                  fontSize: "35px",
+                  fontSize: "36px",
                 }}
               >
                 Latest Posts
               </span>
-              <span className="flex-grow border-b-2 border-gray-300 ml-3"></span>
+              <span className="flex-grow border-b-[1px] border-[#f7775e] ml-4"></span>
             </h2>
-
-            <span
+            <p
               style={{
                 fontFamily: playfair.style.fontFamily,
                 fontSize: "20px",
               }}
-              className="text-base font-normal text-gray-500 tracking-normal block pt-2"
+              className="text-gray-600 tracking-wide"
             >
               Stay up-to-date
-            </span>
+            </p>
           </div>
 
           <div className="post pt-10">
