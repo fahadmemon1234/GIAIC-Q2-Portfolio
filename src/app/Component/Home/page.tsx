@@ -1,12 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { FaRegComment } from "react-icons/fa";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Carousel from "react-multi-carousel";
+import { FaArrowRight } from "react-icons/fa6";
 
 const Main = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -26,7 +29,7 @@ const Main = () => {
   };
 
   const cards = Array(8).fill({
-    imgSrc: "/assets/img/Main.jpg",
+    imgSrc: "/assets/img/tree.jpeg",
     category: "TRAVEL",
     title: "Escape the Busy City and Dive in this Beauty",
     author: "Diana Lewis",
@@ -219,7 +222,173 @@ const Main = () => {
           </div>
         </section>
 
-        <h1>asdasdas</h1>
+        {/* Latest Posts Section */}
+
+        <section className="pt-14">
+          <div className="text-center">
+            <h2 className="flex items-center justify-center">
+              <span className="flex-grow border-b-2 border-gray-300 mr-3"></span>
+              <span className="text-xxl font-semibold">Latest Posts</span>
+              <span className="flex-grow border-b-2 border-gray-300 ml-3"></span>
+            </h2>
+
+            <span className="text-base font-normal text-gray-500 tracking-normal block">
+              Stay up-to-date
+            </span>
+          </div>
+
+          <div className="post pt-10">
+            <Row className="items-center pb-3">
+              <Col md={3} sm={12}>
+                <Image
+                  src={"/assets/img/tree.jpeg"}
+                  alt={"Discover the Northern Lights"}
+                  className="mb-3 w-[auto] object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                  width={300}
+                  height={50}
+                />
+              </Col>
+              <Col md={9} sm={12}>
+                <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 transition-colors duration-300 ease-in-out">
+                  TRAVEL
+                </span>
+
+                <h2 className="card-title">
+                  Is It Worth to Ride to West & North Canada?
+                </h2>
+                <div className="card-text pt-3">
+                  <div className="flex flex-wrap items-center gap-4">
+                    <span className="text-[#a5a6aa]">
+                      By <strong className="text-[#25211d]">DIANA</strong>
+                    </span>
+                    <span className="text-[#a5a6aa]">28 MAR 2008</span>
+                    <span className="flex items-center gap-2 text-[#a5a6aa]">
+                      <FaRegComment /> 0
+                    </span>
+                  </div>
+                </div>
+
+                <p className="pt-3 text-[#a5a6aa]">
+                  People who have traveled around the world are willing to share
+                  their tips and tricks
+                </p>
+              </Col>
+            </Row>
+
+            <Row className="items-center border-t-[#eaeaea] border-t-[1px] pt-3 pb-3">
+              <Col md={3} sm={12}>
+                <Image
+                  src={"/assets/img/tree.jpeg"}
+                  alt={"Discover the Northern Lights"}
+                  className="mb-3 w-[auto] object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                  width={300}
+                  height={50}
+                />
+              </Col>
+              <Col md={9} sm={12}>
+                <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 transition-colors duration-300 ease-in-out">
+                  TRAVEL
+                </span>
+
+                <h2 className="card-title">
+                  Is It Worth to Ride to West & North Canada?
+                </h2>
+                <div className="card-text pt-3">
+                  <div className="flex flex-wrap items-center gap-4">
+                    <span className="text-[#a5a6aa]">
+                      By <strong className="text-[#25211d]">DIANA</strong>
+                    </span>
+                    <span className="text-[#a5a6aa]">28 MAR 2008</span>
+                    <span className="flex items-center gap-2 text-[#a5a6aa]">
+                      <FaRegComment /> 0
+                    </span>
+                  </div>
+                </div>
+
+                <p className="pt-3 text-[#a5a6aa]">
+                  People who have traveled around the world are willing to share
+                  their tips and tricks
+                </p>
+              </Col>
+            </Row>
+
+            <Row className="items-center border-t-[#eaeaea] border-t-[1px] pt-3 pb-3">
+              <Col md={3}>
+                <Image
+                  src={"/assets/img/tree.jpeg"}
+                  alt={"Discover the Northern Lights"}
+                  className="mb-3 w-[auto] object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                  width={300}
+                  height={50}
+                />
+              </Col>
+              <Col md={9}>
+                <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 transition-colors duration-300 ease-in-out">
+                  TRAVEL
+                </span>
+
+                <h2 className="card-title">
+                  Is It Worth to Ride to West & North Canada?
+                </h2>
+                <div className="card-text pt-3">
+                  <div className="flex flex-wrap items-center gap-4">
+                    <span className="text-[#a5a6aa]">
+                      By <strong className="text-[#25211d]">DIANA</strong>
+                    </span>
+                    <span className="text-[#a5a6aa]">28 MAR 2008</span>
+                    <span className="flex items-center gap-2 text-[#a5a6aa]">
+                      <FaRegComment /> 0
+                    </span>
+                  </div>
+                </div>
+
+                <p className="pt-3 text-[#a5a6aa]">
+                  People who have traveled around the world are willing to share
+                  their tips and tricks
+                </p>
+              </Col>
+            </Row>
+          </div>
+
+          <Button
+            variant="dark"
+            style={{
+              borderRadius: "50px",
+              paddingLeft: "24px",
+              paddingRight: "24px",
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              cursor: "pointer",
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            More Posts{" "}
+            {isHovered && (
+              <FaArrowRight
+                style={{
+                  animation: "jump 0.5s ease-in-out infinite",
+                  transition: "transform 0.3s ease",
+                }}
+              />
+            )}
+            <style>
+              {`
+          @keyframes jump {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-3px);
+            }
+          }
+        `}
+            </style>
+          </Button>
+        </section>
       </Container>
     </>
   );
