@@ -85,3 +85,40 @@
 .react-multi-carousel-dot button {
   display: none !important;
 }
+
+body.dark {
+  background-color: #121212;
+  color: #fff;
+}
+
+.navbar.dark {
+  background-color: #333;
+}
+
+.navbar-link:hover {
+  color: #f7775e;
+}
+
+.navbar-icon:hover {
+  color: #f7775e;
+}
+
+.theme-toggle {
+  background-color: #f7775e;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: #e67e5e;
+}
+
+button.navbar-toggle.text-white.navbar-toggler.collapsed {
+  background-color: white;
+  border-color: white;
+}
+
+.navbar-toggle.text-black .navbar-toggler-icon {
+  background-color: transparent;
+  border-color: black;
+}
+

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-
 import TopNavbar from "./Component/Navbar/page";
 import Footer from "./Component/Footer/page";
 

@@ -9,6 +9,10 @@ import { FaArrowRight } from "react-icons/fa6";
 import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
 
+interface MainProps {
+  theme: string;
+}
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "900"],
@@ -16,7 +20,7 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-const Main = () => {
+const Main = ({ theme }: MainProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const responsive = {
@@ -244,7 +248,9 @@ const Main = () => {
             <h2 className="flex items-center justify-center mb-4">
               <span className="flex-grow border-b-[1px] border-[#f7775e] mr-4"></span>
               <span
-                className="font-bold text-[#25211d]"
+                className={`font-bold ${
+                  theme == "dark" ? "text-white" : "text-[#25211d]"
+                }`}
                 style={{
                   fontFamily: playfair.style.fontFamily,
                   fontSize: "36px",
@@ -259,7 +265,9 @@ const Main = () => {
                 fontFamily: playfair.style.fontFamily,
                 fontSize: "20px",
               }}
-              className="text-gray-600 tracking-wide"
+              className={`tracking-wide ${
+                theme == "dark" ? "text-white" : "text-gray-600"
+              }`}
             >
               Stay up-to-date
             </p>

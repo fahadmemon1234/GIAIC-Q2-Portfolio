@@ -45,7 +45,7 @@ const TrendingPost = () => {
 
   return (
     <>
-      <section className="pt-14 bg-[#fbf7f4]">
+      <section className="pt-14 pb-10 bg-[#fbf7f4]">
         <Container>
           <div className="text-center">
             <h2 className="flex items-center justify-center mb-4">
