@@ -352,6 +352,7 @@ const Main = () => {
 
           <Button
             variant="dark"
+            className="mb-5"
             style={{
               borderRadius: "50px",
               paddingLeft: "24px",

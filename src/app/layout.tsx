@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '@fontsource/roboto';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import "react-multi-carousel/lib/styles.css";
 
 import TopNavbar from "./Component/Navbar/page";
+import Footer from "./Component/Footer/page";
+import "./globals.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fontsource/roboto";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import "react-multi-carousel/lib/styles.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body>
         <TopNavbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
