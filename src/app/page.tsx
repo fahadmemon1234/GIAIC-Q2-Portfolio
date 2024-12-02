@@ -7,13 +7,18 @@ export default function Home() {
   const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    setTheme(savedTheme === "dark" ? "dark" : "light");
+    const interval = setInterval(() => {
+      const savedTheme = localStorage.getItem("theme");
+      setTheme(savedTheme === "dark" ? "dark" : "light");
+    }, 100);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <>
       <Main theme={theme} />
+
       <ScrollToTopButton />
     </>
   );

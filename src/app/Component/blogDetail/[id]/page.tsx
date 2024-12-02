@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 import { Playfair_Display, Open_Sans } from "next/font/google";
@@ -21,9 +22,22 @@ const openSans = Open_Sans({
 });
 
 const BlogDetail = ({ params }: { params: { id: string } }) => {
+  const [theme, setTheme] = useState<string>("light");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const savedTheme = localStorage.getItem("theme");
+      setTheme(savedTheme === "dark" ? "dark" : "light");
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-      <div className="bg-[#f9f9f9] pb-10">
+      <div
+        className={`pb-10 ${theme == "dark" ? "text-[white]" : "bg-[#f9f9f9]"}`}
+      >
         <div className="relative w-full h-[400px]">
           <Image
             src="/assets/img/tree.jpeg"
@@ -45,12 +59,22 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
 
         <Container>
           <div className="text-center mt-8">
-            <span className="inline-block bg-[#25211d] text-white text-sm px-4 py-1 rounded-full uppercase tracking-wider">
+            <span
+              className={`inline-block   text-sm px-4 py-1 rounded-full uppercase tracking-wider ${
+                theme == "dark"
+                  ? "bg-[white] text-[#25211d]"
+                  : "bg-[#25211d] text-white"
+              }`}
+            >
               Travel
             </span>
             <div className="mt-4 text-[#a5a6aa]">
               <span className="mr-4 flex items-center justify-center gap-2">
-                <FaUser className="text-[#25211d]" />
+                <FaUser
+                  className={`${
+                    theme == "dark" ? "text-white" : "text-[#25211d]"
+                  }`}
+                />
                 <strong>Diana</strong>
               </span>
               <span className="mr-4">28 MAR 2008</span>
@@ -76,7 +100,9 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
             </p>
 
             <h2
-              className="text-[25px] font-semibold mb-4"
+              className={`text-[25px] font-semibold mb-4 ${
+                theme == "dark" ? "text-white" : "text-[#25211d]"
+              }`}
               style={{
                 fontFamily: playfair.style.fontFamily,
               }}
@@ -141,10 +167,12 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
           </Container>
         </div>
 
-        <div className="mt-16 bg-[#f9f9f9] py-10 px-6 rounded-lg">
+        <div className="mt-16 py-10 px-6 rounded-lg mb-16">
           <Container>
             <h3
-              className="text-[24px] text-[#25211d] font-bold mb-6"
+              className={`text-[24px] ont-bold mb-6 ${
+                theme == "dark" ? "text-white" : "text-[#25211d]"
+              }`}
               style={{
                 fontFamily: playfair.style.fontFamily,
               }}
@@ -158,7 +186,11 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
                 </div>
 
                 <div className="flex-1">
-                  <h4 className="text-[#25211d] font-semibold text-[18px]">
+                  <h4
+                    className={`font-semibold text-[18px] ${
+                      theme == "dark" ? "text-white" : "text-[#25211d]"
+                    }`}
+                  >
                     Diana
                   </h4>
                   <p className="text-[#7a7e83] mt-1 text-[16px] leading-relaxed">
@@ -179,7 +211,11 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
                 </div>
 
                 <div className="flex-1">
-                  <h4 className="text-[#25211d] font-semibold text-[18px]">
+                  <h4
+                    className={`font-semibold text-[18px] ${
+                      theme == "dark" ? "text-white" : "text-[#25211d]"
+                    }`}
+                  >
                     John
                   </h4>
                   <p className="text-[#7a7e83] mt-1 text-[16px] leading-relaxed">

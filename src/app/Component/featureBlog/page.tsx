@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaRegComment, FaUser, FaCalendarAlt } from "react-icons/fa";
 import TrendingPost from "../TrendingPost/page";
@@ -43,9 +43,24 @@ const blogs = [
 ];
 
 export default function FeatureBlog() {
+  const [theme, setTheme] = useState<string>("light");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const savedTheme = localStorage.getItem("theme");
+      setTheme(savedTheme === "dark" ? "dark" : "light");
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-      <div className="min-h-screen bg-gray-100 text-gray-900">
+      <div
+        className={`min-h-screen font-bold ${
+          theme == "dark" ? " text-[white] " : "bg-gray-100 text-gray-900"
+        }`}
+      >
         <Container>
           <div className="container mx-auto px-6 py-10">
             <div className="mb-10">

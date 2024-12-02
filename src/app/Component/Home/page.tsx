@@ -274,7 +274,7 @@ const Main = ({ theme }: MainProps) => {
           </div>
 
           <div className="post pt-10">
-            <Row className="items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
+            <Row className="pt-4 items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
               <Col md={3} sm={12}>
                 <Image
                   src={"/assets/img/tree.jpeg"}
@@ -291,13 +291,24 @@ const Main = ({ theme }: MainProps) => {
                   Travel
                 </span>
 
-                <h2 className="text-2xl font-semibold text-[#25211d] group-hover:text-[#f7775e] transition-colors duration-300">
+                <h2
+                  className={`text-2xl font-semibold group-hover:text-[#f7775e] transition-colors duration-300 ${
+                    theme == "dark" ? "text-white" : "text-[#25211d]"
+                  }`}
+                >
                   Is It Worth to Ride to West & North Canada?
                 </h2>
 
                 <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
                   <span>
-                    By <strong className="text-[#25211d]">Diana</strong>
+                    By{" "}
+                    <strong
+                      className={` ${
+                        theme == "dark" ? "text-white" : "text-[#25211d]"
+                      }`}
+                    >
+                      Diana
+                    </strong>
                   </span>
                   <span className="text-[#6c757d]">28 Mar 2008</span>
                   <span className="flex items-center gap-2">
@@ -313,7 +324,7 @@ const Main = ({ theme }: MainProps) => {
               </Col>
             </Row>
 
-            <Row className="items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
+            <Row className="pt-4 items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
               <Col md={3} sm={12}>
                 <Image
                   src={"/assets/img/tree.jpeg"}
@@ -330,13 +341,24 @@ const Main = ({ theme }: MainProps) => {
                   Travel
                 </span>
 
-                <h2 className="text-2xl font-semibold text-[#25211d] group-hover:text-[#f7775e] transition-colors duration-300">
+                <h2
+                  className={`text-2xl font-semibold group-hover:text-[#f7775e] transition-colors duration-300 ${
+                    theme == "dark" ? "text-white" : "text-[#25211d]"
+                  }`}
+                >
                   Is It Worth to Ride to West & North Canada?
                 </h2>
 
                 <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
                   <span>
-                    By <strong className="text-[#25211d]">Diana</strong>
+                    By{" "}
+                    <strong
+                      className={` ${
+                        theme == "dark" ? "text-white" : "text-[#25211d]"
+                      }`}
+                    >
+                      Diana
+                    </strong>
                   </span>
                   <span className="text-[#6c757d]">28 Mar 2008</span>
                   <span className="flex items-center gap-2">
@@ -352,7 +374,7 @@ const Main = ({ theme }: MainProps) => {
               </Col>
             </Row>
 
-            <Row className="items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
+            <Row className="pt-4 items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
               <Col md={3} sm={12}>
                 <Image
                   src={"/assets/img/tree.jpeg"}
@@ -369,13 +391,24 @@ const Main = ({ theme }: MainProps) => {
                   Travel
                 </span>
 
-                <h2 className="text-2xl font-semibold text-[#25211d] group-hover:text-[#f7775e] transition-colors duration-300">
+                <h2
+                  className={`text-2xl font-semibold group-hover:text-[#f7775e] transition-colors duration-300 ${
+                    theme === "dark" ? "text-white" : "text-[#25211d]"
+                  }`}
+                >
                   Is It Worth to Ride to West & North Canada?
                 </h2>
 
                 <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
                   <span>
-                    By <strong className="text-[#25211d]">Diana</strong>
+                    By{" "}
+                    <strong
+                      className={` ${
+                        theme === "dark" ? "text-white" : "text-[#25211d]"
+                      }`}
+                    >
+                      Diana
+                    </strong>
                   </span>
                   <span className="text-[#6c757d]">28 Mar 2008</span>
                   <span className="flex items-center gap-2">
@@ -397,6 +430,7 @@ const Main = ({ theme }: MainProps) => {
             className="mb-5 mt-10 bg-[#25211d] text-white hover:bg-[#f7775e] transition-all duration-300"
             style={{
               borderRadius: "50px",
+              border: "2px solid white",
               paddingLeft: "24px",
               paddingRight: "24px",
               textTransform: "uppercase",
