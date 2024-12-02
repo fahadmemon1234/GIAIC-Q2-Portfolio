@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import TopNavbar from "./Component/Navbar/page";
 import Footer from "./Component/Footer/page";
+import ScrollToTopButton from "./Component/ScrollToTopButton/page";
 
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body>
         <TopNavbar />
         {children}
+        <ScrollToTopButton />
         <Footer />
       </body>
     </html>

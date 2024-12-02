@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import Main from "./Component/Home/page";
-import ScrollToTopButton from "./Component/ScrollToTopButton/page";
 
 export default function Home() {
   const [theme, setTheme] = useState<string>("light");
@@ -18,8 +17,6 @@ export default function Home() {
   return (
     <>
       <Main theme={theme} />
-
-      <ScrollToTopButton />
     </>
   );
 }

@@ -121,3 +121,31 @@ button.navbar-toggle.text-white.navbar-toggler.collapsed {
   background-color: transparent;
   border-color: black;
 }
+
+.navbar-link:hover {
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.dropdown-item {
+  transition: all 0.3s ease;
+  padding: 10px 15px !important;
+}
+
+.dropdown-item:hover {
+  transform: scale(1.05);
+}
+
+@layer utilities {
+  .dropdown-toggle::after {
+    @apply content-[''] block w-2 h-2 border-t-2 border-r-2 border-current rotate-45;
+  }
+
+  .dark .dropdown-toggle::after {
+    color: white;
+  }
+
+  .light .dropdown-toggle::after {
+    color: black;
+  }
+}

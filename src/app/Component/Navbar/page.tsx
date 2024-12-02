@@ -6,7 +6,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { CiSearch, CiUser } from "react-icons/ci";
 import { BsMoon, BsSun } from "react-icons/bs";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, NavDropdown } from "react-bootstrap";
+import { AiOutlineAppstore, AiOutlineTag } from "react-icons/ai";
 import LoginPage from "../Account/Login/page";
 
 const TopNavbar = () => {
@@ -71,7 +72,7 @@ const TopNavbar = () => {
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
             className={`navbar-toggle ${
-              theme === "dark" ? "text-white" : "text-black"
+              theme === "dark" ? "bg-white" : "text-black"
             }`}
           />
           <Navbar.Collapse
@@ -103,14 +104,62 @@ const TopNavbar = () => {
               >
                 Feature
               </Nav.Link>
-              <Nav.Link
-                href="#link"
-                className={`navbar-link ${
-                  theme === "dark" ? "text-white" : "text-black"
-                }`}
+              <NavDropdown
+                title={
+                  <span
+                    className={`${
+                      theme === "dark" ? "text-white" : "text-black"
+                    }`}
+                  >
+                    Category
+                  </span>
+                }
+                id="category-dropdown"
+                className={`${theme === "dark" ? "text-white" : "text-black"}`}
+                menuVariant={theme === "dark" ? "dark" : "light"}
               >
-                Blog
-              </Nav.Link>
+                <div
+                  style={{
+                    backgroundColor:
+                      theme === "dark" ? "transparent" : "transparent",
+                    color: theme === "dark" ? "#ffffff" : "#000000",
+                  }}
+                >
+                  <NavDropdown.Item
+                    href="#action/1"
+                    className={`flex items-center ${
+                      theme === "dark"
+                        ? "hover:bg-gray-800 text-white"
+                        : "hover:bg-gray-100 text-black"
+                    }`}
+                  >
+                    <AiOutlineTag className="mr-2" />
+                    Category 1
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    href="#action/2"
+                    className={`flex items-center ${
+                      theme === "dark"
+                        ? "hover:bg-gray-800 text-white"
+                        : "hover:bg-gray-100 text-black"
+                    }`}
+                  >
+                    <AiOutlineTag className="mr-2" />
+                    Category 2
+                  </NavDropdown.Item>
+                  <NavDropdown.Item
+                    href="#action/3"
+                    className={`flex items-center ${
+                      theme === "dark"
+                        ? "hover:bg-gray-800 text-white"
+                        : "hover:bg-gray-100 text-black"
+                    }`}
+                  >
+                    <AiOutlineTag className="mr-2" />
+                    Category 3
+                  </NavDropdown.Item>
+                </div>
+              </NavDropdown>
             </Nav>
           </Navbar.Collapse>
 
@@ -132,7 +181,13 @@ const TopNavbar = () => {
       </Navbar>
 
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Body>
+        <Modal.Body
+          className={`${
+            theme == "dark"
+              ? " bg-[#121212] rounded-lg border-1 border-white"
+              : "bg-white rounded-lg"
+          }`}
+        >
           <LoginPage />
         </Modal.Body>
       </Modal>

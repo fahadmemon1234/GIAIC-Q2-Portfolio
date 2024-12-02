@@ -2,9 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import Image from "next/image";
-import Link from "next/link";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
@@ -18,7 +17,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="w-full p-6 ">
+      <div className="w-full p-6">
         <Image
           src={
             theme === "dark" ? "/assets/img/white.png" : "/assets/img/Logo.png"
@@ -33,10 +32,25 @@ const LoginPage = () => {
             theme == "dark" ? " text-white " : "text-gray-500"
           }`}
         >
-          Log in to your account
+          Create your account
         </p>
 
         <Form>
+          <Form.Group className="mb-4">
+            <Form.Label
+              className={`${
+                theme == "dark" ? " text-white " : "text-gray-700"
+              }`}
+            >
+              Name
+            </Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Full Name"
+              className="rounded-lg"
+            />
+          </Form.Group>
+
           <Form.Group className="mb-4">
             <Form.Label
               className={`${
@@ -67,23 +81,20 @@ const LoginPage = () => {
             />
           </Form.Group>
 
-          <div className="flex justify-between items-center mb-4">
-            <Form.Check
-              type="checkbox"
-              label="Remember me"
+          <Form.Group className="mb-4">
+            <Form.Label
               className={`${
                 theme == "dark" ? " text-white " : "text-gray-700"
               }`}
-            />
-            <a
-              href="#"
-              className={`text-sm ${
-                theme == "dark" ? " text-white " : "text-gray-700"
-              }`}
             >
-              Forgot password?
-            </a>
-          </div>
+              Confirm Password
+            </Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Confirm Password"
+              className="rounded-lg"
+            />
+          </Form.Group>
 
           <Button
             variant="dark"
@@ -92,7 +103,7 @@ const LoginPage = () => {
             }`}
             type="submit"
           >
-            Login
+            Register
           </Button>
         </Form>
 
@@ -101,19 +112,19 @@ const LoginPage = () => {
             theme == "dark" ? " text-white " : "text-gray-500"
           }`}
         >
-          Don't have an account?{" "}
-          <Link
+          Already have an account?{" "}
+          <a
             href="#"
             className={`font-semibold ${
               theme == "dark" ? " text-white " : "text-black"
             }`}
           >
-            Create account
-          </Link>
+            Log in
+          </a>
         </p>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
