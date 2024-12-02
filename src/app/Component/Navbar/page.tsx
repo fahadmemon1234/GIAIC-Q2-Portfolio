@@ -6,9 +6,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { CiSearch, CiUser } from "react-icons/ci";
 import { BsMoon, BsSun } from "react-icons/bs";
-import { Modal, Button, Form, NavDropdown } from "react-bootstrap";
-import { AiOutlineAppstore, AiOutlineTag } from "react-icons/ai";
-import LoginPage from "../Account/Login/page";
+import { Modal, NavDropdown } from "react-bootstrap";
+import { AiOutlineTag } from "react-icons/ai";
+import AuthPage from "../Account/page";
 
 const TopNavbar = () => {
   const [show, setShow] = useState(false);
@@ -188,7 +188,7 @@ const TopNavbar = () => {
               : "bg-white rounded-lg"
           }`}
         >
-          <LoginPage />
+          <AuthPage />
         </Modal.Body>
       </Modal>
     </>
