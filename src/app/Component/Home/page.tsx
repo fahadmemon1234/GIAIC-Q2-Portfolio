@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { FaRegComment } from "react-icons/fa";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
@@ -49,6 +50,12 @@ const Main = ({ theme }: MainProps) => {
     date: "20 Feb 2020",
     comments: 0,
   });
+
+  const router = useRouter();
+
+  const handlePage = () => {
+    router.push("/Component/featureBlog");
+  };
 
   return (
     <>
@@ -458,6 +465,7 @@ const Main = ({ theme }: MainProps) => {
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={handlePage}
           >
             More Posts{" "}
             <span
