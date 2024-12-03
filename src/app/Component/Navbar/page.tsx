@@ -9,6 +9,12 @@ import { BsMoon, BsSun } from "react-icons/bs";
 import { Modal, NavDropdown } from "react-bootstrap";
 import { AiOutlineTag } from "react-icons/ai";
 import AuthPage from "../Account/page";
+import { fetchCategory } from "@/app/lib/api";
+
+interface CategoryItem {
+  id: number;
+  title: string;
+}
 
 const TopNavbar = () => {
   const [show, setShow] = useState(false);
@@ -48,6 +54,25 @@ const TopNavbar = () => {
     document.body.classList.add(newTheme);
     localStorage.setItem("theme", newTheme);
   };
+
+  // Fetch Category Start
+
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const data = await fetchCategory();
+        if (data) setCategories(data);
+      } catch (error) {
+        console.error("Error fetching navbar data:", error);
+      }
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  // Fetch Category End
 
   return (
     <>
@@ -125,39 +150,20 @@ const TopNavbar = () => {
                     color: theme === "dark" ? "#ffffff" : "#000000",
                   }}
                 >
-                  <NavDropdown.Item
-                    href="#action/1"
-                    className={`flex items-center ${
-                      theme === "dark"
-                        ? "hover:bg-gray-800 text-white"
-                        : "hover:bg-gray-100 text-black"
-                    }`}
-                  >
-                    <AiOutlineTag className="mr-2" />
-                    Category 1
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    href="#action/2"
-                    className={`flex items-center ${
-                      theme === "dark"
-                        ? "hover:bg-gray-800 text-white"
-                        : "hover:bg-gray-100 text-black"
-                    }`}
-                  >
-                    <AiOutlineTag className="mr-2" />
-                    Category 2
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    href="#action/3"
-                    className={`flex items-center ${
-                      theme === "dark"
-                        ? "hover:bg-gray-800 text-white"
-                        : "hover:bg-gray-100 text-black"
-                    }`}
-                  >
-                    <AiOutlineTag className="mr-2" />
-                    Category 3
-                  </NavDropdown.Item>
+                  {categories.map((category) => (
+                    <NavDropdown.Item
+                      key={category.title}
+                      href={`/Component/Category/${category.title}`}
+                      className={`flex items-center ${
+                        theme === "dark"
+                          ? "hover:bg-gray-800 text-white"
+                          : "hover:bg-gray-100 text-black"
+                      }`}
+                    >
+                      <AiOutlineTag className="mr-2" />
+                      {category.title}
+                    </NavDropdown.Item>
+                  ))}
                 </div>
               </NavDropdown>
             </Nav>
