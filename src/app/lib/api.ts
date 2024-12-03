@@ -12,6 +12,24 @@ interface CategoryItem {
   title: string;
 }
 
+interface HeroCard {
+  id: number;
+  title: string;
+  category: {
+    title: string;
+  };
+  author: string;
+  createdDate: string;
+  imageUrl: {
+    asset: {
+      url: string;
+    };
+  };
+  description1: string;
+  subHeading: string;
+  subDescription: string;
+}
+
 // interface BlogCard {
 //   id: number;
 //   title: string;
@@ -33,21 +51,34 @@ export const fetchCategory = async (): Promise<CategoryItem[]> => {
   }
 };
 
-// export const fetchBlogCard = async (): Promise<BlogCard[]> => {
-//   const query = `*[_type == "blogCard"] | order(id asc) { id, title, category, author, date, imageUrl[] {
-//     asset->{
-//       url
-//     }
-//   }, description }`;
-//   try {
-//     const blogcard = await client.fetch<BlogCard[]>(query);
-
-//     return blogcard;
-//   } catch (error) {
-//     console.error("Error fetching blogcard data from Sanity:", error);
-//     throw new Error("Failed to fetch blogcard data");
-//   }
-// };
+export const fetchheroCard = async (): Promise<HeroCard[]> => {
+  const query = `
+    *[_type == "herosection"] | order(id desc) {
+      id,
+      title,
+      category-> {
+        title
+      },
+      author,
+      createdDate,
+      imageUrl {
+        asset->{
+          url
+        }
+      },
+      description1,
+      subHeading,
+      subDescription
+    }
+  `;
+  try {
+    const heroCards = await client.fetch<HeroCard[]>(query);
+    return heroCards;
+  } catch (error) {
+    console.error("Error fetching hero card data from Sanity:", error);
+    throw new Error("Failed to fetch hero card data");
+  }
+};
 
 export const fetchTutorials = async (query: string): Promise<any> => {
   try {

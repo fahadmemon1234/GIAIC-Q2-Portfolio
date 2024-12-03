@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaRegComment } from "react-icons/fa";
@@ -9,9 +9,28 @@ import Carousel from "react-multi-carousel";
 import { FaArrowRight } from "react-icons/fa6";
 import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
+import { fetchheroCard } from "@/app/lib/api";
 
 interface MainProps {
   theme: string;
+}
+
+interface HeroCard {
+  id: number;
+  title: string;
+  category: {
+    title: string;
+  };
+  author: string;
+  createdDate: string;
+  imageUrl: {
+    asset: {
+      url: string;
+    };
+  };
+  description1: string;
+  subHeading: string;
+  subDescription: string;
 }
 
 const playfair = Playfair_Display({
@@ -57,126 +76,74 @@ const Main = ({ theme }: MainProps) => {
     router.push("/Component/featureBlog");
   };
 
+  // Fetch hero card Start
+
+  const [heroCard, setHeroCard] = useState<HeroCard[]>([]);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const data = await fetchheroCard();
+        if (data) {
+          setHeroCard(data);
+        }
+      } catch (error) {
+        console.error("Error fetching hero card data:", error);
+      }
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  // Fetch hero card Start
+
   return (
     <>
       <Container className="mt-5">
         <Row>
-          <Col md={4} sm={12}>
-            <Link href={"/Component/blogDetail/3"}>
-              <div className="group card rounded-lg overflow-hidden cursor-pointer mb-6 shadow-md hover:shadow-xl transform transition-transform duration-300 hover:scale-105">
-                <div className="relative">
-                  <Image
-                    src={"/assets/img/Main.jpg"}
-                    alt={"Discover the Northern Lights"}
-                    className="rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
-                    layout="responsive"
-                    width={700}
-                    height={400}
-                  />
+          {heroCard.slice(0, 3).map((card) => (
+            <Col md={4} sm={12} key={card.id}>
+              <Link href={`/Component/blogDetail/${card.id}`}>
+                <div className="group card rounded-lg overflow-hidden cursor-pointer mb-6 shadow-md hover:shadow-xl transform transition-transform duration-300 hover:scale-105">
+                  <div className="relative h-[540px]">
+                    <Image
+                      src={card.imageUrl.asset.url}
+                      alt={card.title}
+                      className="rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
+                      layout="responsive"
+                      width={700}
+                      height={400}
+                    />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-all duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-all duration-500"></div>
 
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 text-center">
-                    <span className="inline-block bg-[#f7775e] text-white uppercase text-xs font-semibold tracking-wider py-1 px-3 rounded-full mb-4 shadow-sm group-hover:scale-105 transition-transform">
-                      Travel
-                    </span>
-
-                    <h2 className="text-white text-lg font-bold leading-snug group-hover:text-[#f7775e] transition-colors duration-300">
-                      Is It Worth to Ride to West & North Canada?
-                    </h2>
-
-                    <div className="flex justify-center items-center gap-4 text-xs text-gray-300 mt-3">
-                      <span>
-                        By <strong className="text-white">Diana</strong>
+                    <div className="absolute inset-0 flex flex-col justify-end p-6 text-center">
+                      <span className="inline-block bg-[#f7775e] text-white uppercase text-xs font-semibold tracking-wider py-1 px-3 rounded-full mb-4 shadow-sm group-hover:scale-105 transition-transform">
+                        {card.category.title}
                       </span>
-                      <span>28 Mar 2008</span>
-                      <span className="flex items-center gap-1">
-                        <FaRegComment className="text-[#f7775e]" /> 0
-                      </span>
+
+                      <h2 className="text-white text-lg font-bold leading-snug group-hover:text-[#f7775e] transition-colors duration-300">
+                        {card.title}
+                      </h2>
+
+                      <div className="flex justify-center items-center gap-4 text-xs text-gray-300 mt-3">
+                        <span>
+                          By{" "}
+                          <strong className="text-white">{card.author}</strong>
+                        </span>
+                        <span>
+                          {new Date(card.createdDate).toLocaleDateString()}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <FaRegComment className="text-[#f7775e]" /> 0
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          </Col>
-
-          <Col md={4} sm={12}>
-            <Link href={"/Component/blogDetail/3"}>
-              <div className="group card rounded-lg overflow-hidden cursor-pointer mb-6 shadow-md hover:shadow-xl transform transition-transform duration-300 hover:scale-105">
-                <div className="relative">
-                  <Image
-                    src={"/assets/img/Main.jpg"}
-                    alt={"Discover the Northern Lights"}
-                    className="rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
-                    layout="responsive"
-                    width={700}
-                    height={400}
-                  />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-all duration-500"></div>
-
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 text-center">
-                    <span className="inline-block bg-[#f7775e] text-white uppercase text-xs font-semibold tracking-wider py-1 px-3 rounded-full mb-4 shadow-sm group-hover:scale-105 transition-transform">
-                      Travel
-                    </span>
-
-                    <h2 className="text-white text-lg font-bold leading-snug group-hover:text-[#f7775e] transition-colors duration-300">
-                      Is It Worth to Ride to West & North Canada?
-                    </h2>
-
-                    <div className="flex justify-center items-center gap-4 text-xs text-gray-300 mt-3">
-                      <span>
-                        By <strong className="text-white">Diana</strong>
-                      </span>
-                      <span>28 Mar 2008</span>
-                      <span className="flex items-center gap-1">
-                        <FaRegComment className="text-[#f7775e]" /> 0
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </Col>
-
-          <Col md={4} sm={12}>
-            <Link href={"/Component/blogDetail/3"}>
-              <div className="group card rounded-lg overflow-hidden cursor-pointer mb-6 shadow-md hover:shadow-xl transform transition-transform duration-300 hover:scale-105">
-                <div className="relative">
-                  <Image
-                    src={"/assets/img/Main.jpg"}
-                    alt={"Discover the Northern Lights"}
-                    className="rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
-                    layout="responsive"
-                    width={700}
-                    height={400}
-                  />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-all duration-500"></div>
-
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 text-center">
-                    <span className="inline-block bg-[#f7775e] text-white uppercase text-xs font-semibold tracking-wider py-1 px-3 rounded-full mb-4 shadow-sm group-hover:scale-105 transition-transform">
-                      Travel
-                    </span>
-
-                    <h2 className="text-white text-lg font-bold leading-snug group-hover:text-[#f7775e] transition-colors duration-300">
-                      Is It Worth to Ride to West & North Canada?
-                    </h2>
-
-                    <div className="flex justify-center items-center gap-4 text-xs text-gray-300 mt-3">
-                      <span>
-                        By <strong className="text-white">Diana</strong>
-                      </span>
-                      <span>28 Mar 2008</span>
-                      <span className="flex items-center gap-1">
-                        <FaRegComment className="text-[#f7775e]" /> 0
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </Col>
+              </Link>
+            </Col>
+          ))}
         </Row>
       </Container>
       {/* Trending News Section */}
