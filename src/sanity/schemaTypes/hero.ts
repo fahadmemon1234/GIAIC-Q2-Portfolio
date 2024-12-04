@@ -1,8 +1,8 @@
 import { defineType } from "sanity";
 
 export default defineType({
-  name: "herosection",
-  title: "Home Hero Section",
+  name: "post",
+  title: "Post",
   type: "document",
   fields: [
     {
@@ -57,6 +57,20 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     },
     {
+      name: "postType",
+      title: "Post Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Hero Post", value: "hero" },
+          { title: "Trending Post", value: "trending" },
+          { title: "Latest Post", value: "latest" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "hero",
+    },
+    {
       name: "createdDate",
       title: "Created Date",
       type: "datetime",
@@ -69,7 +83,7 @@ export default defineType({
     const client = context.getClient({ apiVersion: "2024-11-01" });
 
     const existingItems = await client.fetch<{ id: number }[]>(
-      `*[_type == "herosection"]{id}`
+      `*[_type == "post"]{id}`
     );
     const maxId = existingItems.reduce(
       (max, item) => Math.max(max, item.id || 0),

@@ -31,6 +31,7 @@ interface HeroCard {
   description1: string;
   subHeading: string;
   subDescription: string;
+  postType: string;
 }
 
 const playfair = Playfair_Display({
@@ -101,49 +102,61 @@ const Main = ({ theme }: MainProps) => {
     <>
       <Container className="mt-5">
         <Row>
-          {heroCard.slice(0, 3).map((card) => (
-            <Col md={4} sm={12} key={card.id}>
-              <Link href={`/Component/blogDetail/${card.id}`}>
-                <div className="group card rounded-lg overflow-hidden cursor-pointer mb-6 shadow-md hover:shadow-xl transform transition-transform duration-300 hover:scale-105">
-                  <div className="relative h-[540px]">
-                    <Image
-                      src={card.imageUrl.asset.url}
-                      alt={card.title}
-                      className="rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
-                      layout="responsive"
-                      width={700}
-                      height={400}
-                    />
+          {heroCard
+            .filter((card) => card.postType === "hero")
+            .slice(0, 3)
+            .map((card) => (
+              <Col md={4} sm={12} key={card.id}>
+                <Link href={`/Component/blogDetail/${card.id}`}>
+                  <div className="group card rounded-lg overflow-hidden cursor-pointer mb-6 shadow-md hover:shadow-xl transform transition-transform duration-300 hover:scale-105">
+                    <div className="relative h-[540px]">
+                      <Image
+                        src={card.imageUrl.asset.url}
+                        alt={card.title}
+                        className="rounded-lg group-hover:scale-110 transition-transform duration-500 ease-in-out"
+                        layout="responsive"
+                        width={700}
+                        height={400}
+                      />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-all duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent transition-all duration-500"></div>
 
-                    <div className="absolute inset-0 flex flex-col justify-end p-6 text-center">
-                      <span className="inline-block bg-[#f7775e] text-white uppercase text-xs font-semibold tracking-wider py-1 px-3 rounded-full mb-4 shadow-sm group-hover:scale-105 transition-transform">
-                        {card.category.title}
-                      </span>
-
-                      <h2 className="text-white text-lg font-bold leading-snug group-hover:text-[#f7775e] transition-colors duration-300">
-                        {card.title}
-                      </h2>
-
-                      <div className="flex justify-center items-center gap-4 text-xs text-gray-300 mt-3">
-                        <span>
-                          By{" "}
-                          <strong className="text-white">{card.author}</strong>
+                      <div className="absolute inset-0 flex flex-col justify-end p-6 text-center">
+                        <span className="inline-block bg-[#f7775e] text-white uppercase text-xs font-semibold tracking-wider py-1 px-3 rounded-full mb-4 shadow-sm group-hover:scale-105 transition-transform">
+                          {card.category.title}
                         </span>
-                        <span>
-                          {new Date(card.createdDate).toLocaleDateString()}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <FaRegComment className="text-[#f7775e]" /> 0
-                        </span>
+
+                        <h2 className="text-white text-lg font-bold leading-snug group-hover:text-[#f7775e] transition-colors duration-300">
+                          {card.title}
+                        </h2>
+
+                        <div className="flex justify-center items-center gap-4 text-xs text-gray-300 mt-3">
+                          <span>
+                            By{" "}
+                            <strong className="text-white">
+                              {card.author}
+                            </strong>
+                          </span>
+                          <span>
+                            {new Date(card.createdDate).toLocaleDateString(
+                              "en-US",
+                              {
+                                day: "2-digit",
+                                month: "short",
+                                year: "numeric",
+                              }
+                            )}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <FaRegComment className="text-[#f7775e]" /> 0
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </Col>
-          ))}
+                </Link>
+              </Col>
+            ))}
         </Row>
       </Container>
       {/* Trending News Section */}
@@ -256,160 +269,70 @@ const Main = ({ theme }: MainProps) => {
           </div>
 
           <div className="post pt-10">
-            <Link href={"/Component/blogDetail/3"}>
-              <Row className="pt-4 items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
-                <Col md={3} sm={12}>
-                  <Image
-                    src={"/assets/img/tree.jpeg"}
-                    alt={"Discover the Northern Lights"}
-                    className="rounded-lg w-full h-[150px] transform group-hover:scale-105 transition-transform duration-500 shadow-md"
-                    width={300}
-                    layout="responsive"
-                    height={150}
-                  />
-                </Col>
+            {heroCard
+              .filter((card) => card.postType === "latest")
+              .slice(0, 3)
+              .map((card) => (
+                <Link key={card.id} href={`/Component/blogDetail/${card.id}`}>
+                  <Row className="pt-4 items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
+                    <Col md={3} sm={12}>
+                      <Image
+                        src={card.imageUrl.asset.url}
+                        alt={card.title}
+                        className="rounded-lg w-full h-[150px] transform group-hover:scale-105 transition-transform duration-500 shadow-md"
+                        width={300}
+                        layout="responsive"
+                        height={150}
+                      />
+                    </Col>
 
-                <Col md={9} sm={12} className="mt-4 md:mt-0">
-                  <span className="inline-block text-sm uppercase bg-[#f7775e] text-white py-1 px-3 rounded-full tracking-wider mb-3 group-hover:bg-[#e0654c] transition-colors duration-300">
-                    Travel
-                  </span>
+                    <Col md={9} sm={12} className="mt-4 md:mt-0">
+                      <span className="inline-block text-sm uppercase bg-[#f7775e] text-white py-1 px-3 rounded-full tracking-wider mb-3 group-hover:bg-[#e0654c] transition-colors duration-300">
+                        {card.category.title}
+                      </span>
 
-                  <h2
-                    className={`text-2xl font-semibold group-hover:text-[#f7775e] transition-colors duration-300 ${
-                      theme == "dark" ? "text-white" : "text-[#25211d]"
-                    }`}
-                  >
-                    Is It Worth to Ride to West & North Canada?
-                  </h2>
-
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
-                    <span>
-                      By{" "}
-                      <strong
-                        className={` ${
+                      <h2
+                        className={`text-2xl font-semibold group-hover:text-[#f7775e] transition-colors duration-300 ${
                           theme == "dark" ? "text-white" : "text-[#25211d]"
                         }`}
                       >
-                        Diana
-                      </strong>
-                    </span>
-                    <span className="text-[#6c757d]">28 Mar 2008</span>
-                    <span className="flex items-center gap-2">
-                      <FaRegComment className="text-[#6c757d]" /> 0
-                    </span>
-                  </div>
+                        {card.title}
+                      </h2>
 
-                  <p className="mt-4 text-[#6c757d] leading-relaxed group-hover:text-[#25211d] transition-colors duration-300">
-                    People who have traveled around the world are willing to
-                    share their tips and tricks to help you explore the best
-                    places while avoiding common mistakes.
-                  </p>
-                </Col>
-              </Row>
-            </Link>
-            <Link href={"/Component/blogDetail/3"}>
-              <Row className="pt-4 items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
-                <Col md={3} sm={12}>
-                  <Image
-                    src={"/assets/img/tree.jpeg"}
-                    alt={"Discover the Northern Lights"}
-                    className="rounded-lg w-full h-[150px] transform group-hover:scale-105 transition-transform duration-500 shadow-md"
-                    width={300}
-                    layout="responsive"
-                    height={150}
-                  />
-                </Col>
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
+                        <span>
+                          By{" "}
+                          <strong
+                            className={` ${
+                              theme == "dark" ? "text-white" : "text-[#25211d]"
+                            }`}
+                          >
+                            {card.author}
+                          </strong>
+                        </span>
+                        <span className="text-[#6c757d]">
+                          {" "}
+                          {new Date(card.createdDate).toLocaleDateString(
+                            "en-US",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                            }
+                          )}
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <FaRegComment className="text-[#6c757d]" /> 0
+                        </span>
+                      </div>
 
-                <Col md={9} sm={12} className="mt-4 md:mt-0">
-                  <span className="inline-block text-sm uppercase bg-[#f7775e] text-white py-1 px-3 rounded-full tracking-wider mb-3 group-hover:bg-[#e0654c] transition-colors duration-300">
-                    Travel
-                  </span>
-
-                  <h2
-                    className={`text-2xl font-semibold group-hover:text-[#f7775e] transition-colors duration-300 ${
-                      theme == "dark" ? "text-white" : "text-[#25211d]"
-                    }`}
-                  >
-                    Is It Worth to Ride to West & North Canada?
-                  </h2>
-
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
-                    <span>
-                      By{" "}
-                      <strong
-                        className={` ${
-                          theme == "dark" ? "text-white" : "text-[#25211d]"
-                        }`}
-                      >
-                        Diana
-                      </strong>
-                    </span>
-                    <span className="text-[#6c757d]">28 Mar 2008</span>
-                    <span className="flex items-center gap-2">
-                      <FaRegComment className="text-[#6c757d]" /> 0
-                    </span>
-                  </div>
-
-                  <p className="mt-4 text-[#6c757d] leading-relaxed group-hover:text-[#25211d] transition-colors duration-300">
-                    People who have traveled around the world are willing to
-                    share their tips and tricks to help you explore the best
-                    places while avoiding common mistakes.
-                  </p>
-                </Col>
-              </Row>
-            </Link>
-
-            <Link href={"/Component/blogDetail/3"}>
-              <Row className="pt-4 items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
-                <Col md={3} sm={12}>
-                  <Image
-                    src={"/assets/img/tree.jpeg"}
-                    alt={"Discover the Northern Lights"}
-                    className="rounded-lg w-full h-[150px] transform group-hover:scale-105 transition-transform duration-500 shadow-md"
-                    width={300}
-                    layout="responsive"
-                    height={150}
-                  />
-                </Col>
-
-                <Col md={9} sm={12} className="mt-4 md:mt-0">
-                  <span className="inline-block text-sm uppercase bg-[#f7775e] text-white py-1 px-3 rounded-full tracking-wider mb-3 group-hover:bg-[#e0654c] transition-colors duration-300">
-                    Travel
-                  </span>
-
-                  <h2
-                    className={`text-2xl font-semibold group-hover:text-[#f7775e] transition-colors duration-300 ${
-                      theme === "dark" ? "text-white" : "text-[#25211d]"
-                    }`}
-                  >
-                    Is It Worth to Ride to West & North Canada?
-                  </h2>
-
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-[#a5a6aa] mt-2">
-                    <span>
-                      By{" "}
-                      <strong
-                        className={` ${
-                          theme === "dark" ? "text-white" : "text-[#25211d]"
-                        }`}
-                      >
-                        Diana
-                      </strong>
-                    </span>
-                    <span className="text-[#6c757d]">28 Mar 2008</span>
-                    <span className="flex items-center gap-2">
-                      <FaRegComment className="text-[#6c757d]" /> 0
-                    </span>
-                  </div>
-
-                  <p className="mt-4 text-[#6c757d] leading-relaxed group-hover:text-[#25211d] transition-colors duration-300">
-                    People who have traveled around the world are willing to
-                    share their tips and tricks to help you explore the best
-                    places while avoiding common mistakes.
-                  </p>
-                </Col>
-              </Row>
-            </Link>
+                      <p className="mt-4 text-[#6c757d] leading-relaxed group-hover:text-[#25211d] transition-colors duration-300">
+                        {card.description1.slice(0, 156)}...
+                      </p>
+                    </Col>
+                  </Row>
+                </Link>
+              ))}
           </div>
 
           <Button

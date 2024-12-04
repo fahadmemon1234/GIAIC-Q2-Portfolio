@@ -40,7 +40,7 @@ interface HeroCard {
   subDescription: string;
 }
 
-const BlogDetail = ({ params }: { params: { id: string } }) => {
+const BlogDetail = ({ params }: { params: { id: string; type: string } }) => {
   const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
@@ -59,10 +59,13 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     const intervalId = setInterval(async () => {
       try {
-        const data = await fetchHeroCardById(parseFloat(params.id));
+        let data;
+        if (params.type === "heroSection") {
+          data = await fetchHeroCardById(parseFloat(params.id));
 
-        if (data) {
-          setHeroCard(data);
+          if (data) {
+            setHeroCard(data);
+          }
         }
       } catch (error) {
         console.log("Error fetching hero card data:", error);
@@ -70,7 +73,7 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
     }, 2000);
 
     return () => clearInterval(intervalId);
-  }, [params.id]);
+  }, [params.id, params.type]);
 
   // Fetch hero card End
 

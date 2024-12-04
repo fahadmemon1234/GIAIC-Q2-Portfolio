@@ -28,6 +28,7 @@ interface HeroCard {
   description1: string;
   subHeading: string;
   subDescription: string;
+  postType: string;
 }
 
 // interface BlogCard {
@@ -53,7 +54,7 @@ export const fetchCategory = async (): Promise<CategoryItem[]> => {
 
 export const fetchheroCard = async (): Promise<HeroCard[]> => {
   const query = `
-    *[_type == "herosection"] | order(id desc) {
+    *[_type == "post"] | order(id desc) {
       id,
       title,
       category-> {
@@ -68,7 +69,8 @@ export const fetchheroCard = async (): Promise<HeroCard[]> => {
       },
       description1,
       subHeading,
-      subDescription
+      subDescription,
+      postType
     }
   `;
   try {
@@ -77,6 +79,39 @@ export const fetchheroCard = async (): Promise<HeroCard[]> => {
   } catch (error) {
     console.error("Error fetching hero card data from Sanity:", error);
     throw new Error("Failed to fetch hero card data");
+  }
+};
+
+export const fetchHeroCardById = async (
+  id: number
+): Promise<HeroCard | null> => {
+  const query = `
+    *[_type == "post" && id == $id][0] {
+      id,
+      title,
+      category-> {
+        title
+      },
+      author,
+      createdDate,
+      imageUrl {
+        asset->{
+          url
+        }
+      },
+      description1,
+      subHeading,
+      subDescription,
+      postType
+    }
+  `;
+
+  try {
+    const heroCard = await client.fetch<HeroCard | null>(query, { id });
+    return heroCard;
+  } catch (error) {
+    console.log("Error fetching hero card data by ID from Sanity:", error);
+    throw new Error("Failed to fetch hero card data by ID");
   }
 };
 
