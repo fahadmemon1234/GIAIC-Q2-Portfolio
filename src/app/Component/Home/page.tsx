@@ -271,7 +271,7 @@ const Main = ({ theme }: MainProps) => {
           <div className="post pt-10">
             {heroCard
               .filter((card) => card.postType === "latest")
-              .slice(0, 3)
+              .slice(0, 5)
               .map((card) => (
                 <Link key={card.id} href={`/Component/blogDetail/${card.id}`}>
                   <Row className="pt-4 items-center pb-6 border-b border-gray-300 cursor-pointer group hover:bg-gray-100 transition-colors duration-300">
