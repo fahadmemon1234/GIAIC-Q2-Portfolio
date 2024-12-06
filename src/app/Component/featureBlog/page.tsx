@@ -4,43 +4,28 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaRegComment, FaUser, FaCalendarAlt } from "react-icons/fa";
 import TrendingPost from "../TrendingPost/page";
-import { Container } from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
+import { fetchheroCard } from "@/app/lib/api";
+import Link from "next/link";
 
-const blogs = [
-  {
-    id: 1,
-    title: "Explore the Northern Lights",
-    author: "Diana",
-    date: "28 Mar 2008",
-    comments: 5,
-    category: "Travel",
-    image: "/assets/img/Tree.jpeg",
-    description:
-      "Discover tips and tricks for planning your journey to witness the magical auroras.",
-  },
-  {
-    id: 2,
-    title: "Culinary Wonders of Asia",
-    author: "John",
-    date: "15 Jan 2023",
-    comments: 12,
-    category: "Food",
-    image: "/assets/img/Tree.jpeg",
-    description:
-      "Explore the exotic flavors of Asia and learn about unique recipes to try at home.",
-  },
-  {
-    id: 3,
-    title: "The Art of Minimalism",
-    author: "Sophia",
-    date: "8 Nov 2022",
-    comments: 8,
-    category: "Lifestyle",
-    image: "/assets/img/Tree.jpeg",
-    description:
-      "Learn how to simplify your life and embrace a minimalist lifestyle.",
-  },
-];
+interface HeroCard {
+  id: number;
+  title: string;
+  category: {
+    title: string;
+  };
+  author: string;
+  createdDate: string;
+  imageUrl: {
+    asset: {
+      url: string;
+    };
+  };
+  description1: string;
+  subHeading: string;
+  subDescription: string;
+  postType: string;
+}
 
 export default function FeatureBlog() {
   const [theme, setTheme] = useState<string>("light");
@@ -53,6 +38,27 @@ export default function FeatureBlog() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Fetch hero card Start
+
+  const [heroCard, setHeroCard] = useState<HeroCard[]>([]);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const data = await fetchheroCard();
+        if (data) {
+          setHeroCard(data);
+        }
+      } catch (error) {
+        console.error("Error fetching hero card data:", error);
+      }
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  // Fetch hero card Start
 
   return (
     <>
@@ -68,47 +74,55 @@ export default function FeatureBlog() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogs.map((blog) => (
-                <div
-                  key={blog.id}
-                  className="cursor-pointer relative group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                >
-                  <div className="relative w-full h-60">
-                    <Image
-                      src={blog.image}
-                      alt={blog.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  </div>
+              {heroCard
+                .filter((card) => card.postType === "feature")
+                .slice(0, 9)
+                .map((card) => (
+                  <Link key={card.id} href={`/Component/blogDetail/${card.id}`}>
+                    <Card className="cursor-pointer relative group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                      <div className="relative w-full h-60">
+                        <Image
+                          src={card.imageUrl.asset.url}
+                          alt={card.title}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      </div>
 
-                  <div className="p-5">
-                    <span className="inline-block text-sm uppercase bg-[#f7775e] text-white py-1 px-3 rounded-full tracking-wider mb-3">
-                      {blog.category}
-                    </span>
-                    <h2 className="text-lg font-semibold text-[#25211d]">
-                      {blog.title}
-                    </h2>
-                    <p className="text-sm text-gray-600 mt-2 leading-relaxed">
-                      {blog.description}
-                    </p>
-
-                    <div className="flex items-center justify-between mt-4 text-gray-500 text-sm">
-                      <span className="flex items-center gap-1">
-                        <FaUser className="text-[#f7775e]" /> {blog.author}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <FaCalendarAlt className="text-[#f7775e]" /> {blog.date}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <FaRegComment className="text-[#f7775e]" />{" "}
-                        {blog.comments}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                      <Card.Body className="p-4">
+                        <span className="inline-block text-sm uppercase bg-[#f7775e] text-white py-1 px-3 rounded-full tracking-wider mb-3">
+                          {card.category.title}
+                        </span>
+                        <Card.Title className="text-xl font-semibold text-[#25211d] leading-tight hover:text-[#f7775e] transition-colors duration-200">
+                          {card.title}
+                        </Card.Title>
+                        <Card.Text className="text-sm text-gray-600 mt-2 leading-relaxed">
+                          {card.description1.slice(0, 60)}...
+                        </Card.Text>
+                        <div className="flex items-center justify-between mt-4 text-gray-500 text-sm">
+                          <span className="flex items-center gap-1">
+                            <FaUser className="text-[#f7775e]" /> {card.author}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <FaCalendarAlt className="text-[#f7775e]" />
+                            {new Date(card.createdDate).toLocaleDateString(
+                              "en-US",
+                              {
+                                day: "2-digit",
+                                month: "short",
+                                year: "numeric",
+                              }
+                            )}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <FaRegComment className="text-[#f7775e]" /> 0
+                          </span>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Link>
+                ))}
             </div>
           </div>
         </Container>

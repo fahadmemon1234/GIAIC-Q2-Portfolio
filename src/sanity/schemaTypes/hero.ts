@@ -65,6 +65,7 @@ export default defineType({
           { title: "Hero Post", value: "hero" },
           { title: "Trending Post", value: "trending" },
           { title: "Latest Post", value: "latest" },
+          { title: "Feature Post", value: "feature" },
         ],
         layout: "radio",
       },

@@ -4,8 +4,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaRegComment } from "react-icons/fa";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import Carousel from "react-multi-carousel";
 import { FaArrowRight } from "react-icons/fa6";
 import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
@@ -44,33 +42,6 @@ const playfair = Playfair_Display({
 
 const Main = ({ theme }: MainProps) => {
   const [isHovered, setIsHovered] = useState(false);
-
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-      slidesToSlide: 1,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      slidesToSlide: 1,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-      slidesToSlide: 1,
-    },
-  };
-
-  const cards = Array(8).fill({
-    imgSrc: "/assets/img/tree.jpeg",
-    category: "TRAVEL",
-    title: "Escape the Busy City and Dive in this Beauty",
-    author: "Diana Lewis",
-    date: "20 Feb 2020",
-    comments: 0,
-  });
 
   const router = useRouter();
 
