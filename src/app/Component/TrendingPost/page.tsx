@@ -26,6 +26,7 @@ interface HeroCard {
   subHeading: string;
   subDescription: string;
   postType: string;
+  commentCount: number;
 }
 
 const playfair = Playfair_Display({
@@ -55,15 +56,6 @@ const TrendingPost = () => {
       slidesToSlide: 1,
     },
   };
-
-  const cards = Array(8).fill({
-    imgSrc: "/assets/img/tree.jpeg",
-    category: "TRAVEL",
-    title: "Escape the Busy City and Dive in this Beauty",
-    author: "Diana Lewis",
-    date: "20 Feb 2020",
-    comments: 0,
-  });
 
   // Fetch hero card Start
 
@@ -165,7 +157,7 @@ const TrendingPost = () => {
                             )}
                           </span>
                           <span className="d-flex align-items-center gap-1">
-                            <FaRegComment /> 0
+                            <FaRegComment /> {card.commentCount}
                           </span>
                         </div>
                       </Card.Body>

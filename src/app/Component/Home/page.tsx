@@ -31,6 +31,7 @@ interface HeroCard {
   subHeading: string;
   subDescription: string;
   postType: string;
+  commentCount: number;
 }
 
 const playfair = Playfair_Display({
@@ -120,7 +121,8 @@ const Main = ({ theme }: MainProps) => {
                             )}
                           </span>
                           <span className="flex items-center gap-1">
-                            <FaRegComment className="text-[#f7775e]" /> 0
+                            <FaRegComment className="text-[#f7775e]" />{" "}
+                            {card.commentCount}
                           </span>
                         </div>
                       </div>
@@ -224,7 +226,7 @@ const Main = ({ theme }: MainProps) => {
                           )}
                         </span>
                         <span className="flex items-center gap-2">
-                          <FaRegComment className="text-[#6c757d]" /> 0
+                          <FaRegComment className="text-[#6c757d]" /> {card.commentCount}
                         </span>
                       </div>
 

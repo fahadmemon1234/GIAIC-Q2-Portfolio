@@ -25,6 +25,7 @@ interface HeroCard {
   subHeading: string;
   subDescription: string;
   postType: string;
+  commentCount: number;
 }
 
 export default function FeatureBlog() {
@@ -116,7 +117,8 @@ export default function FeatureBlog() {
                             )}
                           </span>
                           <span className="flex items-center gap-1">
-                            <FaRegComment className="text-[#f7775e]" /> 0
+                            <FaRegComment className="text-[#f7775e]" />{" "}
+                            {card.commentCount}
                           </span>
                         </div>
                       </Card.Body>

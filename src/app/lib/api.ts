@@ -29,6 +29,7 @@ interface HeroCard {
   subHeading: string;
   subDescription: string;
   postType: string;
+  commentCount: number;
 }
 
 interface CommentItem {
@@ -52,7 +53,7 @@ export const fetchCategory = async (): Promise<CategoryItem[]> => {
 
 export const fetchheroCard = async (): Promise<HeroCard[]> => {
   const query = `
-    *[_type == "post"] | order(id desc) {
+     *[_type == "post"] | order(id desc) {
       id,
       title,
       category-> {
@@ -68,7 +69,8 @@ export const fetchheroCard = async (): Promise<HeroCard[]> => {
       description1,
       subHeading,
       subDescription,
-      postType
+      postType,
+      "commentCount": count(*[_type == "comment" && p_id == ^.id])
     }
   `;
   try {
@@ -127,6 +129,26 @@ export const fetchCommentById = async (
 
   try {
     const comment = await client.fetch<CommentItem | null>(query, { id });
+    return comment;
+  } catch (error) {
+    console.log("Error fetching hero card data by ID from Sanity:", error);
+    throw new Error("Failed to fetch hero card data by ID");
+  }
+};
+
+export const fetchAllComments = async (): Promise<CommentItem | null> => {
+  const query = `
+    *[_type == "comment"] | order(id desc) {
+      id,
+      p_id,
+      name,
+      comment,
+      createdDate,
+    }
+  `;
+
+  try {
+    const comment = await client.fetch<CommentItem | null>(query);
     return comment;
   } catch (error) {
     console.log("Error fetching hero card data by ID from Sanity:", error);
