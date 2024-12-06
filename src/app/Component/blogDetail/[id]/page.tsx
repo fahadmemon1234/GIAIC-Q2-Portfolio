@@ -9,6 +9,7 @@ import TrendingPost from "@/app/Component/TrendingPost/page";
 import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
 import { FaRegComments } from "react-icons/fa";
+import Toast from "../../Toast/page";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -94,12 +95,20 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
 
   const [name, setName] = useState<string>("");
   const [comment, setComment] = useState<string>("");
+  const [toastMessage, setToastMessage] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!name || !comment) {
-      alert("Please fill in both fields.");
+      setToastMessage({
+        message: "Please fill in both fields.",
+        type: "error",
+      });
+      setTimeout(() => setToastMessage(null), 3000);
       return;
     }
 
@@ -122,12 +131,19 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
         createdDate: new Date().toISOString(),
       });
 
-      alert("Comment added successfully!");
+      setToastMessage({
+        message: "Comment added successfully!",
+        type: "success",
+      });
+      setTimeout(() => setToastMessage(null), 3000);
       setName("");
       setComment("");
     } catch (error) {
-      console.log("Failed to add comment:", error);
-      alert("Failed to add comment. Please try again.");
+      setToastMessage({
+        message: "Failed to add comment. Please try again.",
+        type: "error",
+      });
+      setTimeout(() => setToastMessage(null), 3000);
     }
   };
 
@@ -272,6 +288,14 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
                 Post Comment
               </button>
             </form>
+
+            {toastMessage && (
+              <Toast
+                message={toastMessage.message}
+                type={toastMessage.type}
+                onClose={() => setToastMessage(null)}
+              />
+            )}
           </Container>
         </div>
 

@@ -18,9 +18,19 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-3px)" },
         },
+        slideIn: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        slideOut: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(100%)" },
+        },
       },
       animation: {
         jump: "jump 0.5s ease-in-out infinite",
+        slideIn: "slideIn 0.6s ease-out",
+        slideOut: "slideOut 0.6s ease-out",
       },
     },
   },
