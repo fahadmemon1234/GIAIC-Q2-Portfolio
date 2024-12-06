@@ -68,6 +68,7 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
   const [heroCard, setHeroCard] = useState<HeroCard | null>(null);
 
   const [commentData, setCommentData] = useState<CommentItem[]>([]);
+  const [commentCount, setCommentCount] = useState<number>(0);
 
   useEffect(() => {
     const intervalId = setInterval(async () => {
@@ -82,6 +83,8 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
 
         if (Array.isArray(comments)) {
           setCommentData(comments);
+          const commentCount = comments.length;
+          setCommentCount(commentCount);
         }
       } catch (error) {
         console.log("Error fetching hero card data:", error);
@@ -201,7 +204,7 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
                   : "Date not available"}
               </span>
               <span className="flex items-center gap-2">
-                <FaRegComment /> 0 Comments
+                <FaRegComment /> {commentCount} Comments
               </span>
             </div>
           </div>
