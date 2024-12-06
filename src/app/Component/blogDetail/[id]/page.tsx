@@ -6,7 +6,9 @@ import { Container } from "react-bootstrap";
 import { Playfair_Display, Open_Sans } from "next/font/google";
 import { FaRegComment, FaUser } from "react-icons/fa";
 import TrendingPost from "@/app/Component/TrendingPost/page";
-import { fetchHeroCardById } from "@/app/lib/api";
+import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
+import { client } from "@/app/lib/sanity";
+import { FaRegComments } from "react-icons/fa";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -40,6 +42,14 @@ interface HeroCard {
   subDescription: string;
 }
 
+interface CommentItem {
+  id: number;
+  p_id: number;
+  name: string;
+  comment: string;
+  createdDate: string;
+}
+
 const BlogDetail = ({ params }: { params: { id: string } }) => {
   const [theme, setTheme] = useState<string>("light");
 
@@ -56,6 +66,8 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
 
   const [heroCard, setHeroCard] = useState<HeroCard | null>(null);
 
+  const [commentData, setCommentData] = useState<CommentItem[]>([]);
+
   useEffect(() => {
     const intervalId = setInterval(async () => {
       try {
@@ -63,6 +75,12 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
 
         if (data) {
           setHeroCard(data);
+        }
+
+        const comments = await fetchCommentById(parseFloat(params.id));
+
+        if (Array.isArray(comments)) {
+          setCommentData(comments);
         }
       } catch (error) {
         console.log("Error fetching hero card data:", error);
@@ -73,6 +91,45 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
   }, [params.id]);
 
   // Fetch hero card End
+
+  const [name, setName] = useState<string>("");
+  const [comment, setComment] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!name || !comment) {
+      alert("Please fill in both fields.");
+      return;
+    }
+
+    try {
+      const existingItems: { id: number }[] = await client.fetch(
+        `*[_type == "comment"]{id}`
+      );
+
+      const maxId = existingItems.reduce(
+        (max, item) => Math.max(max, item.id || 0),
+        0
+      );
+
+      await client.create({
+        _type: "comment",
+        id: maxId + 1,
+        p_id: parseFloat(params.id),
+        name,
+        comment,
+        createdDate: new Date().toISOString(),
+      });
+
+      alert("Comment added successfully!");
+      setName("");
+      setComment("");
+    } catch (error) {
+      console.log("Failed to add comment:", error);
+      alert("Failed to add comment. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -179,12 +236,17 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
             >
               Share Your Thoughts
             </h3>
-            <form className="mt-6 max-w-[600px] mx-auto space-y-6">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-6 max-w-[600px] mx-auto space-y-6"
+            >
               <div className="relative">
                 <input
                   type="text"
                   placeholder="Your Name"
                   className="w-full px-4 py-3 bg-white border border-gray-300 text-[#25211d] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f7775e] placeholder-gray-500"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <span className="absolute right-4 top-[50%] transform -translate-y-[50%] text-gray-500">
                   <i className="far fa-user"></i>
@@ -195,6 +257,8 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
                 <textarea
                   placeholder="Write your comment..."
                   className="w-full px-4 py-3 bg-white border border-gray-300 text-[#25211d] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f7775e] placeholder-gray-500 h-[150px]"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
                 ></textarea>
                 <span className="absolute right-4 top-[20px] text-gray-500">
                   <i className="far fa-comment"></i>
@@ -203,7 +267,7 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
 
               <button
                 type="submit"
-                className="w-full bg-[#f7775e] py-3 rounded-lg text-lg font-semibold text-white hover:bg-[#e0654c] transition-colors duration-300"
+                className="w-full bg-[#f7775e] py-3 cursor-pointer rounded-lg text-lg font-semibold text-white hover:bg-[#e0654c] transition-colors duration-300"
               >
                 Post Comment
               </button>
@@ -224,53 +288,57 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
               Comments
             </h3>
             <div className="space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="w-[60px] h-[60px] flex items-center justify-center rounded-full bg-[#f7775e] text-white text-xl font-bold">
-                  D
-                </div>
+              {commentData.length > 0 ? (
+                <>
+                  {commentData.map((comment) => (
+                    <>
+                      <div className="flex items-start gap-4" key={comment.id}>
+                        <div className="w-[60px] h-[60px] flex items-center justify-center rounded-full bg-[#f7775e] text-white text-xl font-bold">
+                          {comment.name.charAt(0).toUpperCase()}
+                        </div>
 
-                <div className="flex-1">
-                  <h4
-                    className={`font-semibold text-[18px] ${
-                      theme == "dark" ? "text-white" : "text-[#25211d]"
-                    }`}
-                  >
-                    Diana
-                  </h4>
-                  <p className="text-[#7a7e83] mt-1 text-[16px] leading-relaxed">
-                    Lorem Ipsum is simply dummy text of the printing industry.
-                    Great post!
+                        <div className="flex-1">
+                          <h4
+                            className={`font-semibold text-[18px] ${
+                              theme == "dark" ? "text-white" : "text-[#25211d]"
+                            }`}
+                          >
+                            {comment.name}
+                          </h4>
+                          <p className="text-[#7a7e83] mt-1 text-[16px] leading-relaxed">
+                            {comment.comment}
+                          </p>
+                          <span className="text-[#a5a6aa] text-sm">
+                            Posted on:{" "}
+                            {new Date(comment.createdDate).toLocaleDateString(
+                              "en-US",
+                              {
+                                day: "2-digit",
+                                month: "short",
+                                year: "numeric",
+                              }
+                            )}
+                          </span>
+                        </div>
+                      </div>
+
+                      <hr />
+                    </>
+                  ))}
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-8">
+                  <div className="w-[80px] h-[80px] flex items-center justify-center rounded-full bg-[#f7775e]/20 text-[#f7775e] text-4xl animate-bounce">
+                    <FaRegComments />
+                  </div>
+                  <p className="mt-4 text-lg font-semibold text-gray-700">
+                    No Comments Yet
                   </p>
-                  <span className="text-[#a5a6aa] text-sm">
-                    Posted on: 01 Dec 2024
-                  </span>
-                </div>
-              </div>
-
-              <hr />
-
-              <div className="flex items-start gap-4">
-                <div className="w-[60px] h-[60px] flex items-center justify-center rounded-full bg-[#f7775e] text-white text-xl font-bold">
-                  J
-                </div>
-
-                <div className="flex-1">
-                  <h4
-                    className={`font-semibold text-[18px] ${
-                      theme == "dark" ? "text-white" : "text-[#25211d]"
-                    }`}
-                  >
-                    John
-                  </h4>
-                  <p className="text-[#7a7e83] mt-1 text-[16px] leading-relaxed">
-                    Amazing journey! Id love to visit Canada someday.
+                  <p className="text-gray-500 text-sm">
+                    Be the first to share your thoughts!
                   </p>
-                  <span className="text-[#a5a6aa] text-sm">
-                    Posted on: 30 Nov 2024
-                  </span>
                 </div>
-              </div>
-              <hr />
+              )}
             </div>
           </Container>
         </div>
