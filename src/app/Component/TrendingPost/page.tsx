@@ -1,10 +1,32 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaRegComment } from "react-icons/fa";
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Carousel from "react-multi-carousel";
 import { Playfair_Display } from "next/font/google";
+import Link from "next/link";
+
+import { fetchheroCard } from "@/app/lib/api";
+
+interface HeroCard {
+  id: number;
+  title: string;
+  category: {
+    title: string;
+  };
+  author: string;
+  createdDate: string;
+  imageUrl: {
+    asset: {
+      url: string;
+    };
+  };
+  description1: string;
+  subHeading: string;
+  subDescription: string;
+  postType: string;
+}
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -42,6 +64,27 @@ const TrendingPost = () => {
     date: "20 Feb 2020",
     comments: 0,
   });
+
+  // Fetch hero card Start
+
+  const [heroCard, setHeroCard] = useState<HeroCard[]>([]);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const data = await fetchheroCard();
+        if (data) {
+          setHeroCard(data);
+        }
+      } catch (error) {
+        console.error("Error fetching hero card data:", error);
+      }
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  // Fetch hero card Start
 
   return (
     <>
@@ -85,35 +128,50 @@ const TrendingPost = () => {
               arrows={false}
               dotListClass="custom-dot-list-style"
             >
-              {cards.map((card, index) => (
-                <Card
-                  key={index}
-                  className="border-0 cursor-pointer group overflow-hidden mx-2"
-                >
-                  <div className="overflow-hidden">
-                    <Card.Img
-                      variant="top"
-                      src={card.imgSrc}
-                      className="w-100 h-[200px] object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out"
-                    />
-                  </div>
-                  <Card.Body className="d-flex flex-column justify-content-end p-3">
-                    <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 transition-colors duration-300 ease-in-out">
-                      {card.category}
-                    </span>
-                    <h2 className="h5 mb-3 text-dark">{card.title}</h2>
-                    <div className="text-muted small d-flex justify-content-between align-items-center">
-                      <span>
-                        By <strong>{card.author}</strong>
-                      </span>
-                      <span>{card.date}</span>
-                      <span className="d-flex align-items-center gap-1">
-                        <FaRegComment /> {card.comments}
-                      </span>
-                    </div>
-                  </Card.Body>
-                </Card>
-              ))}
+              {heroCard
+                .filter((card) => card.postType === "trending")
+                .map((card) => (
+                  <Link key={card.id} href={`/Component/blogDetail/${card.id}`}>
+                    <Card
+                      key={card.id}
+                      className="border-0 cursor-pointer group overflow-hidden mx-2 h-[380px]"
+                    >
+                      <div className="overflow-hidden">
+                        <Card.Img
+                          variant="top"
+                          src={card.imageUrl.asset.url}
+                          alt={card.title}
+                          className="w-100 h-[200px] object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                        />
+                      </div>
+                      <Card.Body className="d-flex flex-column justify-content-end p-3">
+                        <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 transition-colors duration-300 ease-in-out">
+                          {card.category.title}
+                        </span>
+                        <h2 className="h5 mb-3 text-dark">{card.title}</h2>
+                        <div className="text-muted small d-flex justify-content-between align-items-center">
+                          <span>
+                            By <strong>{card.author}</strong>
+                          </span>
+                          <span>
+                            {" "}
+                            {new Date(card.createdDate).toLocaleDateString(
+                              "en-US",
+                              {
+                                day: "2-digit",
+                                month: "short",
+                                year: "numeric",
+                              }
+                            )}
+                          </span>
+                          <span className="d-flex align-items-center gap-1">
+                            <FaRegComment /> 0
+                          </span>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Link>
+                ))}
             </Carousel>
           </div>
         </Container>

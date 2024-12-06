@@ -10,6 +10,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
 import { fetchheroCard } from "@/app/lib/api";
+import TrendingPost from "../TrendingPost/page";
 
 interface MainProps {
   theme: string;
@@ -160,79 +161,9 @@ const Main = ({ theme }: MainProps) => {
         </Row>
       </Container>
       {/* Trending News Section */}
-      <section className="mt-10 pt-14 pb-10 bg-[#fbf7f4]">
+      <section>
         <Container>
-          <div className="text-center">
-            <h2 className="flex items-center justify-center mb-4">
-              <span className="flex-grow border-b-[1px] border-[#f7775e] mr-4"></span>
-              <span
-                className="font-bold text-[#25211d]"
-                style={{
-                  fontFamily: playfair.style.fontFamily,
-                  fontSize: "36px",
-                }}
-              >
-                Trending News
-              </span>
-              <span className="flex-grow border-b-[1px] border-[#f7775e] ml-4"></span>
-            </h2>
-            <p
-              style={{
-                fontFamily: playfair.style.fontFamily,
-                fontSize: "20px",
-              }}
-              className="text-gray-600 tracking-wide"
-            >
-              Popular Posts
-            </p>
-          </div>
-
-          <div className="card-slider pt-10">
-            <Carousel
-              responsive={responsive}
-              infinite={true}
-              autoPlay={true}
-              autoPlaySpeed={3000}
-              keyBoardControl={true}
-              transitionDuration={500}
-              containerClass="carousel-container"
-              showDots={true}
-              arrows={false}
-              dotListClass="custom-dot-list-style"
-            >
-              {cards.map((card, index) => (
-                <Link href={"/Component/blogDetail/3"}>
-                  <Card
-                    key={index}
-                    className="border-0 cursor-pointer group overflow-hidden mx-2"
-                  >
-                    <div className="overflow-hidden">
-                      <Card.Img
-                        variant="top"
-                        src={card.imgSrc}
-                        className="w-100 h-[200px] object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out"
-                      />
-                    </div>
-                    <Card.Body className="d-flex flex-column justify-content-end p-3">
-                      <span className="badge badges-detail bg-[#25211d] group-hover:bg-[#f7775e] mb-2 transition-colors duration-300 ease-in-out">
-                        {card.category}
-                      </span>
-                      <h2 className="h5 mb-3 text-dark">{card.title}</h2>
-                      <div className="text-muted small d-flex justify-content-between align-items-center">
-                        <span>
-                          By <strong>{card.author}</strong>
-                        </span>
-                        <span>{card.date}</span>
-                        <span className="d-flex align-items-center gap-1">
-                          <FaRegComment /> {card.comments}
-                        </span>
-                      </div>
-                    </Card.Body>
-                  </Card>
-                </Link>
-              ))}
-            </Carousel>
-          </div>
+          <TrendingPost />
         </Container>
       </section>
 
