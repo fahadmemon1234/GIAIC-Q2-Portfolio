@@ -4,39 +4,27 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, Container } from "react-bootstrap";
+import { fetchheroCard } from "@/app/lib/api";
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "Mastering React.js in 2024",
-    description:
-      "Discover the best practices, tips, and resources to become a React expert.",
-    imageUrl: "/assets/img/tree.jpeg",
-    category: "web-development",
-    date: "November 25, 2024",
-    author: "John Doe",
-  },
-  {
-    id: 2,
-    title: "Top 10 UI/UX Design Trends",
-    description:
-      "Explore the emerging trends in UI/UX design that will shape 2024.",
-    imageUrl: "/assets/blog/uiux.png",
-    category: "design",
-    date: "November 20, 2024",
-    author: "Jane Smith",
-  },
-  {
-    id: 3,
-    title: "Mastering React.js in 2024",
-    description:
-      "Discover the best practices, tips, and resources to become a React expert.",
-    imageUrl: "/assets/img/tree.jpeg",
-    category: "web-development",
-    date: "November 25, 2024",
-    author: "John Doe",
-  },
-];
+interface HeroCard {
+  id: number;
+  title: string;
+  category: {
+    title: string;
+  };
+  author: string;
+  createdDate: string;
+  imageUrl: {
+    asset: {
+      url: string;
+    };
+  };
+  description1: string;
+  subHeading: string;
+  subDescription: string;
+  postType: string;
+  commentCount: number;
+}
 
 const CategoryPage = ({ params }: { params: { category: string } }) => {
   const router = useRouter();
@@ -46,8 +34,6 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
   };
 
   const { category } = params;
-
-  const filteredPosts = blogPosts.filter((post) => post.category === category);
 
   const [theme, setTheme] = useState<string>("light");
 
@@ -59,6 +45,32 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
 
     return () => clearInterval(interval);
   }, []);
+
+  // Fetch hero card Start
+
+  const [heroCard, setHeroCard] = useState<HeroCard[]>([]);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const data = await fetchheroCard();
+        if (data) {
+          setHeroCard(data);
+        }
+      } catch (error) {
+        console.error("Error fetching hero card data:", error);
+      }
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const filteredCards = heroCard.filter(
+    (card) =>
+      card.category.title.toLowerCase() === params.category.toLowerCase()
+  );
+
+  // Fetch hero card Start
 
   return (
     <div
@@ -86,14 +98,14 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
         </div>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredPosts.map((post) => (
+          {filteredCards.map((post) => (
             <Link
               href={`/Component/blogDetail/${post.id}`}
               key={post.id}
               className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
             >
               <Image
-                src={post.imageUrl}
+                src={post.imageUrl.asset.url}
                 alt={post.title}
                 width={400}
                 height={200}
@@ -104,17 +116,22 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
                   {post.title}
                 </h2>
                 <p className="text-sm text-gray-500 mt-1">
-                  By {post.author} • {post.date}
+                  By {post.author} •{" "}
+                  {new Date(post.createdDate).toLocaleDateString("en-US", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
                 </p>
                 <p className="text-gray-600 mt-2 text-sm">
-                  {post.description.substring(0, 100)}...
+                  {post.description1.slice(0, 100)}...
                 </p>
               </div>
             </Link>
           ))}
         </div>
 
-        {filteredPosts.length === 0 && (
+        {filteredCards.length === 0 && (
           <div className="text-center mt-8">
             <p
               className={`text-lg font-bold ${
