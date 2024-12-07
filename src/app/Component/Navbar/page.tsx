@@ -76,8 +76,6 @@ const TopNavbar = () => {
 
   // Fetch Category End
 
-
-
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
   const [showDropdown, setShowDropdown] = useState(false); // Track dropdown visibility
 
@@ -197,39 +195,39 @@ const TopNavbar = () => {
               onClick={handleShow}
             /> */}
 
-{!isLoggedIn ? (
-        <CiUser
-          size={30}
-          className="navbar-icon cursor-pointer"
-          onClick={handleShow}
-        />
-      ) : (
-        <div className="relative">
-          <FaUserCircle
-            size={30}
-            className="navbar-icon cursor-pointer"
-            onClick={toggleDropdown}
-          />
-          {showDropdown && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
-              <ul className="py-2">
-                <li
-                  className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                  onClick={() => console.log("View Profile")}
-                >
-                  View Profile
-                </li>
-                <li
-                  className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
+            {!isLoggedIn ? (
+              <CiUser
+                size={30}
+                className="navbar-icon cursor-pointer"
+                onClick={handleShow}
+              />
+            ) : (
+              <div className="relative">
+                <FaUserCircle
+                  size={30}
+                  className="navbar-icon cursor-pointer"
+                  onClick={toggleDropdown}
+                />
+                {showDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
+                    <ul className="py-2">
+                      <li
+                        className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                        onClick={() => console.log("View Profile")}
+                      >
+                        View Profile
+                      </li>
+                      <li
+                        className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
             <div
               onClick={toggleTheme}
               className="theme-toggle d-flex align-items-center justify-content-center p-2 rounded-full cursor-pointer"
