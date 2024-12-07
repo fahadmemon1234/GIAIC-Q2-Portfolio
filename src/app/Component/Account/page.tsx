@@ -35,15 +35,18 @@ const LoginPage = ({
     e.preventDefault();
 
     try {
-      const users: { email: string; password: string }[] = await client.fetch(
-        `*[_type == "userRegistration"]{email, password}`
-      );
+      const users: { _id: string; email: string; password: string }[] =
+        await client.fetch(
+          `*[_type == "userRegistration"]{_id, email, password}`
+        );
 
       const user = users.find(
         (user) => user.email === email && user.password === password
       );
 
       if (user) {
+        await client.patch(user._id).set({ isLogin: true }).commit();
+
         setToastMessage({
           message: "Login successful!",
           type: "success",
@@ -243,6 +246,7 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
         id: maxId + 1,
         name: name,
         email: email,
+        isLogin: false,
         password: password,
         createdAt: new Date().toISOString(),
       });

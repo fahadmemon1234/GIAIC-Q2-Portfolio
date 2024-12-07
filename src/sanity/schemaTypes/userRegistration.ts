@@ -34,6 +34,13 @@ export default defineType({
       validation: (Rule) => Rule.required().min(6).max(100),
     },
     {
+      name: "isLogin",
+      title: "Is Login",
+      type: "boolean",
+      hidden: true,
+      initialValue: false,
+    },
+    {
       name: "createdAt",
       title: "Created At",
       type: "datetime",

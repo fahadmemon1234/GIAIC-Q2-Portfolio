@@ -10,6 +10,8 @@ import { Modal, NavDropdown } from "react-bootstrap";
 import { AiOutlineTag } from "react-icons/ai";
 import AuthPage from "../Account/page";
 import { fetchCategory } from "@/app/lib/api";
+import { FaUserCircle } from "react-icons/fa";
+import { Dropdown } from "react-bootstrap";
 
 interface CategoryItem {
   id: number;
@@ -73,6 +75,24 @@ const TopNavbar = () => {
   }, []);
 
   // Fetch Category End
+
+
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+  const [showDropdown, setShowDropdown] = useState(false); // Track dropdown visibility
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true); // Set login state to true after successful login
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown((prev) => !prev); // Toggle dropdown visibility
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Reset login state on logout
+    setShowDropdown(false); // Hide dropdown
+  };
 
   return (
     <>
@@ -171,11 +191,45 @@ const TopNavbar = () => {
 
           <div className="d-flex align-items-center" style={{ gap: "10px" }}>
             <CiSearch size={30} className="navbar-icon" />
-            <CiUser
+            {/* <CiUser
               size={30}
               className="navbar-icon cursor-pointer"
               onClick={handleShow}
-            />
+            /> */}
+
+{!isLoggedIn ? (
+        <CiUser
+          size={30}
+          className="navbar-icon cursor-pointer"
+          onClick={handleShow}
+        />
+      ) : (
+        <div className="relative">
+          <FaUserCircle
+            size={30}
+            className="navbar-icon cursor-pointer"
+            onClick={toggleDropdown}
+          />
+          {showDropdown && (
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
+              <ul className="py-2">
+                <li
+                  className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                  onClick={() => console.log("View Profile")}
+                >
+                  View Profile
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
             <div
               onClick={toggleTheme}
               className="theme-toggle d-flex align-items-center justify-content-center p-2 rounded-full cursor-pointer"
