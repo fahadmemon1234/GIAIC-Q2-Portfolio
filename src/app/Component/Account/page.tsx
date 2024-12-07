@@ -3,8 +3,16 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
+import { client } from "@/app/lib/sanity";
+import Toast from "@/app/Component/Toast/page";
 
-const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
+const LoginPage = ({
+  toggleForm,
+  onLoginSuccess,
+}: {
+  toggleForm: () => void;
+  onLoginSuccess: () => void;
+}) => {
   const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
@@ -15,6 +23,52 @@ const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [toastMessage, setToastMessage] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const users: { email: string; password: string }[] = await client.fetch(
+        `*[_type == "userRegistration"]{email, password}`
+      );
+
+      const user = users.find(
+        (user) => user.email === email && user.password === password
+      );
+
+      if (user) {
+        setToastMessage({
+          message: "Login successful!",
+          type: "success",
+        });
+
+        setTimeout(() => {
+          setToastMessage(null);
+          onLoginSuccess();
+        }, 2000);
+      } else {
+        setToastMessage({
+          message: "Invalid email or password",
+          type: "error",
+        });
+        setTimeout(() => setToastMessage(null), 3000);
+      }
+    } catch (error) {
+      setToastMessage({
+        message: "Login failed. Please try again.",
+        type: "error",
+      });
+      setTimeout(() => setToastMessage(null), 3000);
+      console.log("Error logging in:", error);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center">
@@ -36,7 +90,7 @@ const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
           Log in to your account
         </p>
 
-        <Form>
+        <Form onSubmit={handleLogin}>
           <Form.Group className="mb-4">
             <Form.Label
               className={`${
@@ -49,6 +103,8 @@ const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
               type="email"
               placeholder="Email"
               className="rounded-lg"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
 
@@ -64,6 +120,8 @@ const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
               type="password"
               placeholder="Password"
               className="rounded-lg"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
 
@@ -95,6 +153,14 @@ const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
             Login
           </Button>
         </Form>
+
+        {toastMessage && (
+          <Toast
+            message={toastMessage.message}
+            type={toastMessage.type}
+            onClose={() => setToastMessage(null)}
+          />
+        )}
 
         <p
           className={`mt-6 text-center text-sm ${
@@ -129,6 +195,77 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
     return () => clearInterval(interval);
   }, []);
 
+  const [toastMessage, setToastMessage] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
+
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setToastMessage({
+        message: "Passwords do not match",
+        type: "error",
+      });
+      setTimeout(() => setToastMessage(null), 3000);
+
+      return;
+    }
+
+    try {
+      const existingItems: { id: number; email: string }[] = await client.fetch(
+        `*[_type == "userRegistration"]{id, email}`
+      );
+
+      const emailExists = existingItems.some((item) => item.email === email);
+      if (emailExists) {
+        setToastMessage({
+          message: "Email already exists. Please use a different email.",
+          type: "error",
+        });
+        setTimeout(() => setToastMessage(null), 3000);
+        return;
+      }
+
+      const maxId = existingItems.reduce(
+        (max, item) => Math.max(max, item.id || 0),
+        0
+      );
+
+      await client.create({
+        _type: "userRegistration",
+        id: maxId + 1,
+        name: name,
+        email: email,
+        password: password,
+        createdAt: new Date().toISOString(),
+      });
+
+      setToastMessage({
+        message: "Registration successful!",
+        type: "success",
+      });
+      setTimeout(() => setToastMessage(null), 3000);
+
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+    } catch (error) {
+      setToastMessage({
+        message: "Registration failed. Please try again.",
+        type: "error",
+      });
+      setTimeout(() => setToastMessage(null), 3000);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center">
       <div className="w-full p-6">
@@ -149,7 +286,7 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
           Create your account
         </p>
 
-        <Form>
+        <Form onSubmit={handleRegister}>
           <Form.Group className="mb-4">
             <Form.Label
               className={`${
@@ -162,6 +299,8 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
               type="text"
               placeholder="Full Name"
               className="rounded-lg"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </Form.Group>
 
@@ -177,6 +316,8 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
               type="email"
               placeholder="Email"
               className="rounded-lg"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
 
@@ -192,6 +333,8 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
               type="password"
               placeholder="Password"
               className="rounded-lg"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
 
@@ -207,6 +350,8 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
               type="password"
               placeholder="Confirm Password"
               className="rounded-lg"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </Form.Group>
 
@@ -236,21 +381,35 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
           >
             Log in
           </Link>
+          {toastMessage && (
+            <Toast
+              message={toastMessage.message}
+              type={toastMessage.type}
+              onClose={() => setToastMessage(null)}
+            />
+          )}
         </p>
       </div>
     </div>
   );
 };
 
-const AuthPage = () => {
+const AuthPage = ({ onClose }: { onClose: () => void }) => {
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleForm = () => setIsLogin(!isLogin);
 
+  const handleLoginSuccess = () => {
+    onClose();
+  };
+
   return (
     <div>
       {isLogin ? (
-        <LoginPage toggleForm={toggleForm} />
+        <LoginPage
+          toggleForm={toggleForm}
+          onLoginSuccess={handleLoginSuccess}
+        />
       ) : (
         <RegisterPage toggleForm={toggleForm} />
       )}
