@@ -13,7 +13,7 @@ const Email = () => {
           <div className="flex flex-row justify-center items-center">
             <input
               type="email"
-              placeholder="your@gmail.com"
+              placeholder="your@email.com"
               className="p-3 bg-[#F9F9F9] border-0 border-gray-300 w-2/3 md:w-80 focus:outline-none"
             />
             <button className="bg-gray-800 text-white py-3 px-5 w-1/3 md:w-auto">
