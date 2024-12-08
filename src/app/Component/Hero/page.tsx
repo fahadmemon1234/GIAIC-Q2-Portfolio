@@ -3,7 +3,7 @@ import Image from "next/image";
 const HeroSection = () => {
   return (
     <>
-      <div className="flex flex-col md:flex-row lg:container mx-auto lg:px-16 lg:py-16">
+      <div className="flex flex-col md:flex-row lg:container mx-auto lg:py-16">
         <div className="bg-[#2E294E] text-white p-14 flex flex-col justify-center md:w-2/3">
           <h1
             className="text-3xl font-Inter mb-10"
@@ -14,7 +14,7 @@ const HeroSection = () => {
           <button className="bg-[#4A4E69] hidden lg:block text-white font-light py-4 px-6 mb-48 w-44">
             View collection
           </button>
-          <p className="font-light lg:w-[90%]">
+          <p className="font-light lg:w-[80%]">
             A new era in eco-friendly furniture with Avelon, the French luxury
             retail brand with nice fonts, tasteful colors, and a beautiful way
             to display things digitally using modern web technologies.
