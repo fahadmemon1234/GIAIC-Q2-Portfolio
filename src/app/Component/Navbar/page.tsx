@@ -12,7 +12,6 @@ export const Navbar1 = () => {
     <>
       {/* Navbar for Large and Medium Screens */}
       <nav className="bg-[#FFFFFF] hidden sm:block">
-        {/* Top Section */}
         <div className="flex items-center justify-between px-6 py-5">
           <div className="text-gray-600">
             <IoIosSearch className="text-xl" />
@@ -71,7 +70,6 @@ export const Navbar1 = () => {
 
         <hr className="m-auto w-[97%]" />
 
-       
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"
@@ -105,5 +103,111 @@ export const Navbar1 = () => {
 };
 
 export const Navbar2 = () => {
-  return <></>;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <>
+      <nav className="bg-[#FFFFFF] font-Poppins">
+        <div className="flex items-center justify-between px-4 py-4 sm:px-6">
+          <h1 className="text-2xl font-Poppins text-gray-800">Avion</h1>
+
+          <ul className="hidden sm:flex space-x-12 text-sm text-gray-500">
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Plant pots
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Ceramics
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Tables
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Chairs
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Crockery
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Tableware
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Cutlery
+              </a>
+            </li>
+          </ul>
+
+          <div className="flex items-center space-x-4 text-gray-600">
+            <IoIosSearch className="text-xl sm:block" />
+            <IoCartOutline className="text-xl" />
+            <FaRegUserCircle className="text-xl" />
+
+            {/* Hamburger Menu */}
+            <button
+              className="sm:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <HiX className="text-2xl text-gray-800" />
+              ) : (
+                <HiOutlineMenuAlt3 className="text-2xl text-gray-800" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {isMenuOpen && (
+          <ul className="flex flex-col items-center space-y-4 px-6 py-4 text-sm text-gray-500 sm:hidden">
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Plant pots
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Ceramics
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Tables
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Chairs
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Crockery
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Tableware
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-gray-800">
+                Cutlery
+              </a>
+            </li>
+          </ul>
+        )}
+      </nav>
+    </>
+  );
 };

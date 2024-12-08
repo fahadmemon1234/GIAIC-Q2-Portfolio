@@ -1,5 +1,10 @@
-import { Navbar1 } from "./Component/Navbar/page";
+import { Navbar1, Navbar2 } from "./Component/Navbar/page";
 
 export default function Home() {
-  return <Navbar1 />;
+  return (
+    <>
+      <Navbar1 />
+      <Navbar2 />
+    </>
+  );
 }
