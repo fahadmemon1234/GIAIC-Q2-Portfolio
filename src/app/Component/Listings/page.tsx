@@ -84,16 +84,16 @@ export const Listing2 = () => {
   ];
 
   return (
-    <div className="container pb-[64px] font-helvetica ">
+    <div className="container pb-[64px] font-helvetica">
       <h1 className="text-3xl font-light font-helvetica text-gray-800 mb-8">
         Our popular products
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <div className="flex gap-6 md:grid md:grid-cols-12 md:gap-6 md:overflow-x-auto">
         {listings.map((listing, index) => (
           <div
             key={index}
-            className={`flex flex-col ${
-              index === 0 ? "md:col-span-6" : "md:col-span-3"
+            className={`flex-shrink-0 w-[80%] md:flex-shrink md:w-auto ${
+              index === 0 ? "hidden md:block md:col-span-6" : "md:col-span-3"
             }`}
           >
             <div className="relative w-full h-[350px]">
@@ -101,11 +101,11 @@ export const Listing2 = () => {
                 src={listing.image}
                 alt={listing.alt}
                 layout="fill"
+                objectFit="cover"
                 quality={100}
                 priority
               />
             </div>
-
             <h2 className="text-lg font-helvetica font-normal text-gray-800 mt-4">
               {listing.title}
             </h2>
