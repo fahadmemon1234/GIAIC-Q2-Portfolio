@@ -103,7 +103,7 @@ const AllProduct = () => {
   return (
     <>
       <Navbar1 />
-      <div className="relative w-full">
+      <div className="relative w-[482px] md:w-[1349px] h-[209px] mx-auto">
         <Image
           src="/assets/img/bg.jpeg"
           alt="Background with a dark texture and a wooden object on the right"
@@ -113,7 +113,7 @@ const AllProduct = () => {
           quality={100}
           priority
         />
-        <div className="container font-helvetica absolute bottom-[520px] md:bottom-[480px] left-4 z-10 text-white text-4xl md:text-2xl text-center md:text-left">
+        <div className="container pt-0 md:pt-20 absolute inset-0 flex items-center justify-center md:justify-start font-helvetica text-white text-4xl md:text-2xl z-10">
           All products
         </div>
       </div>
