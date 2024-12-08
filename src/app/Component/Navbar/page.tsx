@@ -16,7 +16,7 @@ export const Navbar1 = () => {
             <IoIosSearch className="text-xl" />
           </div>
 
-          <h1 className="text-2xl font-Poppins text-gray-800">Avion</h1>
+          <h1 className="text-2xl font-helvetica text-gray-800">Avion</h1>
 
           <div className="flex items-center space-x-4 text-gray-600">
             <IoCartOutline className="text-xl" />
@@ -52,7 +52,7 @@ export const Navbar1 = () => {
 
       <nav className="bg-[#FFFFFF] block sm:hidden font-Poppins">
         <div className="flex items-center justify-between px-4 py-4">
-          <h1 className="text-2xl font-Poppins text-gray-800">Avion</h1>
+          <h1 className="text-2xl font-helvetica text-gray-800">Avion</h1>
 
           <div className="flex items-center space-x-4 text-gray-600">
             <IoIosSearch className="text-xl" />
@@ -107,7 +107,7 @@ export const Navbar2 = () => {
     <>
       <nav className="bg-[#FFFFFF] font-Poppins">
         <div className="flex items-center justify-between px-4 py-4 sm:px-6">
-          <h1 className="text-2xl font-Poppins text-gray-800">Avion</h1>
+          <h1 className="text-2xl font-helvetica text-gray-800">Avion</h1>
 
           <ul className="hidden sm:flex space-x-12 text-sm text-gray-500">
             <li>

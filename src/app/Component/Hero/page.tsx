@@ -6,7 +6,7 @@ const HeroSection = () => {
       <div className="flex flex-col md:flex-row lg:container mx-auto lg:py-16">
         <div className="bg-[#2E294E] text-white p-14 flex flex-col justify-center md:w-2/3">
           <h1
-            className="text-3xl font-Inter mb-10"
+            className="text-3xl font-helvetica mb-10"
             style={{ lineHeight: "40px" }}
           >
             The furniture brand for the <br /> future, with timeless designs
@@ -25,7 +25,7 @@ const HeroSection = () => {
           <Image
             src="/assets/img/chair.jpg"
             alt="A modern black chair with wooden legs"
-            className="h-[553px] object-cover md:block hidden" // Hide image on small screens
+            className="h-[553px] object-cover md:block hidden"
             width={800}
             height={500}
             quality={100}

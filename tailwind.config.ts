@@ -18,6 +18,7 @@ const config: Config = {
       Poppins: ["Poppins", "sans-serif"],
       Inter: ["Inter", "sans-serif"],
       Arial: ["Arial", "sans-serif"],
+      helvetica: ["HelveticaNeueLT43LightEx", "sans-serif"],
     },
     container: {
       center: true,
