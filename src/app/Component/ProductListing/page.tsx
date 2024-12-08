@@ -61,25 +61,32 @@ const ProductListing = () => {
             Dimensions
           </h2>
           <div className="flex mb-10 gap-8">
-            <div className="mr-8 border-r-1px solid gray300 md:border-0">
+            <div className="">
               <p className="text-gray-700 text-sm font-helvetica mb-4">
                 Height
               </p>
               <p className="text-gray-500 text-sm font-helvetica">110cm</p>
             </div>
-            <div className="mr-8">
+            <div className="border-r border-gray-300 md:border-0"></div>
+            <div className="">
               <p className="text-gray-700 text-sm font-helvetica mb-4">Width</p>
               <p className="text-gray-500 text-sm font-helvetica">75cm</p>
             </div>
+            <div className="border-r border-gray-300 md:border-0"></div>
             <div>
               <p className="text-gray-700 text-sm font-helvetica mb-4">Depth</p>
               <p className="text-gray-500 text-sm font-helvetica">50cm</p>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center mb-6">
-            <p className="text-gray-700 text-sm font-helvetica mr-4">Amount:</p>
-            <div className="flex items-center justify-between gap-4 md:gap-56 sm:gap-8 sm:w-auto w-full mb-4 sm:mb-0">
-              <div className="flex-1 flex items-center bg-gray-100 text-gray-500">
+            <p className="text-gray-700 text-sm font-helvetica mr-4 hidden md:block mb-3">
+              Amount:
+            </p>
+            <p className="text-gray-700 text-sm font-helvetica mr-4 block md:hidden mb-3">
+              Quantitity:
+            </p>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-56 sm:gap-8 sm:w-auto w-full mb-4 sm:mb-0">
+              <div className="flex-1 flex items-center bg-gray-100 text-gray-500 w-full sm:w-auto">
                 <button
                   className="px-2 py-1 text-gray-400 cursor-pointer"
                   onClick={handleDecrement}
@@ -89,7 +96,7 @@ const ProductListing = () => {
                 </button>
                 <input
                   type="text"
-                  className="w-12 bg-transparent text-center"
+                  className="w-full sm:w-12 bg-transparent text-center"
                   value={value}
                   readOnly
                 />
