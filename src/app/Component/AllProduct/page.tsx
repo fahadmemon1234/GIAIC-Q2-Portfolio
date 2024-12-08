@@ -1,6 +1,6 @@
 "use client";
-import { Navbar1 } from "../Navbar/page";
-import { Footer1 } from "../Footer/page";
+import Navbar1 from "../Navbar/page";
+import Footer1 from "../Footer/page";
 import Image from "next/image";
 import { useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
@@ -217,8 +217,8 @@ const AllProduct = () => {
       <div className="container">
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-14">
           {listings.map((listing, index) => (
-            <Link href={"/Component/ProductListing"}>
-              <div key={index} className="pb-3">
+            <Link key={index} href={"/Component/ProductListing"}>
+              <div className="pb-3">
                 <div className="w-full h-[300px]">
                   <Image
                     src={listing.image}

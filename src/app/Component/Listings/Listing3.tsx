@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const Listing1 = () => {
+const Listing3 = () => {
   const listings = [
     {
       image: "/assets/img/chair.jpg",
@@ -31,11 +31,11 @@ const Listing1 = () => {
 
   return (
     <div className="container py-16 font-helvetica">
-      <h1 className="text-3xl text-gray-900 mb-8">New ceramics</h1>
+      <h1 className="text-3xl text-gray-900 mb-8">You might also like</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {listings.map((listing, index) => (
-          <Link key={index} href={"/Component/ProductListing"}>
-            <div>
+          <div key={index}>
+            <Link href={"/Component/ProductListing"}>
               <div className="w-full h-[300px]">
                 <Image
                   src={listing.image}
@@ -51,13 +51,13 @@ const Listing1 = () => {
                 {listing.title}
               </h2>
               <p className="text-gray-500">{listing.price}</p>
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))}
       </div>
       <div className="flex justify-center text-center mt-10">
         <Link href="/Component/AllProduct">
-          <button className="bg-gray-100 cursor-pointer lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44">
+          <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44 cursor-pointer">
             View collection
           </button>
         </Link>
@@ -66,4 +66,4 @@ const Listing1 = () => {
   );
 };
 
-export default Listing1;
+export default Listing3;

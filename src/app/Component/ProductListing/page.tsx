@@ -1,10 +1,10 @@
 "use client";
-import { Navbar2 } from "../Navbar/page";
+import Navbar2 from "../Navbar/Navbar2";
 import TopBar from "../topBar/page";
-import { Listing3 } from "../Listings/page";
-import { Features1 } from "../Features/page";
+import Listing3 from "../Listings/Listing3";
+import Features1 from "../Features/page";
 import Email from "../Email/page";
-import { Footer2 } from "../Footer/page";
+import Footer2 from "../Footer/Footer2";
 import Image from "next/image";
 import React, { useState } from "react";
 

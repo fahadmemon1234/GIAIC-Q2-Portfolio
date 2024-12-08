@@ -1,10 +1,11 @@
 import TopBar from "../topBar/page";
-import { Navbar3 } from "../Navbar/page";
+import Navbar3 from "../Navbar/Navbar3";
 import Image from "next/image";
 import Link from "next/link";
-import { Features3, Features4 } from "../Features/page";
+import Features3 from "../Features/Feature3";
+import Features4 from "../Features/Feature4";
 import Email from "../Email/page";
-import { Footer2 } from "../Footer/page";
+import Footer2 from "../Footer/Footer2";
 
 const About = () => {
   return (

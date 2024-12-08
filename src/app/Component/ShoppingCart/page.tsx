@@ -1,5 +1,5 @@
-import { Navbar1 } from "../Navbar/page";
-import { Footer1 } from "../Footer/page";
+import Navbar1 from "../Navbar/page";
+import Footer1 from "../Footer/page";
 import Image from "next/image";
 
 const ShoppingCart = () => {
