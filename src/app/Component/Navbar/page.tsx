@@ -20,7 +20,9 @@ export const Navbar1 = () => {
           <h1 className="text-2xl font-helvetica text-gray-800">Avion</h1>
 
           <div className="flex items-center space-x-4 text-gray-600">
-            <IoCartOutline className="text-xl" />
+            <Link href="/Component/ShoppingCart">
+              <IoCartOutline className="text-xl cursor-pointer" />
+            </Link>
             <FaRegUserCircle className="text-xl" />
           </div>
         </div>
@@ -150,10 +152,11 @@ export const Navbar2 = () => {
 
           <div className="flex items-center space-x-4 text-gray-600">
             <IoIosSearch className="text-xl sm:block" />
-            <IoCartOutline className="text-xl" />
+            <Link href="/Component/ShoppingCart">
+              <IoCartOutline className="text-xl cursor-pointer" />
+            </Link>
             <FaRegUserCircle className="text-xl" />
 
-            {/* Hamburger Menu */}
             <button
               className="sm:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -231,7 +234,9 @@ export const Navbar3 = () => {
               </a>
             </div>
             <IoIosSearch className="text-xl hidden md:block" />
-            <IoCartOutline className="text-xl hidden md:block" />
+            <Link href="/Component/ShoppingCart">
+              <IoCartOutline className="text-xl hidden md:block cursor-pointer" />
+            </Link>
             <FaRegUserCircle className="text-xl hidden md:block" />
 
             <div className="md:hidden block">

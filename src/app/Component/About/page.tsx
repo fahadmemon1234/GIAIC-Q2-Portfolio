@@ -21,9 +21,11 @@ const About = () => {
           </p>
         </div>
         <div className="mt-6 md:mt-0 w-full md:w-2/12 text-center md:text-left">
-          <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-2 w-full md:w-22">
-            View our products
-          </button>
+          <Link href={"/Component/AllProduct"}>
+            <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-2 w-full md:w-22">
+              View our products
+            </button>
+          </Link>
         </div>
       </div>
 

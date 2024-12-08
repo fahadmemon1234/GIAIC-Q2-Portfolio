@@ -56,9 +56,11 @@ export const Listing1 = () => {
         ))}
       </div>
       <div className="flex justify-center text-center mt-10">
-        <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44">
-          View collection
-        </button>
+        <Link href="/Component/AllProduct">
+          <button className="bg-gray-100 cursor-pointer lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44">
+            View collection
+          </button>
+        </Link>
       </div>
     </div>
   );
@@ -99,27 +101,31 @@ export const Listing2 = () => {
               index === 0 ? "hidden md:block md:col-span-6" : "md:col-span-3"
             }`}
           >
-            <div className="relative w-full h-[350px]">
-              <Image
-                src={listing.image}
-                alt={listing.alt}
-                layout="fill"
-                objectFit="cover"
-                quality={100}
-                priority
-              />
-            </div>
-            <h2 className="text-lg font-helvetica font-normal text-gray-800 mt-4">
-              {listing.title}
-            </h2>
-            <p className="text-gray-600">{listing.price}</p>
+            <Link href={"/Component/ProductListing"}>
+              <div className="relative w-full h-[350px]">
+                <Image
+                  src={listing.image}
+                  alt={listing.alt}
+                  layout="fill"
+                  objectFit="cover"
+                  quality={100}
+                  priority
+                />
+              </div>
+              <h2 className="text-lg font-helvetica font-normal text-gray-800 mt-4">
+                {listing.title}
+              </h2>
+              <p className="text-gray-600">{listing.price}</p>
+            </Link>
           </div>
         ))}
       </div>
       <div className="flex justify-center text-center mt-10">
-        <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44">
-          View collection
-        </button>
+        <Link href="/Component/AllProduct">
+          <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44 cursor-pointer">
+            View collection
+          </button>
+        </Link>
       </div>
     </div>
   );
@@ -159,28 +165,32 @@ export const Listing3 = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {listings.map((listing, index) => (
           <div key={index}>
-            <div className="w-full h-[300px]">
-              <Image
-                src={listing.image}
-                alt={listing.alt}
-                width={300}
-                height={400}
-                quality={100}
-                priority
-                className="object-cover h-full w-full"
-              />
-            </div>
-            <h2 className="text-lg font-normal text-gray-900 mt-4">
-              {listing.title}
-            </h2>
-            <p className="text-gray-500">{listing.price}</p>
+            <Link href={"/Component/ProductListing"}>
+              <div className="w-full h-[300px]">
+                <Image
+                  src={listing.image}
+                  alt={listing.alt}
+                  width={300}
+                  height={400}
+                  quality={100}
+                  priority
+                  className="object-cover h-full w-full"
+                />
+              </div>
+              <h2 className="text-lg font-normal text-gray-900 mt-4">
+                {listing.title}
+              </h2>
+              <p className="text-gray-500">{listing.price}</p>
+            </Link>
           </div>
         ))}
       </div>
       <div className="flex justify-center text-center mt-10">
-        <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44">
-          View collection
-        </button>
+        <Link href="/Component/AllProduct">
+          <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44 cursor-pointer">
+            View collection
+          </button>
+        </Link>
       </div>
     </div>
   );

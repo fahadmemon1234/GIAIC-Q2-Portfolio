@@ -6,6 +6,7 @@ import {
   FaTwitter,
   FaPinterest,
 } from "react-icons/fa";
+import Link from "next/link";
 
 export const Footer1 = () => {
   return (
@@ -20,7 +21,9 @@ export const Footer1 = () => {
                 <li>Best sellers</li>
                 <li>Recently viewed</li>
                 <li>Popular this week</li>
-                <li>All products</li>
+                <li className="cursor-pointer">
+                  <Link href={"/Component/AllProduct"}>All products</Link>
+                </li>
               </ul>
             </div>
 
@@ -39,7 +42,9 @@ export const Footer1 = () => {
             <div className="md:col-span-1 col-span-2">
               <h4 className="text-lg font-helvetica mb-4">Our company</h4>
               <ul className="space-y-2 font-light">
-                <li>About us</li>
+                <li className="cursor-pointer">
+                  <Link href={"/Component/About"}>About us</Link>
+                </li>
                 <li>Vacancies</li>
                 <li>Contact us</li>
                 <li>Privacy</li>
@@ -170,7 +175,9 @@ export const Footer2 = () => {
             <div className="md:col-span-1 block md:hidden">
               <h4 className="text-lg font-helvetica mb-4">Our company</h4>
               <ul className="space-y-2 font-light">
-                <li>About us</li>
+                <li className="cursor-pointer">
+                  <Link href={"/Component/About"}>About us</Link>
+                </li>
                 <li>Vacancies</li>
                 <li>Contact us</li>
                 <li>Privacy</li>
@@ -185,7 +192,9 @@ export const Footer2 = () => {
                 <li>Best sellers</li>
                 <li>Recently viewed</li>
                 <li>Popular this week</li>
-                <li>All products</li>
+                <li className="cursor-pointer">
+                  <Link href={"/Component/AllProduct"}>All products</Link>
+                </li>
               </ul>
             </div>
 
@@ -196,7 +205,9 @@ export const Footer2 = () => {
                 <li>Best sellers</li>
                 <li>Recently viewed</li>
                 <li>Popular this week</li>
-                <li>All products</li>
+                <li className="cursor-pointer">
+                  <Link href={"/Component/AllProduct"}>All products</Link>
+                </li>
               </ul>
             </div>
 
@@ -215,7 +226,9 @@ export const Footer2 = () => {
             <div className="md:col-span-1 col-span-2 hidden md:block">
               <h4 className="text-lg font-helvetica mb-4">Our company</h4>
               <ul className="space-y-2 font-light">
-                <li>About us</li>
+                <li className="cursor-pointer">
+                  <Link href={"/Component/About"}>About us</Link>
+                </li>
                 <li>Vacancies</li>
                 <li>Contact us</li>
                 <li>Privacy</li>

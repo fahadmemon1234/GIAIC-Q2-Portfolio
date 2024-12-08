@@ -3,6 +3,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { CiCreditCard1 } from "react-icons/ci";
 import { RiSeedlingLine } from "react-icons/ri";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Features1 = () => {
   return (
@@ -62,10 +63,11 @@ export const Features2 = () => {
             live, breathe and design so our Chelsea boutique become the hotbed
             for the London interior design community.
           </p>
-
-          <button className="bg-gray-100 lg:block text-gray-800 font-light py-4 px-6 w-full lg:w-44">
-            Get in touch
-          </button>
+          <Link href={"/Component/ProductListing"}>
+            <button className="bg-gray-100 lg:block text-gray-800 font-light py-4 px-6 w-full lg:w-44">
+              Get in touch
+            </button>
+          </Link>
         </div>
         <div className="flex-1">
           <Image
@@ -113,9 +115,11 @@ export const Features3 = () => {
             for the London interior design community.
           </p>
 
-          <button className="bg-white lg:block text-gray-800 font-light py-4 px-6 w-full lg:w-44">
-            Get in touch
-          </button>
+          <Link href={"/Component/ProductListing"}>
+            <button className="bg-white lg:block text-gray-800 font-light py-4 px-6 w-full lg:w-44">
+              Get in touch
+            </button>
+          </Link>
         </div>
       </div>
     </>

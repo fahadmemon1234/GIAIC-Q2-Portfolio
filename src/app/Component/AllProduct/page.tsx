@@ -240,9 +240,11 @@ const AllProduct = () => {
         </div>
 
         <div className="flex justify-center text-center mt-10 mb-10">
-          <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44">
-            View collection
-          </button>
+          <Link href={"/Component/AllProduct"}>
+            <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-6 w-full lg:w-44">
+              View collection
+            </button>
+          </Link>
         </div>
       </div>
       <Footer1 />
