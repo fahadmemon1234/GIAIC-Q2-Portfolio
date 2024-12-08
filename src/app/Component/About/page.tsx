@@ -2,7 +2,9 @@ import TopBar from "../topBar/page";
 import { Navbar3 } from "../Navbar/page";
 import Image from "next/image";
 import Link from "next/link";
-import { Features3 } from "../Features/page";
+import { Features3, Features4 } from "../Features/page";
+import Email from "../Email/page";
+import { Footer2 } from "../Footer/page";
 
 const About = () => {
   return (
@@ -25,7 +27,7 @@ const About = () => {
         </div>
       </div>
 
-      <div className="flex flex-col container md:flex-row mx-auto lg:py-16 gap-4">
+      <div className="flex flex-col container md:flex-row mx-auto lg:py-16 gap-4 pb-10">
         <div className="bg-[#2E294E] text-white md:h-[575px] p-14 flex flex-col justify-center md:w-1/2">
           <h1
             className="text-2xl md:text-3xl font-helvetica mb-10 md:pt-[20px]"
@@ -61,6 +63,12 @@ const About = () => {
       </div>
 
       <Features3 />
+
+      <Features4 />
+
+      <Email />
+
+      <Footer2 />
     </>
   );
 };
