@@ -16,6 +16,7 @@ const config: Config = {
     },
     fontFamily: {
       Poppins: ["Poppins", "sans-serif"],
+      Inter: ["Inter", "sans-serif"],
     },
   },
   plugins: [],
