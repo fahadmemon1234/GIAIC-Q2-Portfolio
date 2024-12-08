@@ -10,7 +10,6 @@ export const Navbar1 = () => {
 
   return (
     <>
-      {/* Navbar for Large and Medium Screens */}
       <nav className="bg-[#FFFFFF] hidden sm:block">
         <div className="flex items-center justify-between px-6 py-5">
           <div className="text-gray-600">
@@ -51,7 +50,6 @@ export const Navbar1 = () => {
         </div>
       </nav>
 
-      {/* Navbar for Small Screens */}
       <nav className="bg-[#FFFFFF] block sm:hidden font-Poppins">
         <div className="flex items-center justify-between px-4 py-4">
           <h1 className="text-2xl font-Poppins text-gray-800">Avion</h1>

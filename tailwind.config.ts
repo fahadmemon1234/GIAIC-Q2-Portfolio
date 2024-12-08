@@ -18,6 +18,10 @@ const config: Config = {
       Poppins: ["Poppins", "sans-serif"],
       Inter: ["Inter", "sans-serif"],
     },
+    container: {
+      center: true,
+      padding: "1rem",
+    },
   },
   plugins: [],
 };
