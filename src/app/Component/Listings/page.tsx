@@ -29,7 +29,7 @@ export const Listing1 = () => {
   ];
 
   return (
-    <div className="container py-16 sm:px-6 lg:px-8 font-helvetica">
+    <div className="container py-16 font-helvetica">
       <h1 className="text-3xl text-gray-900 mb-8">New ceramics</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {listings.map((listing, index) => (
@@ -62,5 +62,62 @@ export const Listing1 = () => {
 };
 
 export const Listing2 = () => {
-  return <></>;
+  const listings = [
+    {
+      image: "/assets/img/sofa.jpg",
+      alt: "Green suede sofa in a minimalistic room",
+      title: "The Poplar suede sofa",
+      price: "£980",
+    },
+    {
+      image: "/assets/img/chair.jpg",
+      alt: "Black modern chair with wooden legs",
+      title: "The Dandy chair",
+      price: "£250",
+    },
+    {
+      image: "/assets/img/danychair.jpg",
+      alt: "Black wooden chair in a dark room",
+      title: "The Dandy chair",
+      price: "£250",
+    },
+  ];
+
+  return (
+    <div className="container pb-[64px] font-helvetica ">
+      <h1 className="text-3xl font-light font-helvetica text-gray-800 mb-8">
+        Our popular products
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+        {listings.map((listing, index) => (
+          <div
+            key={index}
+            className={`flex flex-col ${
+              index === 0 ? "md:col-span-6" : "md:col-span-3"
+            }`}
+          >
+            <div className="relative w-full h-[350px]">
+              <Image
+                src={listing.image}
+                alt={listing.alt}
+                layout="fill"
+                quality={100}
+                priority
+              />
+            </div>
+
+            <h2 className="text-lg font-helvetica font-normal text-gray-800 mt-4">
+              {listing.title}
+            </h2>
+            <p className="text-gray-600">{listing.price}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-center text-center mt-10">
+        <button className="bg-gray-100 lg:block text-gray-500 font-light py-4 px-6 mb-48 w-full lg:w-44">
+          View collection
+        </button>
+      </div>
+    </div>
+  );
 };
