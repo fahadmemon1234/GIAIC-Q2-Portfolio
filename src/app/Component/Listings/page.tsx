@@ -88,7 +88,7 @@ export const Listing2 = () => {
       <h1 className="text-3xl font-light font-helvetica text-gray-800 mb-8">
         Our popular products
       </h1>
-      <div className="flex gap-6 md:grid md:grid-cols-12 md:gap-6 md:overflow-x-auto">
+      <div className="flex overflow-x-auto gap-6 md:grid md:grid-cols-12 md:gap-6 md:overflow-x-auto">
         {listings.map((listing, index) => (
           <div
             key={index}
