@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export const Listing1 = () => {
   const listings = [
@@ -33,23 +34,25 @@ export const Listing1 = () => {
       <h1 className="text-3xl text-gray-900 mb-8">New ceramics</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {listings.map((listing, index) => (
-          <div key={index}>
-            <div className="w-full h-[300px]">
-              <Image
-                src={listing.image}
-                alt={listing.alt}
-                width={300}
-                height={400}
-                quality={100}
-                priority
-                className="object-cover h-full w-full"
-              />
+          <Link href={"/Component/ProductListing"}>
+            <div key={index}>
+              <div className="w-full h-[300px]">
+                <Image
+                  src={listing.image}
+                  alt={listing.alt}
+                  width={300}
+                  height={400}
+                  quality={100}
+                  priority
+                  className="object-cover h-full w-full"
+                />
+              </div>
+              <h2 className="text-lg font-normal text-gray-900 mt-4">
+                {listing.title}
+              </h2>
+              <p className="text-gray-500">{listing.price}</p>
             </div>
-            <h2 className="text-lg font-normal text-gray-900 mt-4">
-              {listing.title}
-            </h2>
-            <p className="text-gray-500">{listing.price}</p>
-          </div>
+          </Link>
         ))}
       </div>
       <div className="flex justify-center text-center mt-10">
