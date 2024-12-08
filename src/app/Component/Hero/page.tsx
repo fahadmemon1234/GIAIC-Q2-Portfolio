@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -11,9 +12,11 @@ const HeroSection = () => {
           >
             The furniture brand for the <br /> future, with timeless designs
           </h1>
-          <button className="bg-[#4A4E69] hidden lg:block text-white font-light py-4 px-6 mb-48 w-44">
-            View collection
-          </button>
+          <Link href={"/Component/ProductListing"}>
+            <button className="bg-[#4A4E69] hidden lg:block text-white text-center font-light py-4 px-6 mb-48 w-44">
+              View collection
+            </button>
+          </Link>
           <p className="font-light lg:w-[80%]">
             A new era in eco-friendly furniture with Avelon, the French luxury
             retail brand with nice fonts, tasteful colors, and a beautiful way

@@ -26,7 +26,7 @@ const ProductListing = () => {
 
       {/* Product Detail */}
 
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row mb-10">
         <div className="flex-1">
           <Image
             src="/assets/img/chair1.jpg"
@@ -39,10 +39,10 @@ const ProductListing = () => {
           />
         </div>
         <div className="flex-1 flex flex-col justify-center p-8 md:p-16 bg-white container">
-          <h1 className="text-4xl font-helvetica text-gray-900 mb-4">
+          <h1 className="text-2xl md:text-4xl font-helvetica text-gray-900 mb-4">
             The Dandy Chair
           </h1>
-          <p className="text-2xl text-gray-700 mb-12">£250</p>
+          <p className="text-1xl md:text-2xl text-gray-700 mb-12">£250</p>
           <h2 className="text-sm font-helvetica text-gray-900 mb-2">
             Description
           </h2>
@@ -61,7 +61,7 @@ const ProductListing = () => {
             Dimensions
           </h2>
           <div className="flex mb-10 gap-8">
-            <div className="mr-8">
+            <div className="mr-8 border-r-1px solid gray300 md:border-0">
               <p className="text-gray-700 text-sm font-helvetica mb-4">
                 Height
               </p>
@@ -76,10 +76,10 @@ const ProductListing = () => {
               <p className="text-gray-500 text-sm font-helvetica">50cm</p>
             </div>
           </div>
-          <div className="flex items-center mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center mb-6">
             <p className="text-gray-700 text-sm font-helvetica mr-4">Amount:</p>
-            <div className="flex items-center justify-between gap-[250px]">
-              <div className="flex-1 flex items-center bg-gray-100 lg:block text-gray-500">
+            <div className="flex items-center justify-between gap-4 md:gap-56 sm:gap-8 sm:w-auto w-full mb-4 sm:mb-0">
+              <div className="flex-1 flex items-center bg-gray-100 text-gray-500">
                 <button
                   className="px-2 py-1 text-gray-400 cursor-pointer"
                   onClick={handleDecrement}
@@ -100,8 +100,8 @@ const ProductListing = () => {
                   +
                 </button>
               </div>
-              <div className="ml-4">
-                <button className="bg-[#2a254b] text-white font-thin px-6 py-3">
+              <div className="sm:ml-4 w-full sm:w-auto">
+                <button className="bg-[#2a254b] text-white font-thin px-6 py-3 w-full sm:w-auto">
                   Add to cart
                 </button>
               </div>
