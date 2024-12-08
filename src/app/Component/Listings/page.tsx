@@ -3,7 +3,7 @@ import Image from "next/image";
 export const Listing1 = () => {
   return (
     <>
-      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 font-helvetica">
+      <div className="container  py-16 sm:px-6 lg:px-8 font-helvetica">
         <h1 className="text-3xl text-gray-900 mb-8">New ceramics</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="">
