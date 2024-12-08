@@ -9,7 +9,7 @@ const TopBar = () => {
         <div className="flex items-center text-center mx-auto gap-3">
           <LiaShippingFastSolid className="text-xl" />
           <p className="text-sm">
-            Free delivery on all orders over €50 with code easter at checkout
+            Free delivery on all orders over £50 with code easter at checkout
           </p>
         </div>
 
