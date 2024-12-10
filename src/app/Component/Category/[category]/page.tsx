@@ -92,8 +92,8 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
               theme == "dark" ? "text-[white]" : "text-gray-600"
             }`}
           >
-            Discover the latest articles and insights in the "{category}"
-            category.
+            Discover the latest articles and insights in the &quot;{category}
+            &quot; category.
           </p>
         </div>
 

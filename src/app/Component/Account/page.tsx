@@ -174,7 +174,7 @@ const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
             theme == "dark" ? " text-white " : "text-gray-500"
           }`}
         >
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             href="#"
             className={`font-semibold ${
