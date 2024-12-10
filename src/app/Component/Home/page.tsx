@@ -11,7 +11,7 @@ import { fetchheroCard } from "@/app/lib/api";
 import TrendingPost from "../TrendingPost/page";
 
 interface MainProps {
-  theme: string;
+  theme?: string;
 }
 
 interface HeroCard {
@@ -226,7 +226,8 @@ const Main = ({ theme }: MainProps) => {
                           )}
                         </span>
                         <span className="flex items-center gap-2">
-                          <FaRegComment className="text-[#6c757d]" /> {card.commentCount}
+                          <FaRegComment className="text-[#6c757d]" />{" "}
+                          {card.commentCount}
                         </span>
                       </div>
 

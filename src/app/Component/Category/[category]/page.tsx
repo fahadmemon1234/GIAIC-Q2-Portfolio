@@ -38,12 +38,20 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
   const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const savedTheme = localStorage.getItem("theme");
-      setTheme(savedTheme === "dark" ? "dark" : "light");
-    }, 100);
+    const savedTheme = localStorage.getItem("theme");
+    setTheme(savedTheme === "dark" ? "dark" : "light");
 
-    return () => clearInterval(interval);
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === "theme") {
+        setTheme(event.newValue === "dark" ? "dark" : "light");
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   // Fetch hero card Start

@@ -30,22 +30,18 @@ const TopNavbar = () => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.body.classList.add(savedTheme);
-    }
+    setTheme(savedTheme === "dark" ? "dark" : "light");
 
-    const handleScroll = (): void => {
-      if (window.scrollY > 50) {
-        setShadow(true);
-      } else {
-        setShadow(false);
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === "theme") {
+        setTheme(event.newValue === "dark" ? "dark" : "light");
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("storage", handleStorageChange);
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
 
