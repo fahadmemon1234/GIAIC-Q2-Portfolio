@@ -41,7 +41,7 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-const Main = ({ theme }: MainProps) => {
+const Main = ({ theme = "light" }: MainProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const router = useRouter();
