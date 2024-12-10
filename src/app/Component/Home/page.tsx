@@ -10,10 +10,6 @@ import Link from "next/link";
 import { fetchheroCard } from "@/app/lib/api";
 import TrendingPost from "../TrendingPost/page";
 
-interface MainProps {
-  theme?: string;
-}
-
 interface HeroCard {
   id: number;
   title: string;
@@ -41,7 +37,7 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-const Main = ({ theme = "light" }: MainProps) => {
+const Main = ({ theme = "light" }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const router = useRouter();
