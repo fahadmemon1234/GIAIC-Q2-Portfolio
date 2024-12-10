@@ -7,13 +7,7 @@ import { client } from "@/app/lib/sanity";
 import Toast from "@/app/Component/Toast/page";
 import Cookies from "js-cookie";
 
-const LoginPage = ({
-  toggleForm,
-  onLoginSuccess,
-}: {
-  toggleForm: () => void;
-  onLoginSuccess: () => void;
-}) => {
+const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
   const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
@@ -57,7 +51,7 @@ const LoginPage = ({
 
         setTimeout(() => {
           setToastMessage(null);
-          onLoginSuccess();
+          // onLoginSuccess();
         }, 2000);
       } else {
         setToastMessage({
@@ -72,7 +66,6 @@ const LoginPage = ({
         type: "error",
       });
       setTimeout(() => setToastMessage(null), 3000);
-      console.log("Error logging in:", error);
     }
   };
 
@@ -401,22 +394,15 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
   );
 };
 
-const AuthPage = ({ onClose }: { onClose: () => void }) => {
+const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleForm = () => setIsLogin(!isLogin);
 
-  const handleLoginSuccess = () => {
-    onClose();
-  };
-
   return (
     <div>
       {isLogin ? (
-        <LoginPage
-          toggleForm={toggleForm}
-          onLoginSuccess={handleLoginSuccess}
-        />
+        <LoginPage toggleForm={toggleForm} />
       ) : (
         <RegisterPage toggleForm={toggleForm} />
       )}

@@ -257,7 +257,7 @@ const TopNavbar = () => {
               : "bg-white rounded-lg"
           }`}
         >
-          <AuthPage onClose={handleClose} />
+          <AuthPage />
         </Modal.Body>
       </Modal>
     </>
