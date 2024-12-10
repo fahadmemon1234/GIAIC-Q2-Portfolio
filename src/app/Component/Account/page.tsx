@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/app/lib/sanity";
 import Toast from "@/app/Component/Toast/page";
+import Cookies from "js-cookie";
 
 const LoginPage = ({
   toggleForm,
@@ -46,6 +47,8 @@ const LoginPage = ({
 
       if (user) {
         await client.patch(user._id).set({ isLogin: true }).commit();
+
+        Cookies.set("user_id", user._id, { expires: 7 });
 
         setToastMessage({
           message: "Login successful!",

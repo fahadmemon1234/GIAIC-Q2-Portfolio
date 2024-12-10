@@ -11,7 +11,8 @@ import { AiOutlineTag } from "react-icons/ai";
 import AuthPage from "../Account/page";
 import { fetchCategory } from "@/app/lib/api";
 import { FaUserCircle } from "react-icons/fa";
-import { Dropdown } from "react-bootstrap";
+import Cookies from "js-cookie";
+import { client } from "@/app/lib/sanity";
 
 interface CategoryItem {
   id: number;
@@ -76,20 +77,43 @@ const TopNavbar = () => {
 
   // Fetch Category End
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
-  const [showDropdown, setShowDropdown] = useState(false); // Track dropdown visibility
+  const [user, setUser] = useState<null | { _id: string; isLogin: boolean }>(
+    null
+  );
 
-  const handleLoginSuccess = () => {
-    setIsLoggedIn(true); // Set login state to true after successful login
-  };
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const toggleDropdown = () => {
-    setShowDropdown((prev) => !prev); // Toggle dropdown visibility
-  };
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      const userId = Cookies.get("user_id");
+      if (userId) {
+        try {
+          const userData = await client.fetch(
+            `*[_type == "userRegistration" && _id == $userId][0]`,
+            { userId }
+          );
+          setUser(userData);
+        } catch (error) {
+          console.log("Error fetching user data:", error);
+        }
+      }
+    }, 2000);
+    //
+    return () => clearInterval(intervalId);
+  }, []);
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Reset login state on logout
-    setShowDropdown(false); // Hide dropdown
+    if (user) {
+      client
+        .patch(user._id)
+        .set({ isLogin: false })
+        .commit()
+        .then(() => {
+          Cookies.remove("user_id");
+          setUser(null);
+        })
+        .catch((error) => console.log("Error logging out:", error));
+    }
   };
 
   return (
@@ -189,45 +213,32 @@ const TopNavbar = () => {
 
           <div className="d-flex align-items-center" style={{ gap: "10px" }}>
             <CiSearch size={30} className="navbar-icon" />
-            {/* <CiUser
-              size={30}
-              className="navbar-icon cursor-pointer"
-              onClick={handleShow}
-            /> */}
-
-            {!isLoggedIn ? (
+            {user && user.isLogin ? (
+              <div className="relative">
+                <FaUserCircle
+                  size={30}
+                  className="navbar-icon cursor-pointer"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                />
+                {isDropdownOpen && (
+                  <div className="absolute top-14 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 bg-white border rounded shadow">
+                    <button
+                      className="block w-full px-4 py-2 text-left hover:bg-gray-100"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
               <CiUser
                 size={30}
                 className="navbar-icon cursor-pointer"
                 onClick={handleShow}
               />
-            ) : (
-              <div className="relative">
-                <FaUserCircle
-                  size={30}
-                  className="navbar-icon cursor-pointer"
-                  onClick={toggleDropdown}
-                />
-                {showDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg">
-                    <ul className="py-2">
-                      <li
-                        className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                        onClick={() => console.log("View Profile")}
-                      >
-                        View Profile
-                      </li>
-                      <li
-                        className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                        onClick={handleLogout}
-                      >
-                        Logout
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
             )}
+
             <div
               onClick={toggleTheme}
               className="theme-toggle d-flex align-items-center justify-content-center p-2 rounded-full cursor-pointer"
