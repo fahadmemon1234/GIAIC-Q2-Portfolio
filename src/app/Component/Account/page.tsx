@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/app/lib/sanity";
-import Toast from "@/app/Component/Toast/page";
+// import Toast from "@/app/Component/Toast/page";
 import Cookies from "js-cookie";
 
 const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
@@ -161,13 +161,13 @@ const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
           </Button>
         </Form>
 
-        {toastMessage && (
+        {/* {toastMessage && (
           <Toast
             message={toastMessage.message}
             type={toastMessage.type}
             onClose={() => setToastMessage(null)}
           />
-        )}
+        )} */}
 
         <p
           className={`mt-6 text-center text-sm ${
@@ -397,13 +397,13 @@ const RegisterPage = ({ toggleForm }: { toggleForm: () => void }) => {
           >
             Log in
           </Link>
-          {toastMessage && (
+          {/* {toastMessage && (
             <Toast
               message={toastMessage.message}
               type={toastMessage.type}
               onClose={() => setToastMessage(null)}
             />
-          )}
+          )} */}
         </p>
       </div>
     </div>
