@@ -4,7 +4,6 @@ import { Form, Button } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/app/lib/sanity";
-// import Toast from "@/app/Component/Toast/page";
 import Cookies from "js-cookie";
 
 const LoginPage = ({ toggleForm }: { toggleForm: () => void }) => {
