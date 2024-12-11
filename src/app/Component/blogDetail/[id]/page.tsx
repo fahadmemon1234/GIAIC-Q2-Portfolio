@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from "react";
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 import { Playfair_Display, Open_Sans } from "next/font/google";
@@ -9,8 +9,6 @@ import TrendingPost from "@/app/Component/TrendingPost/page";
 import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
 import { FaRegComments } from "react-icons/fa";
-
-import { GetServerSideProps } from "next";
 
 interface BlogDetailProps {
   params: {
@@ -58,7 +56,8 @@ interface CommentItem {
   createdDate: string;
 }
 
-const BlogDetail = ({ params }: BlogDetailProps) => {
+const BlogDetail: FC<BlogDetailProps> = async ({ params }) => {
+  const { id } = params;
   const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
@@ -88,13 +87,13 @@ const BlogDetail = ({ params }: BlogDetailProps) => {
   useEffect(() => {
     const intervalId = setInterval(async () => {
       try {
-        const data = await fetchHeroCardById(parseFloat(params.id));
+        const data = await fetchHeroCardById(parseFloat(id));
 
         if (data) {
           setHeroCard(data);
         }
 
-        const comments = await fetchCommentById(parseFloat(params.id));
+        const comments = await fetchCommentById(parseFloat(id));
 
         if (Array.isArray(comments)) {
           setCommentData(comments);
@@ -143,7 +142,7 @@ const BlogDetail = ({ params }: BlogDetailProps) => {
       await client.create({
         _type: "comment",
         id: maxId + 1,
-        p_id: parseFloat(params.id),
+        p_id: parseFloat(id),
         name,
         comment,
         createdDate: new Date().toISOString(),
@@ -392,14 +391,3 @@ const BlogDetail = ({ params }: BlogDetailProps) => {
 };
 
 export default BlogDetail;
-
-export const getServerSideProps: GetServerSideProps<BlogDetailProps> = async (
-  context
-) => {
-  const { id } = context.params as { id: string };
-  return {
-    props: {
-      params: { id },
-    },
-  };
-};
