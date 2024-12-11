@@ -26,7 +26,11 @@ interface HeroCard {
   commentCount: number;
 }
 
-const CategoryPage = ({ params }: { params: { category: string } }) => {
+interface CategoryPageProps {
+  params: { category: string };
+}
+
+const CategoryPage: React.FC<CategoryPageProps> = ({ params }) => {
   const router = useRouter();
 
   const handleRedirect = () => {
@@ -55,7 +59,6 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
   }, []);
 
   // Fetch hero card Start
-
   const [heroCard, setHeroCard] = useState<HeroCard[]>([]);
 
   useEffect(() => {
@@ -74,11 +77,8 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
   }, []);
 
   const filteredCards = heroCard.filter(
-    (card) =>
-      card.category.title.toLowerCase() === params.category.toLowerCase()
+    (card) => card.category.title.toLowerCase() === category.toLowerCase()
   );
-
-  // Fetch hero card Start
 
   return (
     <div
