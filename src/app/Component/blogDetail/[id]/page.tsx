@@ -10,6 +10,14 @@ import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
 import { FaRegComments } from "react-icons/fa";
 
+import { GetServerSideProps } from "next";
+
+interface BlogDetailProps {
+  params: {
+    id: string;
+  };
+}
+
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "900"],
@@ -50,7 +58,7 @@ interface CommentItem {
   createdDate: string;
 }
 
-const BlogDetail = ({ params }: { params: { id: string } }) => {
+const BlogDetail = ({ params }: BlogDetailProps) => {
   const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
@@ -384,3 +392,14 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
 };
 
 export default BlogDetail;
+
+export const getServerSideProps: GetServerSideProps<BlogDetailProps> = async (
+  context
+) => {
+  const { id } = context.params as { id: string };
+  return {
+    props: {
+      params: { id },
+    },
+  };
+};
