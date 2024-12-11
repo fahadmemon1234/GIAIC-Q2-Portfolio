@@ -4,16 +4,15 @@ import React, { useState, useEffect, FC } from "react";
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 import { Playfair_Display, Open_Sans } from "next/font/google";
-import { FaRegComment, FaUser } from "react-icons/fa";
+import { FaRegComment, FaUser, FaRegComments } from "react-icons/fa";
 import TrendingPost from "@/app/Component/TrendingPost/page";
 import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
-import { FaRegComments } from "react-icons/fa";
 
 interface BlogDetailProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 const playfair = Playfair_Display({
@@ -57,7 +56,8 @@ interface CommentItem {
 }
 
 const BlogDetail: FC<BlogDetailProps> = async ({ params }) => {
-  const { id } = params;
+  const { id } = await params; // Await the params to resolve
+
   const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
@@ -77,10 +77,7 @@ const BlogDetail: FC<BlogDetailProps> = async ({ params }) => {
     };
   }, []);
 
-  // Fetch hero card Start
-
   const [heroCard, setHeroCard] = useState<HeroCard | null>(null);
-
   const [commentData, setCommentData] = useState<CommentItem[]>([]);
   const [commentCount, setCommentCount] = useState<number>(0);
 
@@ -107,8 +104,6 @@ const BlogDetail: FC<BlogDetailProps> = async ({ params }) => {
 
     return () => clearInterval(intervalId);
   }, [id]);
-
-  // Fetch hero card End
 
   const [name, setName] = useState<string>("");
   const [comment, setComment] = useState<string>("");
