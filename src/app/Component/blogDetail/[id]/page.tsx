@@ -8,7 +8,7 @@ import { FaRegComment, FaUser, FaRegComments } from "react-icons/fa";
 import TrendingPost from "@/app/Component/TrendingPost/page";
 import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
-import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -51,8 +51,8 @@ interface CommentItem {
 }
 
 const BlogDetail: React.FC = () => {
-  const router = useRouter();
-  const { id } = router.query;
+  // const router = useRouter();
+  const { id } = useParams();
 
   const [theme, setTheme] = useState("light");
   const [heroCard, setHeroCard] = useState<HeroCard | null>(null);
