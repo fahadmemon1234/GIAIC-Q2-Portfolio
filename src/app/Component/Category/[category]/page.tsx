@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button, Container } from "react-bootstrap";
@@ -26,18 +26,15 @@ interface HeroCard {
   commentCount: number;
 }
 
-interface CategoryPageProps {
-  params: { category: string };
-}
-
-const CategoryPage: React.FC<CategoryPageProps> = ({ params }) => {
+const CategoryPage: React.FC = () => {
   const router = useRouter();
+  const { category } = useParams();
 
   const handleRedirect = () => {
     router.push("/");
   };
 
-  const { category } = params;
+  // const { category } = params;
 
   const [theme, setTheme] = useState<string>("light");
 
@@ -76,8 +73,11 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ params }) => {
     return () => clearInterval(intervalId);
   }, []);
 
+  const categoryLowerCase =
+    typeof category === "string" ? category.toLowerCase() : "";
+
   const filteredCards = heroCard.filter(
-    (card) => card.category.title.toLowerCase() === category.toLowerCase()
+    (card) => card.category.title.toLowerCase() === categoryLowerCase
   );
 
   return (
@@ -93,7 +93,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ params }) => {
               theme == "dark" ? "text-[white]" : "text-gray-800"
             }`}
           >
-            {category.replace("-", " ")} Blogs
+            {categoryLowerCase.replace("-", " ")} Blogs
           </h1>
           <p
             className={`mt-3 ${
