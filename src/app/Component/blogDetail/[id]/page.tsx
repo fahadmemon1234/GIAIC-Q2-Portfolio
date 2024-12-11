@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Container } from "react-bootstrap";
 import { Playfair_Display, Open_Sans } from "next/font/google";
@@ -10,9 +10,9 @@ import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
 
 interface BlogDetailProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 const playfair = Playfair_Display({
@@ -55,8 +55,8 @@ interface CommentItem {
   createdDate: string;
 }
 
-const BlogDetail: FC<BlogDetailProps> = async ({ params }) => {
-  const { id } = await params;
+const BlogDetail: React.FC<BlogDetailProps> = ({ params }) => {
+  const { id } = params;
 
   const [theme, setTheme] = useState("light");
   const [heroCard, setHeroCard] = useState<HeroCard | null>(null);
