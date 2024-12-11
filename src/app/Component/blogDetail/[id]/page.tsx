@@ -10,9 +10,9 @@ import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
 
 interface BlogDetailProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 const playfair = Playfair_Display({
@@ -55,8 +55,8 @@ interface CommentItem {
   createdDate: string;
 }
 
-const BlogDetail: FC<BlogDetailProps> = ({ params }) => {
-  const { id } = params;
+const BlogDetail: FC<BlogDetailProps> = async ({ params }) => {
+  const { id } = await params;
 
   const [theme, setTheme] = useState("light");
   const [heroCard, setHeroCard] = useState<HeroCard | null>(null);
