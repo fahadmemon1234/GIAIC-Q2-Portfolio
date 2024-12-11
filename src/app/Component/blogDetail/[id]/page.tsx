@@ -9,7 +9,7 @@ import TrendingPost from "@/app/Component/TrendingPost/page";
 import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
 import { FaRegComments } from "react-icons/fa";
-import Toast from "../../Toast/page";
+// import Toast from "../../Toast/page";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -300,13 +300,13 @@ const BlogDetail = ({ params }: { params: { id: string } }) => {
               </button>
             </form>
 
-            {toastMessage && (
+            {/* {toastMessage && (
               <Toast
                 message={toastMessage.message}
                 type={toastMessage.type}
                 onClose={() => setToastMessage(null)}
               />
-            )}
+            )} */}
           </Container>
         </div>
 
