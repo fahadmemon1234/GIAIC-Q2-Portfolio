@@ -37,7 +37,26 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-const Main = ({ theme = "light" }) => {
+const Main = () => {
+  const [theme, setTheme] = useState<string>("light");
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    setTheme(savedTheme === "dark" ? "dark" : "light");
+
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === "theme") {
+        setTheme(event.newValue === "dark" ? "dark" : "light");
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
   const [isHovered, setIsHovered] = useState(false);
 
   const router = useRouter();
