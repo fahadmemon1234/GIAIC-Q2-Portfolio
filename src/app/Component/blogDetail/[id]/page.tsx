@@ -8,12 +8,7 @@ import { FaRegComment, FaUser, FaRegComments } from "react-icons/fa";
 import TrendingPost from "@/app/Component/TrendingPost/page";
 import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
-
-interface BlogDetailProps {
-  params: {
-    id: string;
-  };
-}
+import { useRouter } from "next/router";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -55,8 +50,9 @@ interface CommentItem {
   createdDate: string;
 }
 
-const BlogDetail: React.FC<BlogDetailProps> = ({ params }) => {
-  const { id } = params;
+const BlogDetail: React.FC = () => {
+  const router = useRouter();
+  const { id } = router.query;
 
   const [theme, setTheme] = useState("light");
   const [heroCard, setHeroCard] = useState<HeroCard | null>(null);
@@ -89,10 +85,10 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const heroCardData = await fetchHeroCardById(parseFloat(id));
+        const heroCardData = await fetchHeroCardById(parseFloat(id as string));
         setHeroCard(heroCardData);
 
-        const comments = await fetchCommentById(parseFloat(id));
+        const comments = await fetchCommentById(parseFloat(id as string));
         if (Array.isArray(comments)) {
           setCommentData(comments);
           setCommentCount(comments.length);
@@ -130,7 +126,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ params }) => {
       await client.create({
         _type: "comment",
         id: maxId + 1,
-        p_id: parseFloat(id),
+        p_id: parseFloat(id as string),
         name,
         comment,
         createdDate: new Date().toISOString(),
