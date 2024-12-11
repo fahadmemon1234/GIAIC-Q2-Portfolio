@@ -10,9 +10,9 @@ import { fetchHeroCardById, fetchCommentById } from "@/app/lib/api";
 import { client } from "@/app/lib/sanity";
 
 interface BlogDetailProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 const playfair = Playfair_Display({
@@ -55,10 +55,19 @@ interface CommentItem {
   createdDate: string;
 }
 
-const BlogDetail: FC<BlogDetailProps> = async ({ params }) => {
-  const { id } = await params; // Await the params to resolve
+const BlogDetail: FC<BlogDetailProps> = ({ params }) => {
+  const { id } = params;
 
-  const [theme, setTheme] = useState<string>("light");
+  const [theme, setTheme] = useState("light");
+  const [heroCard, setHeroCard] = useState<HeroCard | null>(null);
+  const [commentData, setCommentData] = useState<CommentItem[]>([]);
+  const [commentCount, setCommentCount] = useState<number>(0);
+  const [name, setName] = useState<string>("");
+  const [comment, setComment] = useState<string>("");
+  const [toastMessage, setToastMessage] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -77,40 +86,24 @@ const BlogDetail: FC<BlogDetailProps> = async ({ params }) => {
     };
   }, []);
 
-  const [heroCard, setHeroCard] = useState<HeroCard | null>(null);
-  const [commentData, setCommentData] = useState<CommentItem[]>([]);
-  const [commentCount, setCommentCount] = useState<number>(0);
-
   useEffect(() => {
-    const intervalId = setInterval(async () => {
+    const fetchData = async () => {
       try {
-        const data = await fetchHeroCardById(parseFloat(id));
-
-        if (data) {
-          setHeroCard(data);
-        }
+        const heroCardData = await fetchHeroCardById(parseFloat(id));
+        setHeroCard(heroCardData);
 
         const comments = await fetchCommentById(parseFloat(id));
-
         if (Array.isArray(comments)) {
           setCommentData(comments);
-          const commentCount = comments.length;
-          setCommentCount(commentCount);
+          setCommentCount(comments.length);
         }
       } catch (error) {
-        console.log("Error fetching hero card data:", error);
+        console.error("Error fetching data:", error);
       }
-    }, 2000);
+    };
 
-    return () => clearInterval(intervalId);
+    fetchData();
   }, [id]);
-
-  const [name, setName] = useState<string>("");
-  const [comment, setComment] = useState<string>("");
-  const [toastMessage, setToastMessage] = useState<{
-    message: string;
-    type: "success" | "error";
-  } | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
