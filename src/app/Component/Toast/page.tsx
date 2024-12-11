@@ -1,14 +1,12 @@
 import React from "react";
 
-const Toast = ({
-  message,
-  type,
-  onClose,
-}: {
+interface ToastProps {
   message: string;
   type: "success" | "error";
   onClose: () => void;
-}) => {
+}
+
+const Toast: React.FC<ToastProps> = ({ message, type, onClose }) => {
   const bgColor = type === "success" ? "bg-green-500" : "bg-red-500";
 
   return (
