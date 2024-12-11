@@ -106,7 +106,7 @@ const BlogDetail: FC<BlogDetailProps> = async ({ params }) => {
     }, 2000);
 
     return () => clearInterval(intervalId);
-  }, [params.id]);
+  }, [id]);
 
   // Fetch hero card End
 
