@@ -187,6 +187,7 @@ const TopNavbar = () => {
                       theme === "dark" ? "transparent" : "transparent",
                     color: theme === "dark" ? "#ffffff" : "#000000",
                   }}
+                  className="max-h-[200px] overflow-y-auto" // Tailwind for scrollable dropdown
                 >
                   {categories.map((category) => (
                     <NavDropdown.Item
