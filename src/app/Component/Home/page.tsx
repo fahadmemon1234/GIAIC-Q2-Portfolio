@@ -1,6 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import { SlBasketLoaded } from "react-icons/sl";
+import { IoMdBluetooth } from "react-icons/io";
+import { PiBatteryFullBold } from "react-icons/pi";
+import { MdTouchApp } from "react-icons/md";
+import { BsVolumeUpFill } from "react-icons/bs";
+import { GiWaterDrop } from "react-icons/gi";
 import Link from "next/link";
 
 const Main = () => {
@@ -142,6 +147,66 @@ const Main = () => {
       </section>
 
       {/* <!-- Feartured section end --> */}
+
+      {/* <!-- Banner section start --> */}
+      <section
+        className="pt-24 pb-24 bg-no-repeat bg-cover bg-center"
+        style={{ backgroundImage: "url('/assets/images/banner/bg.webp')" }}
+      >
+        <div className="container">
+          <div className="w-full flex items-center -mx-4 flex-wrap justify-end px-4">
+            <div className="lg:w-2/4 xl:w-2/5">
+              <span className="text-md font-normal text-white block mb-8">
+                #Action Feature
+              </span>
+              <h2 className="font-playfair font-bold text-white text-4xl lg:text-xl xl:text-5xl mb-10">
+                Ultimate comfort.
+              </h2>
+              <hr className="w-16 h-1 bg-white mb-10 border-0" />
+              <ul>
+                <li className="flex items-center text-white text-md md:text-3xl mb-10">
+                  <span className="block text-4xl mr-5">
+                    <IoMdBluetooth size={30} />
+                  </span>{" "}
+                  Smart Connectivity
+                </li>
+                <li className="flex items-center text-white text-md md:text-3xl mb-10">
+                  <span className="block text-4xl mr-5">
+                    <PiBatteryFullBold size={30} />
+                  </span>{" "}
+                  Long lasting battery
+                </li>
+                <li className="flex items-center text-white text-md md:text-3xl mb-10">
+                  <span className="block text-4xl mr-5">
+                    <MdTouchApp size={30} />
+                  </span>{" "}
+                  Touch Control Panel
+                </li>
+                <li className="flex items-center text-white text-md md:text-3xl mb-10">
+                  <span className="block text-4xl mr-5">
+                    <BsVolumeUpFill size={30} />
+                  </span>{" "}
+                  Volume Up Control
+                </li>
+                <li className="flex items-center text-white text-md md:text-3xl mb-10">
+                  <span className="block text-4xl mr-5">
+                    <GiWaterDrop size={30} />
+                  </span>{" "}
+                  Water Dust Proof
+                </li>
+              </ul>
+              <Link
+                href="#"
+                className="bg-white transition-all hover:bg-orange hover:text-white px-5 md:px-12 py-3 md:py-4 xl:py-4 rounded-full text-orange capitalize font-medium text-sm lg:text-md inline-block leading-normal"
+              >
+                Buy Now
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* <!-- Banner section end --> */}
     </div>
   );
 };
