@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 import { SlBasketLoaded } from "react-icons/sl";
 import Link from "next/link";
 
@@ -53,6 +53,95 @@ const Main = () => {
       </section>
 
       {/* <!-- Hero section end --> */}
+
+      {/* <!-- Feartured section start --> */}
+      <section className="pt-24">
+        <div className="container">
+          <div className="flex items-center -mx-4 flex-wrap">
+            <div className="w-full md:w-1/2 px-4  order-last md:order-first">
+              <Image
+                className="mt-8 md:mt-0 w-full h-full lg:pr-14 xl:pr-20"
+                src={"/assets/images/featured-products/product1.webp"}
+                alt="product image"
+                loading="lazy"
+                width={512}
+                height={647}
+              />
+            </div>
+
+            <div className="w-full md:w-1/2 px-4">
+              <h2 className="text-md font-normal text-primary block mb-4">
+                FEATURED PRODUCT
+              </h2>
+              <h3 className="font-playfair font-bold text-orange text-[30px] sm:text-[36px] xl:text-[48px] leading-tight mb-5">
+                Minimal Headphone <br />
+                For Music Lover
+              </h3>
+              <hr className="w-16 h-1 bg-orange mb-7 border-0" />
+              <p className="font-normal text-primary text-base xl:text-md">
+                When an unknown printer took a galley of type and scrambled it
+                to make a type specimen book. sint occaeca Excepteur sint
+                occaecat cupidatat non proident.
+              </p>
+              <Link
+                href="#"
+                className="bg-primary transition-all hover:bg-orange
+                     hover:text-white px-5 md:px-12 py-3 md:py-4 xl:py-4 
+                     rounded-full text-orange capitalize font-medium text-sm 
+                     lg:text-md inline-block mt-8 leading-normal"
+              >
+                Buy Now
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* <!-- Feartured section end --> */}
+
+      {/* <!-- Feartured section start --> */}
+      <section className="pt-24 pb-24">
+        <div className="container">
+          <div className="flex items-center -mx-4 flex-wrap">
+            <div className="w-full md:w-1/2 px-4">
+              <h2 className="text-md font-normal text-primary block mb-4">
+                MINIMAL PRODUCT
+              </h2>
+              <h3 className="font-playfair font-bold text-orange text-[30px] sm:text-[36px] xl:text-[48px] leading-tight mb-5">
+                Minimal Headphone <br />
+                For Music Lover
+              </h3>
+              <hr className="w-16 h-1 bg-orange mb-7 border-0" />
+              <p className="font-normal text-primary text-base xl:text-md">
+                When an unknown printer took a galley of type and scrambled it
+                to make a type specimen book. sint occaeca Excepteur sint
+                occaecat cupidatat non proident.
+              </p>
+              <Link
+                href="#"
+                className="bg-primary transition-all hover:bg-orange 
+                    hover:text-white px-5 md:px-12 py-3 md:py-4 xl:py-4 
+                    rounded-full text-orange capitalize font-medium text-sm 
+                    lg:text-md inline-block mt-8 leading-normal"
+              >
+                Buy Now
+              </Link>
+            </div>
+            <div className="w-full md:w-1/2 px-4">
+              <Image
+                className="mt-8 md:mt-0 w-full h-full"
+                src={"/assets/images/featured-products/product2.webp"}
+                alt="product image"
+                loading="lazy"
+                width={612}
+                height={723}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* <!-- Feartured section end --> */}
     </div>
   );
 };
