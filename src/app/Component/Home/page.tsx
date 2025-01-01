@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { SlBasketLoaded } from "react-icons/sl";
 import { IoMdBluetooth } from "react-icons/io";
@@ -7,8 +9,53 @@ import { MdTouchApp } from "react-icons/md";
 import { BsVolumeUpFill } from "react-icons/bs";
 import { GiWaterDrop } from "react-icons/gi";
 import Link from "next/link";
+import ProductSlider from "../ProductSlider/page";
 
 const Main = () => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const targetDate = new Date("2025/01/20").getTime(); // Set the target date here
+
+    // Function to update the countdown values
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const remainingTime = targetDate - now;
+
+      if (remainingTime <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      } else {
+        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor(
+          (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        // Update the state with the new countdown values
+        setTimeLeft({ days, hours, minutes, seconds });
+      }
+    };
+
+    // Update the countdown every second
+    const interval = setInterval(updateCountdown, 1000);
+
+    // Initial countdown update
+    updateCountdown();
+
+    // Clean up the interval when the component is unmounted
+    return () => clearInterval(interval);
+  }, []);
+
+  const [showVideo, setShowVideo] = useState(false);
+
   return (
     <div>
       {/* <!-- Hero section start --> */}
@@ -207,6 +254,141 @@ const Main = () => {
       </section>
 
       {/* <!-- Banner section end --> */}
+
+      {/* // <!-- Product section start --> */}
+      <section className="product-section pt-24 pb-24">
+        <div className="container">
+          <div className="grid grid-rows-1 grid-flow-col gap-4">
+            <div className="text-center mb-14">
+              <h2 className="font-playfair font-bold text-orange text-4xl lg:text-xl mb-4">
+                Deal Collection
+              </h2>
+              <p className="font-normal text-black text-base">
+                There are many variations of passages of Lorem
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-12 gap-4">
+            <div className="col-start-1 md:col-start-3 col-span-12 md:col-span-8">
+              {/* <!-- countdown start --> */}
+
+              <div className="relative py-4 p-4 before:absolute before:w-full before:empty before:block before:h-full before:z-10 before:shadow-deal before:inset-x-2 before:top-2 after:absolute after:w-full after:empty after:block after:h-full after:z-10 after:shadow-deal after:inset-x-3 after:top-3 mb-12">
+                <div className="countdown item-1 flex flex-wrap justify-center pt-4">
+                  <div className="countdown__item flex flex-wrap items-baseline flex-col sm:flex-row mr-5">
+                    <span className="countdown__time mr-1 text-lg lg:text-4xl text-dark font-500">
+                      {timeLeft.days < 10 ? `0${timeLeft.days}` : timeLeft.days}
+                    </span>
+                    <span className="countdown__text capitalize text-base text-dark font-400">
+                      Days
+                    </span>
+                  </div>
+                  <div className="countdown__item flex flex-wrap items-baseline flex-col sm:flex-row mr-5">
+                    <span className="countdown__time mr-1 text-lg lg:text-4xl text-dark font-500">
+                      {timeLeft.hours < 10
+                        ? `0${timeLeft.hours}`
+                        : timeLeft.hours}
+                    </span>
+                    <span className="countdown__text capitalize text-base text-dark font-400">
+                      Hours
+                    </span>
+                  </div>
+                  <div className="countdown__item flex flex-wrap items-baseline flex-col sm:flex-row mr-5">
+                    <span className="countdown__time mr-1 text-lg lg:text-4xl text-dark font-500">
+                      {timeLeft.minutes < 10
+                        ? `0${timeLeft.minutes}`
+                        : timeLeft.minutes}
+                    </span>
+                    <span className="countdown__text capitalize text-base text-dark font-400">
+                      Minutes
+                    </span>
+                  </div>
+                  <div className="countdown__item flex flex-wrap items-baseline flex-col sm:flex-row">
+                    <span className="countdown__time mr-1 text-lg lg:text-4xl text-dark font-500">
+                      {timeLeft.seconds < 10
+                        ? `0${timeLeft.seconds}`
+                        : timeLeft.seconds}
+                    </span>
+                    <span className="countdown__text capitalize text-base text-dark font-400">
+                      Seconds
+                    </span>
+                  </div>
+                </div>
+              </div>
+              {/* <!-- countdown end --> */}
+            </div>
+          </div>
+          <div className="grid grid-cols-12 gap-4">
+            <div className="col-span-12">
+              <section className="relative -m-4">
+                <div className="product-carousel overflow-hidden p-4">
+                  <ProductSlider />
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* // // <!-- Product section end --> */}
+
+      {/* <!-- Vedio Banner section start --> */}
+      <section className="vedio-banner-section relative h-sm-b-h md:h-full">
+        <Image
+          className="object-cover h-full w-full"
+          src="/assets/images/banner/video-bg.webp"
+          alt="banner image"
+          loading="lazy"
+          width={1920}
+          height={902}
+        />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full xl:max-w-3xl lg:px-10 px-4">
+          <h3 className="font-playfair font-bold text-orange text-lg sm:text-4xl lg:text-xl mb-3 md:mb-10">
+            The Right Headphones
+          </h3>
+          <p className="font-medium text-white text-base mb-4 md:mb-10">
+            In ornare quam viverra orci sagittis. Duis ultricies lacus sed
+            turpis tincidunt id aliquet risus. Arcu felis bibendum ut tristique
+            et.
+          </p>
+
+          <button
+            onClick={() => setShowVideo(true)}
+            className="inline-block play-vedio"
+          >
+            <Image
+              src="/assets/images/icon/play.webp"
+              alt="play image"
+              loading="lazy"
+              width={50}
+              height={50}
+            />
+          </button>
+        </div>
+        {showVideo && (
+          <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
+            <div className="relative w-full max-w-3xl">
+              <button
+                onClick={() => setShowVideo(false)}
+                style={{ paddingBottom: "8px" }}
+                className="absolute top-0 right-0 m-4 text-black text-4xl bg-white rounded-full w-12 h-12 flex items-center justify-center"
+              >
+                &times;
+              </button>
+              <iframe
+                width="100%"
+                height="500"
+                src="https://www.youtube.com/embed/pONeWAzDsQg"
+                frameBorder="0"
+                allow="accelerometer; autoplay; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* <!-- Vedio Banner section end --> */}
     </div>
   );
 };
