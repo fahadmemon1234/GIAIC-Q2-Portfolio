@@ -8,6 +8,7 @@ import { AiFillTwitterCircle } from "react-icons/ai";
 import { SiYoutubemusic } from "react-icons/si";
 import Link from "next/link";
 import Image from "next/image";
+import Scroll from "../scrollUp/page";
 
 const Footer = () => {
   return (
@@ -134,14 +135,7 @@ const Footer = () => {
         {/* <!-- Footer Bottom Section end --> */}
       </footer>
 
-      {/* <Link
-        id="scrollUp"
-        className="w-12 h-12 rounded-full bg-orange text-white fixed right-5 bottom-16 flex flex-wrap items-center justify-center transition-all duration-300 z-10"
-        href="#"
-        aria-label="scroll up"
-      >
-        <FaArrowUp size={20} />
-      </Link> */}
+      <Scroll />
     </>
   );
 };
