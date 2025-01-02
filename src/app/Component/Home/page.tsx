@@ -407,7 +407,10 @@ const Main = () => {
             </div>
             <div className="col-span-12">
               <section className="relative -m-4">
-                <div className="blog-carousel overflow-hidden p-4">
+                <div
+                  className="blog-carousel overflow-hidden"
+                  style={{ padding: "1.8rem;" }}
+                >
                   <BlogSlider />
                 </div>
               </section>

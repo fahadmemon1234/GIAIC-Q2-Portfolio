@@ -133,7 +133,8 @@ const BlogSlider = () => {
         .swiper-button-next {
           background-color: white;
           border-radius: 50%;
-          border: 2px solid transparent;
+          border: 1px solid;
+          border-color: rgb(241 241 241);
           color: black;
           width: 40px;
           height: 40px;
@@ -144,10 +145,10 @@ const BlogSlider = () => {
           transition: all 0.3s ease;
         }
         .swiper-button-prev {
-          left: 10px;
+          left: -20px;
         }
         .swiper-button-next {
-          right: 10px;
+          right: -20px;
         }
         .swiper-button-prev:hover,
         .swiper-button-next:hover {
