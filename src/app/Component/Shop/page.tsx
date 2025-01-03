@@ -120,9 +120,14 @@ const Shop = () => {
 
                   <p className="my-2 sm:my-0">Showing 1 - 9 of 9 result</p>
                 </div>
-                <div>
-                  <span>Show :</span>
-                  <select className="bg-transparent">
+                <div className="shop-select flex items-center space-x-4 mr-12">
+                  <label
+                    htmlFor="Show"
+                    className="text-gray-700 font-medium whitespace-nowrap"
+                  >
+                    Show:
+                  </label>
+                  <select className="form-control border border-gray-300 rounded-md px-4 py-2 text-sm focus:ring focus:ring-orange-500 focus:outline-none">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -130,7 +135,7 @@ const Shop = () => {
                   </select>
                 </div>
                 <div>
-                  <ul className="shop-tab-nav flex flex-wrap">
+                  <ul className="shop-tab-nav flex flex-wrap items-center">
                     <li
                       className={`cursor-pointer ${
                         activeTab === "grid" ? "text-orange" : "text-gray-500"
@@ -145,7 +150,7 @@ const Shop = () => {
                       }`}
                       onClick={() => setActiveTab("list")}
                     >
-                      <IoIosMenu size={20} />
+                      <IoIosMenu size={25} />
                     </li>
                   </ul>
                 </div>
