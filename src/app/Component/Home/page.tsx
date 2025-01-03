@@ -90,7 +90,7 @@ const Main = () => {
                       <div className="inline-block mt-8 lg:mt-12">
                         <Link
                           className="flex flex-wrap items-center bg-primary transition-all hover:bg-orange hover:text-white px-3 md:px-4 xl:px-10 py-3 md:py-4 xl:py-5 rounded-full text-orange capitalize font-medium text-sm lg:text-md leading-normal"
-                          href="#"
+                          href="/Component/Shop"
                         >
                           Explore More
                           <SlBasketLoaded className="ml-3 xl:ml-5" size={20} />

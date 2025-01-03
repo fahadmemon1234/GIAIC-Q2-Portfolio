@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import Link from "next/link";
+import Tippy from "@tippyjs/react";
 
 const ProductSlider = () => {
   const products = [
@@ -152,25 +153,29 @@ const ProductSlider = () => {
                   <div className="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 z-10">
                     <ul className="flex items-center justify-center bg-white shadow rounded-full h-0 transition-all group-hover:h-16 duration-500 overflow-hidden">
                       <li className="py-4 pl-7 md:py-5 md:pl-8">
-                        <Link
-                          href="whishlist.html"
-                          className="text-dark flex items-center justify-center text-md hover:text-orange"
-                          data-tippy-content="Add to wishlist"
-                          aria-label="Add to wishlist"
-                        >
-                          <FaRegHeart size={25} />
-                        </Link>
+                        <Tippy content="Add to wishlist" placement="top">
+                          <Link
+                            href="#"
+                            className="text-dark flex items-center justify-center text-md hover:text-orange"
+                            data-tippy-content="Add to wishlist"
+                            aria-label="Add to wishlist"
+                          >
+                            <FaRegHeart size={25} />
+                          </Link>
+                        </Tippy>
                       </li>
 
                       <li className="py-4 pl-7 pr-7 md:py-5 md:pl-8 md:pr-8">
-                        <Link
-                          href="#modal-addto-cart"
-                          className="text-dark flex items-center justify-center text-md hover:text-orange modal-toggle"
-                          data-tippy-content="Add to cart"
-                          aria-label="Add to cart"
-                        >
-                          <MdOutlineShoppingBag size={25} />
-                        </Link>
+                        <Tippy content="Add to cart" placement="top">
+                          <Link
+                            href="#"
+                            className="text-dark flex items-center justify-center text-md hover:text-orange modal-toggle"
+                            data-tippy-content="Add to cart"
+                            aria-label="Add to cart"
+                          >
+                            <MdOutlineShoppingBag size={25} />
+                          </Link>
+                        </Tippy>
                       </li>
                     </ul>
                   </div>
