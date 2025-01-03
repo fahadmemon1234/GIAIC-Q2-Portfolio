@@ -56,7 +56,7 @@ const Navbar = () => {
                   <li className="main-menu__item group">
                     <Link
                       className="block py-10 xl:px-6 md:px-5 capitalize font-normal text-md text-primary hover:text-orange transition-all"
-                      href="#"
+                      href="/Component/Shop"
                     >
                       Shop
                     </Link>
@@ -198,7 +198,7 @@ const Navbar = () => {
               </li>
               <li className="relative block">
                 <Link
-                  href="#"
+                  href="/Component/Shop"
                   className="block capitalize font-normal text-base my-2 py-1 font-roboto"
                 >
                   Shop
