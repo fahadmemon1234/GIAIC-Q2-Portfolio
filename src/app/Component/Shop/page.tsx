@@ -265,7 +265,7 @@ const Shop = () => {
                               <h4>
                                 <Link
                                   className="block text-base hover:text-orange transition-all"
-                                  href="#"
+                                  href="/Component/ProductDetail/1"
                                 >
                                   {product.title}
                                 </Link>
@@ -318,7 +318,7 @@ const Shop = () => {
                               <h4>
                                 <Link
                                   className="block text-md hover:text-orange transition-all mb-2"
-                                  href="#"
+                                  href="/Component/ProductDetail/1"
                                 >
                                   {product.title}
                                 </Link>

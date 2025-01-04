@@ -295,7 +295,7 @@ const ProductSlider = () => {
                   <h3 className="mt-4">
                     <Link
                       className="block text-base hover:text-orange transition-all"
-                      href="single-product.html"
+                      href="/Component/ProductDetail/1"
                     >
                       {product.title}
                     </Link>
