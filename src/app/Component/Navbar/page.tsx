@@ -64,7 +64,7 @@ const Navbar = () => {
                   <li className="main-menu__item relative group">
                     <Link
                       className="block py-10 xl:px-6 md:px-5 capitalize font-normal text-md text-primary hover:text-orange transition-all"
-                      href="#"
+                      href="/Component/Blog"
                     >
                       Blog
                     </Link>
@@ -73,7 +73,7 @@ const Navbar = () => {
                   <li className="main-menu__item">
                     <Link
                       className="block py-10 xl:px-6 md:px-5 capitalize font-normal text-md text-primary hover:text-orange transition-all"
-                      href="#"
+                      href="/Component/Contact"
                     >
                       Contact
                     </Link>
@@ -190,7 +190,7 @@ const Navbar = () => {
             <ul>
               <li className="relative block">
                 <Link
-                  href="#"
+                  href="/"
                   className="block capitalize font-normal text-base my-2 py-1 font-roboto"
                 >
                   Home
@@ -206,23 +206,16 @@ const Navbar = () => {
               </li>
               <li className="relative block">
                 <Link
-                  href="#"
+                  href="/Component/Blog"
                   className="block capitalize font-normal text-base my-2 py-1 font-roboto"
                 >
                   Blog
                 </Link>
               </li>
+
               <li className="relative block">
                 <Link
-                  href="#"
-                  className="relative block capitalize font-normal text-base my-2 py-1 font-roboto"
-                >
-                  about Us
-                </Link>
-              </li>
-              <li className="relative block">
-                <Link
-                  href="#"
+                  href="/Component/Contact"
                   className="relative block capitalize font-normal text-base my-2 py-1 font-roboto"
                 >
                   Contact Us
