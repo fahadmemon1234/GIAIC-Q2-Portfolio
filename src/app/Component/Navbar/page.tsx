@@ -61,14 +61,6 @@ const Navbar = () => {
                       Shop
                     </Link>
                   </li>
-                  <li className="main-menu__item relative group">
-                    <Link
-                      className="block py-10 xl:px-6 md:px-5 capitalize font-normal text-md text-primary hover:text-orange transition-all"
-                      href="/Component/Blog"
-                    >
-                      Blog
-                    </Link>
-                  </li>
 
                   <li className="main-menu__item">
                     <Link
@@ -204,14 +196,6 @@ const Navbar = () => {
                   Shop
                 </Link>
               </li>
-              <li className="relative block">
-                <Link
-                  href="/Component/Blog"
-                  className="block capitalize font-normal text-base my-2 py-1 font-roboto"
-                >
-                  Blog
-                </Link>
-              </li>
 
               <li className="relative block">
                 <Link
@@ -292,7 +276,7 @@ const Navbar = () => {
               </Link>
               <Link
                 className="py-5 px-10 block bg-white border border-solid border-gray-600 uppercase font-semibold text-base hover:bg-orange hover:border-orange hover:text-white transition-all leading-none mt-3"
-                href="#"
+                href="/Component/Cart"
               >
                 View Cart
               </Link>

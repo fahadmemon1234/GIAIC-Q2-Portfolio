@@ -10,7 +10,6 @@ import { BsVolumeUpFill } from "react-icons/bs";
 import { GiWaterDrop } from "react-icons/gi";
 import Link from "next/link";
 import ProductSlider from "../ProductSlider/page";
-import BlogSlider from "../BlogSlider/page";
 
 const Main = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -390,35 +389,6 @@ const Main = () => {
       </section>
 
       {/* <!-- Vedio Banner section end --> */}
-
-      {/* <!-- Blog section start --> */}
-      <section className="blog-carousel-section pt-24 pb-24">
-        <div className="container">
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12">
-              <div className="section-title text-center pb-14">
-                <h3 className="font-playfair font-bold text-orange text-4xl lg:text-xl mb-4">
-                  Latest Blog
-                </h3>
-                <p className="font-normal text-black text-base">
-                  There are many variations of passages of Lorem
-                </p>
-              </div>
-            </div>
-            <div className="col-span-12">
-              <section className="relative -m-4">
-                <div
-                  className="blog-carousel overflow-hidden"
-                  style={{ padding: "1.8rem;" }}
-                >
-                  <BlogSlider />
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* <!-- Blog section end --> */}
     </div>
   );
 };
