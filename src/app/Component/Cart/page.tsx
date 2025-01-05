@@ -384,10 +384,10 @@ const Cart = () => {
                   Update Cart
                 </Link>
                 <Link
-                  href="#"
+                  href="/Component/Checkout"
                   className="inline-block bg-dark leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange uppercase font-semibold hover:text-white ml-4"
                 >
-                  checkout
+                  Checkout
                 </Link>
               </div>
             </div>

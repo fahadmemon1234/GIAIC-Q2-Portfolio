@@ -270,7 +270,7 @@ const Navbar = () => {
             <div className="text-center">
               <Link
                 className="py-5 px-10 block bg-white border border-solid border-gray-600 uppercase font-semibold text-base hover:bg-orange hover:border-orange hover:text-white transition-all leading-none"
-                href="#"
+                href="/Component/Checkout"
               >
                 Checkout
               </Link>
