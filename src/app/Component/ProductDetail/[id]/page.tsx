@@ -1,37 +1,100 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { client } from "@/app/lib/sanity";
+import { fetchProductById } from "@/app/lib/api";
 import {
   AiOutlineHeart,
   AiOutlineFacebook,
   AiOutlineTwitter,
   AiOutlineInstagram,
   AiOutlineYoutube,
+  AiFillHeart,
 } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 import ProductSlider from "../../ProductSlider/page";
 
+interface Product {
+  _id: string;
+  _type: string;
+  _createdAt: string;
+  _updatedAt: string;
+  name: string;
+  slug: {
+    current: string;
+  };
+  description: string;
+  price: number;
+  quantity: number;
+  features: string[];
+  dimensions: {
+    width: string;
+    height: string;
+    depth: string;
+    _type: string;
+  };
+  image: {
+    asset: {
+      _id: string;
+      url: string;
+    };
+  };
+}
+
 const ProductDetail = () => {
   const { id } = useParams();
 
-  const [selectedImage, setSelectedImage] = useState(
-    "/assets/images/single-product/lg/product1.webp"
-  );
+  // const [selectedImage, setSelectedImage] = useState(
+  //   "/assets/images/single-product/lg/product1.webp"
+  // );
 
-  const images = [
-    "/assets/images/single-product/lg/product1.webp",
-    "/assets/images/single-product/lg/product2.webp",
-    "/assets/images/single-product/lg/product3.webp",
-    "/assets/images/single-product/lg/product4.webp",
-    "/assets/images/single-product/lg/product5.webp",
-  ];
+  // const images = [
+  //   "/assets/images/single-product/lg/product1.webp",
+  //   "/assets/images/single-product/lg/product2.webp",
+  //   "/assets/images/single-product/lg/product3.webp",
+  //   "/assets/images/single-product/lg/product4.webp",
+  //   "/assets/images/single-product/lg/product5.webp",
+  // ];
 
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
+  const [productList, setproductList] = useState<Product | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const ProductbyIDData = await fetchProductById(id as string);
+        setproductList(ProductbyIDData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  const handleAddToCart = async () => {
+    try {
+      const doc = {
+        _type: 'addToCart',
+        productId: productList?._id,
+        productName: productList?.name,
+        price: productList?.price,
+        quantity: quantity,
+      };
+
+      const response = await client.create(doc);
+      alert("Added to cart");
+      // console.log('Added to cart:', response);
+    } catch (error) {
+      console.log('Error adding to cart:', error);
+    }
+  };
+
+  // const prevRef = useRef(null);
+  // const nextRef = useRef(null);
 
   const [quantity, setQuantity] = useState<number>(1); // Default quantity
 
@@ -54,9 +117,15 @@ const ProductDetail = () => {
     }
   };
 
-  const [activeTab, setActiveTab] = useState<
-    "description" | "product-details" | "reviews"
-  >("description");
+  // const [activeTab, setActiveTab] = useState<
+  //   "description" | "product-details" | "reviews"
+  // >("description");
+
+  const [liked, setLiked] = useState(false);
+
+  const toggleLike = () => {
+    setLiked(!liked); // Toggle the "like" state
+  };
 
   return (
     <>
@@ -77,7 +146,7 @@ const ProductDetail = () => {
                     </Link>
                   </li>
                   <li className="text-dark font-medium text-base uppercase mr-5">
-                    Airp Variable product
+                    {productList?.name}
                   </li>
                 </ul>
               </nav>
@@ -96,129 +165,64 @@ const ProductDetail = () => {
                   Sale
                 </span>
                 <div className="gallery mb-6">
-                  <Swiper
-                    className="product-gallery-single"
-                    slidesPerView={1}
-                    spaceBetween={20}
-                  >
-                    <SwiperSlide>
-                      <Image
-                        src={selectedImage}
-                        alt="Selected Product"
-                        width={800}
-                        height={800}
-                        className="w-full h-auto"
-                      />
-                    </SwiperSlide>
-                  </Swiper>
-                </div>
-
-                <div className="gallery-nav relative">
-                  <Swiper
-                    className="product-gallery"
-                    modules={[Navigation]}
-                    navigation={{
-                      prevEl: prevRef.current,
-                      nextEl: nextRef.current,
-                    }}
-                    onSwiper={(swiper) => {
-                      setTimeout(() => {
-                        if (swiper.params.navigation) {
-                          (swiper.params.navigation as any).prevEl =
-                            prevRef.current;
-                          (swiper.params.navigation as any).nextEl =
-                            nextRef.current;
-                          swiper.navigation.destroy();
-                          swiper.navigation.init();
-                          swiper.navigation.update();
-                        }
-                      });
-                    }}
-                    breakpoints={{
-                      640: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                      },
-                      768: {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
-                      },
-                      1024: {
-                        slidesPerView: 4,
-                        spaceBetween: 20,
-                      },
-                    }}
-                  >
-                    {images.map((src, index) => (
-                      <SwiperSlide key={index}>
-                        <Image
-                          src={src}
-                          alt={`Product ${index + 1}`}
-                          width={800}
-                          height={800}
-                          className={`w-full h-auto cursor-pointer ${
-                            selectedImage === src
-                              ? "swiper-slide-thumb-active"
-                              : ""
-                          }`}
-                          onClick={() => setSelectedImage(src)} // Update selected image
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                  {/* <!-- If we need pagination --> */}
-
-                  <div className="swiper-buttons">
-                    <button
-                      ref={prevRef}
-                      className="swiper-button-prev right-auto left-4  w-8 h-8 rounded-full  border border-solid border-gray-500 text-sm text-dark opacity-100 transition-all hover:text-orange hover:border-orange"
-                    >
-                      <i className="ion-chevron-left"></i>
-                    </button>
-                    <button
-                      ref={nextRef}
-                      className="swiper-button-next left-auto right-4  w-8 h-8 rounded-full  border border-solid border-gray-500 text-sm text-dark opacity-100 transition-all hover:text-orange hover:border-orange"
-                    >
-                      <i className="ion-chevron-right"></i>
-                    </button>
-                  </div>
+                  <Image
+                    src={productList?.image.asset.url || ""}
+                    alt="Selected Product"
+                    width={800}
+                    height={800}
+                    quality={50}
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             </div>
 
             <div>
               <h3 className="font-medium text-lg capitalize">
-                Airp Variable product
+                {productList?.name}
               </h3>
               <h5 className="font-bold text-md leading-none text-orange my-3">
-                <del className="font-normal text-sm mr-1 inline-block">
-                  $110.00
-                </del>
-                $130.00
+                {/* <del className="font-normal text-sm mr-1 inline-block">
+                  ${((productList?.price * 100) / (100 - 20)).toFixed(2)}
+                </del> */}
+                ${productList?.price.toFixed(2)}
+                {/* <span className="font-normal text-sm text-green-600 ml-2">
+                  (20% off)
+                </span> */}
               </h5>
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 Vendor:<span> Vendor 3 </span>
+              </div> */}
+              <div className="mb-3">
+                Dimensions:
+                <ul className="flex gap-5 items-center">
+                  <li>
+                    <span className="font-medium">Width:</span>{" "}
+                    {productList?.dimensions.width}
+                  </li>
+                  <li>
+                    <span className="font-medium">Height:</span>{" "}
+                    {productList?.dimensions.height}
+                  </li>
+                  <li>
+                    <span className="font-medium">Depth:</span>{" "}
+                    {productList?.dimensions.depth}
+                  </li>
+                </ul>
               </div>
               <div className="mb-3">
-                Type: <span> Type 3 </span>
+                Type: <span> {productList?.slug.current} </span>
               </div>
               <div className="mb-3">
                 <span>Availability:</span>
                 <span className="font-semibold" style={{ paddingLeft: "5px" }}>
-                  9 left in stock
+                  {productList?.quantity}
                 </span>
               </div>
-              <p className="mb-8">
-                There are many variations of passages of Lorem Ipsum available,
-                but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don't look even
-                slightly believable. If you are going to use a passage of Lorem
-                Ipsum, you need to be sure there isn't anything embarrassing
-                hidden in the middle of text.
-              </p>
+              <p className="mb-8">{productList?.description}</p>
 
               <div>
-                <div className="flex flex-wrap items-center mb-6">
+                {/* <div className="flex flex-wrap items-center mb-6">
                   <span className="mr-8">Size:</span>
                   <form className="size-swatch" action="#">
                     <ul className="flex flex-wrap">
@@ -370,7 +374,7 @@ const ProductDetail = () => {
                       </li>
                     </ul>
                   </form>
-                </div>
+                </div> */}
 
                 <div className="mb-8">
                   <div className="flex flex-wrap items-center mt-8">
@@ -401,15 +405,26 @@ const ProductDetail = () => {
                       </button>
                     </div>
                     <div className="ml-2 sm:ml-8">
-                      <button className="bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange">
+                      <button onClick={handleAddToCart} className="bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange">
                         Add to Cart
                       </button>
                     </div>
-                    <Link href="#" className="text-md ml-8">
-                      <AiOutlineHeart
-                        size={25}
-                        className="text-gray-600 hover:text-orange-500 transition-colors duration-200"
-                      />
+                    <Link
+                      href={""}
+                      className="text-md ml-8"
+                      onClick={toggleLike}
+                    >
+                      {liked ? (
+                        <AiFillHeart
+                          size={25}
+                          className="text-orange-500 hover:text-gray-600 transition-colors duration-200"
+                        />
+                      ) : (
+                        <AiOutlineHeart
+                          size={25}
+                          className="text-gray-600 hover:text-orange-500 transition-colors duration-200"
+                        />
+                      )}
                     </Link>
                   </div>
                 </div>
@@ -498,7 +513,7 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      <div id="maintab" className="pb-24">
+      {/* <div id="maintab" className="pb-24">
         <div className="container">
           <div className="grid grid-cols-1 gap-x-5">
             <div className="border border-solid border-gray-300 p-8">
@@ -612,7 +627,6 @@ const ProductDetail = () => {
                 </div>
               )}
 
-              {/* Step 3: Add the review tab */}
               {activeTab === "reviews" && (
                 <div id="review">
                   <div>
@@ -738,7 +752,7 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <!-- Product section start --> */}
       <section className="product-section pb-24">

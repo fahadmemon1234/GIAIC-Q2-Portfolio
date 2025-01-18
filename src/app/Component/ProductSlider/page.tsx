@@ -1,12 +1,41 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import Link from "next/link";
 import Tippy from "@tippyjs/react";
+import { client } from "@/app/lib/sanity";
+import { fetchAllProducts } from "@/app/lib/api";
+
+interface Product {
+  _id: string;
+  _type: string;
+  _createdAt: string;
+  _updatedAt: string;
+  name: string;
+  slug: {
+    current: string;
+  };
+  description: string;
+  price: number;
+  quantity: number;
+  features: string[];
+  dimensions: {
+    width: string;
+    height: string;
+    depth: string;
+    _type: string;
+  };
+  image: {
+    asset: {
+      _id: string;
+      url: string;
+    };
+  };
+}
 
 const ProductSlider = () => {
   const products = [
@@ -96,6 +125,56 @@ const ProductSlider = () => {
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
+  const [productList, setproductList] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        const data = await fetchAllProducts();
+        if (data) {
+          setproductList(data);
+        }
+      } catch (error) {
+        console.error("Error fetching hero card data:", error);
+      }
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const handleAddToCart = async (
+    price: number,
+    productId: string,
+    productName: string
+  ) => {
+    try {
+      const doc = {
+        _type: "addToCart",
+        productId: productId,
+        productName: productName,
+        price: price,
+        quantity: 1, // Default quantity
+      };
+
+      const response = await client.create(doc);
+      alert("Added to cart");
+      console.log("Added to cart:", response);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
+
+  const [likedProducts, setLikedProducts] = useState([]);
+
+  const toggleLike = (productId) => {
+    setLikedProducts(
+      (prevLikedProducts) =>
+        prevLikedProducts.includes(productId)
+          ? prevLikedProducts.filter((id) => id !== productId) // Unlike
+          : [...prevLikedProducts, productId] // Like
+    );
+  };
+
   return (
     <div className="relative">
       <Swiper
@@ -130,38 +209,39 @@ const ProductSlider = () => {
           },
         }}
       >
-        {products.map((product) => (
-          <SwiperSlide key={product.id}>
+        {productList.map((product) => (
+          <SwiperSlide key={product._id}>
             <div className="swiper-slide">
               <div className="border border-solid border-gray-300 transition-all hover:shadow-product group">
                 <div className="relative overflow-hidden">
                   <span className="font-bold uppercase text-sm text-black inline-block py-1 px-2 leading-none absolute top-3 right-3">
-                    Sale
+                    {product.slug.current}
                   </span>
-                  <span className="font-bold uppercase text-sm text-black inline-block py-1 px-2 leading-none absolute top-10 right-3">
-                    {product.discount}
-                  </span>
+
                   <Image
-                    className="w-full h-full"
-                    src={product.imageUrl}
-                    alt={product.title}
+                    className="w-full h-[400px] object-cover"
+                    src={product.image.asset.url}
+                    alt={product.name}
                     loading="lazy"
                     width={432}
-                    height={480}
-                    quality={80}
+                    height={380}
+                    quality={50}
                   />
                   <div className="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 z-10">
                     <ul className="flex items-center justify-center bg-white shadow rounded-full h-0 transition-all group-hover:h-16 duration-500 overflow-hidden">
                       <li className="py-4 pl-7 md:py-5 md:pl-8">
                         <Tippy content="Add to wishlist" placement="top">
-                          <Link
-                            href="#"
+                          <button
+                            onClick={() => toggleLike(product._id)}
                             className="text-dark flex items-center justify-center text-md hover:text-orange"
-                            data-tippy-content="Add to wishlist"
                             aria-label="Add to wishlist"
                           >
-                            <FaRegHeart size={25} />
-                          </Link>
+                            {likedProducts.includes(product._id) ? (
+                              <FaHeart size={25} color="red" />
+                            ) : (
+                              <FaRegHeart size={25} />
+                            )}
+                          </button>
                         </Tippy>
                       </li>
 
@@ -169,6 +249,14 @@ const ProductSlider = () => {
                         <Tippy content="Add to cart" placement="top">
                           <Link
                             href="#"
+                            onClick={(e) => {
+                              e.preventDefault(); // Prevent page reload
+                              handleAddToCart(
+                                product.price,
+                                product._id,
+                                product.name
+                              );
+                            }}
                             className="text-dark flex items-center justify-center text-md hover:text-orange modal-toggle"
                             data-tippy-content="Add to cart"
                             aria-label="Add to cart"
@@ -180,99 +268,14 @@ const ProductSlider = () => {
                     </ul>
                   </div>
 
-                  {/* tabs nav start */}
-
-                  <div className="p-2 bg-gray-200 shadow absolute left-2 right-2 -bottom-40 group-hover:bottom-2 z-20 transition-all duration-500 ease-linear">
-                    <ul className="tab-nav flex flex-wrap items-center justify-center">
-                      <li className="mx-1">
-                        <Link
-                          href="#product4"
-                          className="w-8 h-8 overflow-hidden rounded-full block"
-                        >
-                          <Image
-                            src={"/assets/images/products/sm/product1.webp"}
-                            alt="product image"
-                            loading="lazy"
-                            width={45}
-                            height={50}
-                            quality={80}
-                          />
-                        </Link>
-                      </li>
-                      <li className="mx-1">
-                        <Link
-                          href="#product5"
-                          className="w-8 h-8 overflow-hidden rounded-full block"
-                        >
-                          <Image
-                            src={"/assets/images/products/sm/product2.webp"}
-                            alt="product image"
-                            loading="lazy"
-                            width={45}
-                            height={50}
-                            quality={80}
-                          />
-                        </Link>
-                      </li>
-                      <li className="mx-1">
-                        <Link
-                          href="#product6"
-                          className="w-8 h-8 overflow-hidden rounded-full block"
-                        >
-                          <Image
-                            src={"/assets/images/products/sm/product3.webp"}
-                            alt="product image"
-                            loading="lazy"
-                            width={45}
-                            height={50}
-                            quality={80}
-                          />
-                        </Link>
-                      </li>
-                      <li className="mx-1">
-                        <Link
-                          href="#product7"
-                          className="w-8 h-8 overflow-hidden rounded-full block"
-                        >
-                          <Image
-                            src={"/assets/images/products/sm/product4.webp"}
-                            alt="product image"
-                            loading="lazy"
-                            width={45}
-                            height={50}
-                            quality={80}
-                          />
-                        </Link>
-                      </li>
-                      <li className="mx-1">
-                        <Link
-                          href="#product8"
-                          className="w-8 h-8 overflow-hidden rounded-full block"
-                        >
-                          <Image
-                            src={"/assets/images/products/sm/product5.webp"}
-                            alt="product image"
-                            loading="lazy"
-                            width={45}
-                            height={50}
-                            quality={80}
-                          />
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
                   {/* tabs nav end */}
                 </div>
                 <div className="py-5 px-4">
                   <ul className="mb-3 text-sm capitalize">
                     <li className="flex flex-wrap items-center justify-between">
                       <span>
-                        <span>Sold: </span>
-                        <span className="text-orange">{product.sold}</span>
-                      </span>
-                      <span>
                         <span>Available: </span>
-                        <span className="text-orange">{product.available}</span>
+                        <span className="text-orange">{product.quantity}</span>
                       </span>
                     </li>
                   </ul>
@@ -282,29 +285,26 @@ const ProductSlider = () => {
                       aria-label="progress bar"
                       role="progressbar"
                       style={{
-                        width: `${
-                          (product.sold / (product.sold + product.available)) *
-                          100
-                        }%`,
+                        width: "100%", // Full width since 'sold' is removed
                       }}
-                      aria-valuenow={product.sold}
-                      aria-valuemin={0}
-                      aria-valuemax={product.sold + product.available}
                     ></div>
                   </div>
                   <h3 className="mt-4">
                     <Link
                       className="block text-base hover:text-orange transition-all"
-                      href="/Component/ProductDetail/1"
+                      href={`/Component/ProductDetail/${product._id}`}
                     >
-                      {product.title}
+                      {product.name}
                     </Link>
                   </h3>
                   <h4 className="font-bold text-md leading-none text-orange mt-3">
-                    <del className="font-normal text-sm mr-1 inline-block">
-                      ${product.originalPrice.toFixed(2)}
-                    </del>
+                    {/* <del className="font-normal text-sm mr-1 inline-block">
+                      ${((product.price * 100) / (100 - 20)).toFixed(2)}
+                    </del> */}
                     ${product.price.toFixed(2)}
+                    {/* <span className="font-normal text-sm text-green-600 ml-2">
+                      (20% off)
+                    </span> */}
                   </h4>
                 </div>
               </div>

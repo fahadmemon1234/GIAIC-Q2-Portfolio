@@ -1,7 +1,77 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import React, { useState, useEffect } from "react";
+import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
+
+interface ImageAsset {
+  _id: string;
+  url: string;
+}
+
+// Interface for product dimensions
+interface ProductDimensions {
+  width?: number;
+  height?: number;
+  depth?: number;
+  _type: string;
+}
+
+// Interface for product details in the product table
+interface ProductDetails {
+  name?: string;
+  description?: string;
+  features?: string[];
+  dimensions?: ProductDimensions;
+  image?: ImageAsset;
+}
+
+// Interface for a single cart item (addToCart table)
+interface CartItem {
+  _id: string;
+  _type: string;
+  productId: string;
+  productName: string;
+  productImage?: {
+    asset: ImageAsset;
+  };
+  price: number;
+  quantity: number;
+  productImageFromProductTable?: ImageAsset;
+  // Optional: To include product details like name, description, etc., from the related product table
+  productDetails?: ProductDetails;
+}
 
 const Cart = () => {
+  const [productList, setProductList] = useState<CartItem[]>([]);
+
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        debugger;
+        const data = await fetchAllCartData(); // Fetch data
+
+        const grandTotal = data.reduce(
+          (sum, item) => sum + item.quantity * item.price,
+          0
+        );
+
+        setProductList(data); // Update product list
+        // setDataCount(data.length); // Update data count
+        setTotal(grandTotal);
+        clearInterval(intervalId); // Stop interval after fetching the data once
+      } catch (error) {
+        console.log("Error fetching cart data:", error);
+        clearInterval(intervalId); // Stop interval in case of error
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <>
       <div className="py-14 bg-white"></div>
@@ -57,222 +127,63 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="w-32 p-3 border border-solid border-gray-600 text-center">
-                      <Link href="#">
-                        <Image
-                          src="/assets/images/single-product/sm/product1.webp"
-                          alt="product image"
-                          width={500}
-                          height={500}
-                          quality={80}
-                        />
-                      </Link>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <Link
-                        href="#"
-                        className="transition-all hover:text-orange"
-                      >
-                        Birpod product unsde
-                      </Link>
-                      <span>m / gold</span>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <span>
-                        <span>$80.00</span>
-                      </span>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <div className="flex count border border-solid border-gray-300 p-2 h-11">
-                        <button
-                          className="decrement flex-auto w-5 leading-none"
-                          aria-label="button"
+                  {productList.map((product) => (
+                    <tr key={product._id}>
+                      <td className="w-32 p-3 border border-solid border-gray-600 text-center">
+                        <Link href={`/Component/ProductDetail/${product._id}`}>
+                          <Image
+                            src={
+                              product.productImageFromProductTable?.url || ""
+                            }
+                            alt={product.productName}
+                            width={500}
+                            height={500}
+                            quality={80}
+                          />
+                        </Link>
+                      </td>
+                      <td className="p-3 border border-solid border-gray-600 text-center">
+                        <Link
+                          href={`/Component/ProductDetail/${product._id}`}
+                          className="transition-all hover:text-orange"
                         >
-                          -
-                        </button>
-                        <input
-                          type="number"
-                          min="1"
-                          max="100"
-                          step="1"
-                          value="1"
-                          className="quantity__input border-0 flex-auto w-8 text-center focus:outline-none input-appearance-none"
-                        />
-                        <button
-                          className="increment flex-auto w-5 leading-none"
-                          aria-label="button"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <span>$80.00</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="w-32 p-3 border border-solid border-gray-600 text-center">
-                      <Link href="#">
-                        <Image
-                          src="/assets/images/single-product/sm/product2.webp"
-                          alt="product image"
-                          width={500}
-                          height={500}
-                          quality={80}
-                        />
-                      </Link>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <Link
-                        href="#"
-                        className="transition-all hover:text-orange"
-                      >
-                        Birpod product unsde
-                      </Link>
-                      <span>m / gold</span>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <span>
-                        <span>$80.00</span>
-                      </span>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <div className="flex count border border-solid border-gray-300 p-2 h-11">
-                        <button
-                          className="decrement flex-auto w-5 leading-none"
-                          aria-label="button"
-                        >
-                          -
-                        </button>
-                        <input
-                          type="number"
-                          min="1"
-                          max="100"
-                          step="1"
-                          value="1"
-                          className="quantity__input border-0 flex-auto w-8 text-center focus:outline-none input-appearance-none"
-                        />
-                        <button
-                          className="increment flex-auto w-5 leading-none"
-                          aria-label="button"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <span>$80.00</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="w-32 p-3 border border-solid border-gray-600 text-center">
-                      <Link href="#">
-                        <Image
-                          src="/assets/images/single-product/sm/product3.webp"
-                          alt="product image"
-                          width={500}
-                          height={500}
-                          quality={80}
-                        />
-                      </Link>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <Link
-                        href="#"
-                        className="transition-all hover:text-orange"
-                      >
-                        Birpod product unsde
-                      </Link>
-                      <span>m / gold</span>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <span>
-                        <span>$80.00</span>
-                      </span>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <div className="flex count border border-solid border-gray-300 p-2 h-11">
-                        <button
-                          className="decrement flex-auto w-5 leading-none"
-                          aria-label="button"
-                        >
-                          -
-                        </button>
-                        <input
-                          type="number"
-                          min="1"
-                          max="100"
-                          step="1"
-                          value="1"
-                          className="quantity__input border-0 flex-auto w-8 text-center focus:outline-none input-appearance-none"
-                        />
-                        <button
-                          className="increment flex-auto w-5 leading-none"
-                          aria-label="button"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <span>$80.00</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="w-32 p-3 border border-solid border-gray-600 text-center">
-                      <Link href="#">
-                        <Image
-                          src="/assets/images/single-product/sm/product4.webp"
-                          alt="product image"
-                          width={500}
-                          height={500}
-                          quality={80}
-                        />
-                      </Link>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <Link
-                        href="#"
-                        className="transition-all hover:text-orange"
-                      >
-                        Birpod product unsde
-                      </Link>
-                      <span>m / gold</span>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <span>
-                        <span>$80.00</span>
-                      </span>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <div className="flex count border border-solid border-gray-300 p-2 h-11">
-                        <button
-                          className="decrement flex-auto w-5 leading-none"
-                          aria-label="button"
-                        >
-                          -
-                        </button>
-                        <input
-                          type="number"
-                          min="1"
-                          max="100"
-                          step="1"
-                          value="1"
-                          className="quantity__input border-0 flex-auto w-8 text-center focus:outline-none input-appearance-none"
-                        />
-                        <button
-                          className="increment flex-auto w-5 leading-none"
-                          aria-label="button"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td className="p-3 border border-solid border-gray-600 text-center">
-                      <span>$80.00</span>
-                    </td>
-                  </tr>
+                          {product.productName}
+                        </Link>
+                      </td>
+                      <td className="p-3 border border-solid border-gray-600 text-center">
+                        <span>
+                          <span>${product.price}</span>
+                        </span>
+                      </td>
+                      <td className="p-3 border border-solid border-gray-600 text-center">
+                        <div className="flex count border border-solid border-gray-300 p-2 h-11">
+                          <button
+                            className="decrement flex-auto w-5 leading-none"
+                            aria-label="button"
+                          >
+                            -
+                          </button>
+                          <input
+                            type="number"
+                            min="1"
+                            max="100"
+                            step="1"
+                            value={product.quantity}
+                            className="quantity__input border-0 flex-auto w-8 text-center focus:outline-none input-appearance-none"
+                          />
+                          <button
+                            className="increment flex-auto w-5 leading-none"
+                            aria-label="button"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </td>
+                      <td className="p-3 border border-solid border-gray-600 text-center">
+                        <span>${product.quantity * product.price}</span>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -371,7 +282,7 @@ const Cart = () => {
                   <ul className="flex flex-wrap items-center justify-between">
                     <li className="text-base font-semibold">Total</li>
                     <li className="text-base font-semibold text-orange">
-                      $329
+                      ${total}
                     </li>
                   </ul>
                 </div>

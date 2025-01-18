@@ -1,10 +1,49 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosMenu } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
+import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
+
+interface ImageAsset {
+  _id: string;
+  url: string;
+}
+
+// Interface for product dimensions
+interface ProductDimensions {
+  width?: number;
+  height?: number;
+  depth?: number;
+  _type: string;
+}
+
+// Interface for product details in the product table
+interface ProductDetails {
+  name?: string;
+  description?: string;
+  features?: string[];
+  dimensions?: ProductDimensions;
+  image?: ImageAsset;
+}
+
+// Interface for a single cart item (addToCart table)
+interface CartItem {
+  _id: string;
+  _type: string;
+  productId: string;
+  productName: string;
+  productImage?: {
+    asset: ImageAsset;
+  };
+  price: number;
+  quantity: number;
+  productImageFromProductTable?: ImageAsset;
+  // Optional: To include product details like name, description, etc., from the related product table
+  productDetails?: ProductDetails;
+}
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -14,12 +53,75 @@ const Navbar = () => {
     setIsCartOpen(!isCartOpen);
   };
 
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    if (!isCartOpen) return; // Exit if the cart is not open
+
+    const fetchCartData = async () => {
+      try {
+        const data = await fetchAllCartData();
+        // const grandTotal = await fetchCartDataWithTotal();
+
+        const grandTotal = data.reduce(
+          (sum, item) => sum + item.quantity * item.price,
+          0
+        );
+
+        setProductList(data); // Update the cart data
+        setTotal(grandTotal);
+      } catch (error) {
+        console.log("Error fetching cart data:", error);
+      }
+    };
+
+    fetchCartData(); // Call the function when the cart opens
+  }, [isCartOpen]);
+
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const [productList, setProductList] = useState<CartItem[]>([]);
+  const [dataCount, setDataCount] = useState(0);
+
+   useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        debugger;
+        const data = await fetchAllCartData(); // Fetch data
+
+        // setProductList(data); // Update product list
+        setDataCount(data.length); // Update data count
+        clearInterval(intervalId); // Stop interval after fetching the data once
+      } catch (error) {
+        console.log("Error fetching cart data:", error);
+        clearInterval(intervalId); // Stop interval in case of error
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    try {
+      // Delete the cart item document from Sanity
+      debugger;
+      await deleteCartItem(id);
+      // alert('Item removed from cart');
+
+      // Optionally, update the state to reflect the changes
+      setProductList((prevProductList) =>
+        prevProductList.filter((item) => item._id !== id)
+      );
+    } catch (error) {
+      console.log("Error deleting cart item:", error);
+      alert("Failed to remove item from cart");
+    }
   };
 
   return (
@@ -86,7 +188,7 @@ const Navbar = () => {
                     className="text-primary text-md hover:text-orange transition-all relative offcanvas-toggle"
                   >
                     <span className="w-5 h-5 bg-dark text-white text-sm rounded-full font-normal flex flex-wrap items-center justify-center absolute -top-3 left-2 leading-none">
-                      4
+                      {dataCount}
                     </span>
                     <MdOutlineShoppingBag size={25} />
                   </Link>
@@ -233,39 +335,45 @@ const Navbar = () => {
             </button>
           </div>
           <ul className="h-96 overflow-y-auto">
-            <li className="flex flex-wrap group mb-8">
-              <div className="mr-5 relative">
-                <Link href="#">
-                  <img
-                    src={"assets/images/cart/product1.webp"}
-                    alt="product image"
-                    loading="lazy"
-                    width={90}
-                    height={100}
-                  />
-                </Link>
-                <button className="absolute top-3 left-3 opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all hover:text-orange">
-                  <IoClose size={20} />
-                </button>
-              </div>
-              <div className="flex-1">
-                <h4>
-                  <Link
-                    className="font-light text-sm md:text-base text-dark hover:text-orange transition-all tracking-wide"
-                    href="#"
-                  >
-                    Birpod product unsde - m / gold
+            {productList.map((product) => (
+              <li className="flex flex-wrap group mb-8" key={product._id}>
+                <div className="mr-5 relative">
+                  <Link href="#">
+                    <Image
+                      src={product.productImageFromProductTable?.url || ""}
+                      alt={product.productName}
+                      loading="lazy"
+                      width={90}
+                      height={100}
+                      quality={50}
+                    />
                   </Link>
-                </h4>
-                <span className="font-light text-sm text-dark transition-all tracking-wide">
-                  1 x <span>$80.00</span>
-                </span>
-              </div>
-            </li>
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    className="absolute top-3 left-3 opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all hover:text-orange"
+                  >
+                    <IoClose size={20} />
+                  </button>
+                </div>
+                <div className="flex-1">
+                  <h4>
+                    <Link
+                      className="font-light text-sm md:text-base text-dark hover:text-orange transition-all tracking-wide"
+                      href="#"
+                    >
+                      {product.productName}
+                    </Link>
+                  </h4>
+                  <span className="font-light text-sm text-dark transition-all tracking-wide">
+                    {product.quantity} x <span>${product.price}</span>
+                  </span>
+                </div>
+              </li>
+            ))}
           </ul>
           <div>
             <div className="flex flex-wrap justify-between items-center py-4 my-6 border-t border-b border-solid border-gray-600 font-normal text-base text-dark capitalize">
-              Total:<span>$218.00</span>
+              Total:<span>${total}</span>
             </div>
             <div className="text-center">
               <Link
