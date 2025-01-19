@@ -5,6 +5,8 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
 import { FaTimes } from "react-icons/fa";
+import Navbar from "../Navbar/page";
+import Footer from "../Footer/page";
 
 interface ImageAsset {
   _id: string;
@@ -101,6 +103,7 @@ const Cart = () => {
 
   return (
     <>
+    <Navbar/>
       <div className="py-14 bg-white"></div>
       {/* <!-- Hero section start --> */}
       <div className="py-9 bg-gray-light">
@@ -344,6 +347,7 @@ const Cart = () => {
         </div>
       </section>
       {/* <!-- shipping  end --> */}
+      <Footer/>
     </>
   );
 };

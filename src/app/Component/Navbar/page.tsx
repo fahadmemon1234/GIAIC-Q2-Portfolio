@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
 import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 interface ImageAsset {
   _id: string;
@@ -89,7 +90,7 @@ const Navbar = () => {
   const [productList, setProductList] = useState<CartItem[]>([]);
   const [dataCount, setDataCount] = useState(0);
 
-   useEffect(() => {
+  useEffect(() => {
     const intervalId = setInterval(async () => {
       try {
         debugger;
@@ -107,17 +108,17 @@ const Navbar = () => {
     return () => clearInterval(intervalId);
   }, []);
 
- const handleDelete = async (id: string) => {
+  const handleDelete = async (id: string) => {
     try {
       // Delete the cart item document from Sanity
       debugger;
       await deleteCartItem(id);
-  
+
       // Update the state to reflect the changes
       setProductList((prevProductList) => {
         // Filter out the deleted item
         const updatedList = prevProductList.filter((item) => item._id !== id);
-  
+
         // Recalculate the total
         const updatedTotal = updatedList.reduce(
           (sum, item) => sum + item.quantity * item.price,
@@ -172,6 +173,15 @@ const Navbar = () => {
                     </Link>
                   </li>
 
+                  <li className="main-menu__item group">
+                    <Link
+                      className="block py-10 xl:px-6 md:px-5 capitalize font-normal text-md text-primary hover:text-orange transition-all"
+                      href="/Component/OrderTracking"
+                    >
+                      Tracking Order
+                    </Link>
+                  </li>
+
                   <li className="main-menu__item">
                     <Link
                       className="block py-10 xl:px-6 md:px-5 capitalize font-normal text-md text-primary hover:text-orange transition-all"
@@ -200,6 +210,14 @@ const Navbar = () => {
                     </span>
                     <MdOutlineShoppingBag size={25} />
                   </Link>
+                </li>
+                <li className="ml-6 cursor-pointer">
+                  <SignedOut>
+                    <SignInButton />
+                  </SignedOut>
+                  <SignedIn>
+                    <UserButton />
+                  </SignedIn>
                 </li>
 
                 <li className="ml-6 lg:hidden cursor-pointer">
@@ -304,6 +322,15 @@ const Navbar = () => {
                   className="block capitalize font-normal text-base my-2 py-1 font-roboto"
                 >
                   Shop
+                </Link>
+              </li>
+
+              <li className="relative block">
+                <Link
+                  href="/Component/OrderTracking"
+                  className="block capitalize font-normal text-base my-2 py-1 font-roboto"
+                >
+                  Tracking Order
                 </Link>
               </li>
 

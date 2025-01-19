@@ -11,6 +11,8 @@ import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import Tippy from "@tippyjs/react";
 import { client } from "@/app/lib/sanity";
 import { fetchAllProducts } from "@/app/lib/api";
+import Navbar from "../Navbar/page";
+import Footer from "../Footer/page";
 
 interface Product {
   _id: string;
@@ -107,6 +109,7 @@ const Shop = () => {
 
   return (
     <>
+      <Navbar />
       <div className="py-14 bg-white"></div>
       {/* <!-- Hero section start --> */}
       <div className="py-9 bg-gray-light">
@@ -446,6 +449,7 @@ const Shop = () => {
           </div>
         </div>
       </div>
+      <Footer />
 
       {/* <!-- blog grid section end --> */}
     </>

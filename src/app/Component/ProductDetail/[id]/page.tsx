@@ -7,6 +7,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { client } from "@/app/lib/sanity";
 import { fetchProductById } from "@/app/lib/api";
+import Navbar from "../../Navbar/page";
+import Footer from "../../Footer/page";
 import {
   AiOutlineHeart,
   AiOutlineFacebook,
@@ -129,6 +131,7 @@ const ProductDetail = () => {
 
   return (
     <>
+    <Navbar/>
       <div className="py-14 bg-white"></div>
       {/* <!-- Hero section start --> */}
       <div className="py-9 bg-gray-light">
@@ -779,6 +782,7 @@ const ProductDetail = () => {
         </div>
       </section>
       {/* <!-- Product section end--> */}
+      <Footer/>
     </>
   );
 };

@@ -2,10 +2,13 @@ import Link from "next/link";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdMailOutline } from "react-icons/md";
 import { BsPhone } from "react-icons/bs";
+import Navbar from "../Navbar/page";
+import Footer from "../Footer/page";
 
 const Contact = () => {
   return (
     <>
+    <Navbar/>
       <div className="py-14 bg-white"></div>
 
       {/* <!-- Hero section start --> */}
@@ -128,6 +131,7 @@ const Contact = () => {
       </div>
 
       {/* <!-- google map end --> */}
+      <Footer/>
     </>
   );
 };

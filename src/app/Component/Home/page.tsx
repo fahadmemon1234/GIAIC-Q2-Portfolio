@@ -10,6 +10,9 @@ import { BsVolumeUpFill } from "react-icons/bs";
 import { GiWaterDrop } from "react-icons/gi";
 import Link from "next/link";
 import ProductSlider from "../ProductSlider/page";
+import Navbar from "../Navbar/page";
+import Footer from "../Footer/page";
+
 
 const Main = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -58,6 +61,7 @@ const Main = () => {
 
   return (
     <div>
+      <Navbar />
       {/* <!-- Hero section start --> */}
       <section className="hero-section relative">
         <div className="hero-slider overflow-hidden">
@@ -389,6 +393,8 @@ const Main = () => {
       </section>
 
       {/* <!-- Vedio Banner section end --> */}
+
+      <Footer />
     </div>
   );
 };

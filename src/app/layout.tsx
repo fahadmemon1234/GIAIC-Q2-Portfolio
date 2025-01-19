@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "./Component/Navbar/page";
-import Footer from "./Component/Footer/page";
-import 'tippy.js/dist/tippy.css';
+// import Navbar from "./Component/Navbar/page";
+// import Footer from "./Component/Footer/page";
+import "tippy.js/dist/tippy.css";
+
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Sinp Ecommerce-Website",
@@ -48,12 +56,12 @@ export default function RootLayout({
 
         {/* <!-- Style CSS --> */}
         <link rel="stylesheet" href="/assets/css/style.css" />
-        
       </head>
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        <ClerkProvider>
+         
+          {children}
+        </ClerkProvider>
 
         {/* <!-- JS Vendor, Plugins & Activation Script Files --> */}
 
