@@ -12,6 +12,26 @@ interface Order {
   date: string;
 }
 
+interface TrackingEvent {
+  description: string;
+  occurred_at: string;
+  location: {
+    city: string;
+    state: string;
+    country: string;
+  };
+}
+
+interface TrackingData {
+  tracking_number: string;
+  status_description: string;
+  estimated_delivery_date: string;
+  carrier_detail: {
+    name: string;
+  };
+  events: TrackingEvent[];
+}
+
 const mockOrderData: Order = {
   id: "12345",
   status: "Shipped",
@@ -27,19 +47,52 @@ const OrderTracking: React.FC = () => {
   const [orderId, setOrderId] = useState("");
   const [order, setOrder] = useState<Order | null>(null);
 
-  const handleTrackOrder = async () => {
-    // Simulate fetching order data from an API
-    if (orderId === mockOrderData.id) {
-      setOrder(mockOrderData);
-    } else {
-      alert("Order not found. Please check your order ID.");
-      setOrder(null);
-    }
-  };
+  // const handleTrackOrder = async () => {
+  //   // Simulate fetching order data from an API
+  //   if (orderId === mockOrderData.id) {
+  //     setOrder(mockOrderData);
+  //   } else {
+  //     alert("Order not found. Please check your order ID.");
+  //     setOrder(null);
+  //   }
+  // };
 
   const getStatusStep = (status: string) => {
     const steps = ["Ordered", "Shipped", "Out for Delivery", "Delivered"];
     return steps.indexOf(status) + 1;
+  };
+
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const [trackingData, setTrackingData] = useState<TrackingData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleTrackOrder = async () => {
+    if (!trackingNumber) {
+      alert("Please enter a tracking number");
+      return;
+    }
+
+    try {
+      const response = await fetch("/Component/api/trackOrder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ trackingNumber }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.error || "An error occurred");
+        setTrackingData(null);
+        return;
+      }
+
+      const data: TrackingData = await response.json();
+      setTrackingData(data);
+      setError(null);
+    } catch (err) {
+      setError("Failed to fetch tracking information");
+      setTrackingData(null);
+    }
   };
 
   return (
@@ -79,8 +132,8 @@ const OrderTracking: React.FC = () => {
           <div className="mb-6">
             <input
               type="text"
-              value={orderId}
-              onChange={(e) => setOrderId(e.target.value)}
+              value={trackingNumber}
+              onChange={(e) => setTrackingNumber(e.target.value)}
               placeholder="Enter Order ID"
               className="rounded border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base"
             />
@@ -91,55 +144,37 @@ const OrderTracking: React.FC = () => {
               Track Order
             </button>
           </div>
+          {error && <p className="text-red-500 mt-4">{error}</p>}
 
-          {order && (
-            <div className="bg-white p-6 rounded shadow-lg">
-              <h2 className="text-xl font-bold mb-4">Order Summary</h2>
+          {trackingData && (
+            <div className="bg-white p-6 mt-6 rounded shadow-lg w-3/4">
+              <h2 className="text-lg font-bold mb-4">Tracking Information</h2>
               <p>
-                <strong>Order ID:</strong> {order.id}
+                <strong>Carrier:</strong> {trackingData.carrier_detail.name}
               </p>
               <p>
-                <strong>Order Date:</strong> {order.date}
+                <strong>Status:</strong> {trackingData.status_description}
               </p>
               <p>
-                <strong>Total:</strong> ${order.total}
+                <strong>Estimated Delivery:</strong>{" "}
+                {trackingData.estimated_delivery_date}
               </p>
 
-              <div className="my-6">
-                <h3 className="font-bold mb-3">Order Status</h3>
-                <div className="flex items-center justify-between">
-                  {["Ordered", "Shipped", "Out for Delivery", "Delivered"].map(
-                    (step, index) => (
-                      <div key={index} className="text-center">
-                        <div
-                          className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                            getStatusStep(order.status) > index
-                              ? "bg-orange-500 text-white"
-                              : "bg-gray-300"
-                          }`}
-                        >
-                          {index + 1}
-                        </div>
-                        <p className="mt-2 text-sm">{step}</p>
-                      </div>
-                    )
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-bold mb-3">Items</h3>
-                <ul className="divide-y divide-gray-300">
-                  {order.items.map((item, index) => (
-                    <li key={index} className="py-3 flex justify-between">
-                      <span>
-                        {item.name} x{item.quantity}
-                      </span>
-                      <span>${item.price * item.quantity}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <h3 className="text-md font-bold mt-6 mb-3">Tracking Events:</h3>
+              <ul className="divide-y divide-gray-300">
+                {trackingData.events.map((event, index) => (
+                  <li key={index} className="py-3">
+                    <p>
+                      <strong>{event.description}</strong> on{" "}
+                      {new Date(event.occurred_at).toLocaleString()}
+                    </p>
+                    <p>
+                      Location: {event.location.city}, {event.location.state},{" "}
+                      {event.location.country}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
         </div>

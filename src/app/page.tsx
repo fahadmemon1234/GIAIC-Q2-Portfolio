@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import Main from "./Component/Home/page";
 
-
 export default function Home() {
   const [isClient, setIsClient] = useState(false);
 
@@ -12,7 +11,6 @@ export default function Home() {
 
   if (!isClient) return null;
   return;
-  <>
-    <Main />
-  </>;
+
+  <Main />;
 }
