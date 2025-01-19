@@ -9,6 +9,7 @@ import { client } from "@/app/lib/sanity";
 import { fetchProductById } from "@/app/lib/api";
 import Navbar from "../../Navbar/page";
 import Footer from "../../Footer/page";
+import { toast, Slide } from "react-toastify";
 import {
   AiOutlineHeart,
   AiOutlineFacebook,
@@ -80,7 +81,7 @@ const ProductDetail = () => {
   const handleAddToCart = async () => {
     try {
       const doc = {
-        _type: 'addToCart',
+        _type: "addToCart",
         productId: productList?._id,
         productName: productList?.name,
         price: productList?.price,
@@ -88,10 +89,33 @@ const ProductDetail = () => {
       };
 
       const response = await client.create(doc);
-      alert("Added to cart");
+      // alert("Added to cart");
       // console.log('Added to cart:', response);
+
+      toast.success("Item added to cart successfully", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
     } catch (error) {
-      console.log('Error adding to cart:', error);
+      // console.log('Error adding to cart:', error);
+      toast.error("Failed to add item to cart", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
     }
   };
 
@@ -131,7 +155,7 @@ const ProductDetail = () => {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="py-14 bg-white"></div>
       {/* <!-- Hero section start --> */}
       <div className="py-9 bg-gray-light">
@@ -408,7 +432,10 @@ const ProductDetail = () => {
                       </button>
                     </div>
                     <div className="ml-2 sm:ml-8">
-                      <button onClick={handleAddToCart} className="bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange">
+                      <button
+                        onClick={handleAddToCart}
+                        className="bg-black leading-none py-4 px-5 md:px-8 font-normal text-sm h-11 text-white transition-all hover:bg-orange"
+                      >
                         Add to Cart
                       </button>
                     </div>
@@ -782,7 +809,7 @@ const ProductDetail = () => {
         </div>
       </section>
       {/* <!-- Product section end--> */}
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -4,13 +4,10 @@ import "./globals.css";
 // import Footer from "./Component/Footer/page";
 import "tippy.js/dist/tippy.css";
 
-import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import "./toastify.css";
+import { ToastContainer } from "react-toastify";
+
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Sinp Ecommerce-Website",
@@ -58,10 +55,8 @@ export default function RootLayout({
         <link rel="stylesheet" href="/assets/css/style.css" />
       </head>
       <body>
-        <ClerkProvider>
-         
-          {children}
-        </ClerkProvider>
+        <ToastContainer/>
+        <ClerkProvider>{children}</ClerkProvider>
 
         {/* <!-- JS Vendor, Plugins & Activation Script Files --> */}
 

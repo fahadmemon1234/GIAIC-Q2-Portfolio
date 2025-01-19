@@ -7,6 +7,7 @@ import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
 import { FaTimes } from "react-icons/fa";
 import Navbar from "../Navbar/page";
 import Footer from "../Footer/page";
+import { toast, Slide } from "react-toastify";
 
 interface ImageAsset {
   _id: string;
@@ -80,18 +81,31 @@ const Cart = () => {
       // Delete the cart item document from Sanity
       debugger;
       await deleteCartItem(id);
-  
+
       // Update the state to reflect the changes
       setProductList((prevProductList) => {
         // Filter out the deleted item
         const updatedList = prevProductList.filter((item) => item._id !== id);
-  
+
         // Recalculate the total
         const updatedTotal = updatedList.reduce(
           (sum, item) => sum + item.quantity * item.price,
           0
         );
         setTotal(updatedTotal); // Update total
+
+        toast.success("Item removed from cart", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Slide,
+        });
+
         return updatedList; // Update product list
       });
     } catch (error) {
@@ -99,11 +113,10 @@ const Cart = () => {
       alert("Failed to remove item from cart");
     }
   };
-  
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="py-14 bg-white"></div>
       {/* <!-- Hero section start --> */}
       <div className="py-9 bg-gray-light">
@@ -347,7 +360,7 @@ const Cart = () => {
         </div>
       </section>
       {/* <!-- shipping  end --> */}
-      <Footer/>
+      <Footer />
     </>
   );
 };

@@ -9,8 +9,10 @@ export default function Home() {
   useEffect(() => {
     setIsClient(true);
   }, []);
-  
 
   if (!isClient) return null;
-  return <Main />;
+  return;
+  <>
+    <Main />
+  </>;
 }

@@ -9,6 +9,7 @@ import Link from "next/link";
 import Tippy from "@tippyjs/react";
 import { client } from "@/app/lib/sanity";
 import { fetchAllProducts } from "@/app/lib/api";
+import { toast, Slide } from "react-toastify";
 
 interface Product {
   _id: string;
@@ -38,8 +39,6 @@ interface Product {
 }
 
 const ProductSlider = () => {
-  
-
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
 
@@ -75,10 +74,31 @@ const ProductSlider = () => {
       };
 
       const response = await client.create(doc);
-      alert("Added to cart");
-      console.log("Added to cart:", response);
+
+      toast.success("Item added to cart successfully", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
     } catch (error) {
-      console.error("Error adding to cart:", error);
+      // console.error("Error adding to cart:", error);
+      toast.error("Failed to add item to cart", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
     }
   };
 

@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
 import Navbar from "../Navbar/page";
 import Footer from "../Footer/page";
 import { client } from "@/app/lib/sanity";
+import { toast, Slide } from "react-toastify";
 
 interface ImageAsset {
   _id: string;
@@ -87,8 +88,176 @@ const Checkout = () => {
   const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
 
-  const handlePlaceOrder = async () => {
+  const firstNameRef = useRef<HTMLInputElement | null>(null);
+  const lastNameRef = useRef<HTMLInputElement | null>(null);
+  const companyNameRef = useRef<HTMLInputElement | null>(null);
+  const countryRef = useRef<HTMLInputElement | null>(null);
+  const streetAddressRef = useRef<HTMLInputElement | null>(null);
+  const cityRef = useRef<HTMLInputElement | null>(null);
+  const stateRef = useRef<HTMLInputElement | null>(null);
+  const zipCodeRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+
+  const validation = () => {
+    debugger;
+    if (!firstName) {
+      toast.error("First Name is required!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+      firstNameRef.current?.focus();
+      return false;
+    }
+    if (!lastName) {
+      toast.error("Last Name is required!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+      lastNameRef.current?.focus();
+      return false;
+    }
+
+    if (!country) {
+      toast.error("Country is required!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+
+      countryRef.current?.focus();
+      return false;
+    }
+
+    if (!streetAddress) {
+      toast.error("Address is required!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+      streetAddressRef.current?.focus();
+
+      return false;
+    }
+
+    if (!city) {
+      toast.error("City is required!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+      cityRef.current?.focus();
+
+      return false;
+    }
+    if (!state) {
+      toast.error("State is required!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+      stateRef.current?.focus();
+
+      return false;
+    }
+    if (!zipCode) {
+      toast.error("Zip Code is required!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+      zipCodeRef.current?.focus();
+
+      return false;
+    }
+
+    if (!email) {
+      toast.error("Email is required!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+      emailRef.current?.focus();
+
+      return false;
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
+      emailRef.current?.focus();
+      return false;
+    }
+
+    return true;
+  };
+
+  const handlePlaceOrder = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     try {
+      if (!validation()) {
+        return false;
+      }
+
       const productIds = productList.map((item) => item.productId);
       const orderId = Math.floor(100000 + Math.random() * 900000);
 
@@ -112,10 +281,20 @@ const Checkout = () => {
       };
 
       const response = await client.create(doc);
-      alert("Added to Order");
-      console.log("Added to cart:", response);
+
+      toast.success("Order placed successfully", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Slide,
+      });
     } catch (error) {
-      console.error("Error adding to cart:", error);
+      console.log("Error adding to cart:", error);
     }
   };
 
@@ -163,12 +342,15 @@ const Checkout = () => {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-5">
                     <div>
                       <div>
-                        <label className="mb-3 inline-block">First Name</label>
+                        <label className="mb-3 inline-block">
+                          First Name <span className="text-red-600">*</span>
+                        </label>
                         <input
                           className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base"
                           type="text"
                           name="first_name"
                           placeholder="First Name"
+                          ref={firstNameRef}
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
                         />
@@ -176,12 +358,15 @@ const Checkout = () => {
                     </div>
                     <div>
                       <div>
-                        <label className="mb-3 inline-block">Last Name</label>
+                        <label className="mb-3 inline-block">
+                          Last Name <span className="text-red-600">*</span>
+                        </label>
                         <input
                           className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base"
                           type="text"
                           name="last_name"
                           placeholder="Last Name"
+                          ref={lastNameRef}
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
                         />
@@ -204,9 +389,12 @@ const Checkout = () => {
                     </div>
                     <div className="lg:col-span-2">
                       <div>
-                        <label className="mb-3 inline-block">Country</label>
+                        <label className="mb-3 inline-block">
+                          Country <span className="text-red-600">*</span>
+                        </label>
                         <select
                           value={country}
+                          ref={countryRef}
                           onChange={(e) => setCountry(e.target.value)}
                           className="bg-transparent border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base"
                         >
@@ -224,12 +412,13 @@ const Checkout = () => {
                     <div className="lg:col-span-2">
                       <div>
                         <label className="mb-3 inline-block">
-                          Street Address
+                          Street Address <span className="text-red-600">*</span>
                         </label>
                         <input
                           className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base"
                           placeholder="House number and street name"
                           type="text"
+                          ref={streetAddressRef}
                           value={streetAddress}
                           onChange={(e) => setStreetAddress(e.target.value)}
                         />
@@ -244,11 +433,14 @@ const Checkout = () => {
                     </div>
                     <div className="lg:col-span-2">
                       <div>
-                        <label className="mb-3 inline-block">Town / City</label>
+                        <label className="mb-3 inline-block">
+                          Town / City <span className="text-red-600">*</span>
+                        </label>
                         <input
                           className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base"
                           type="text"
                           value={city}
+                          ref={cityRef}
                           onChange={(e) => setCity(e.target.value)}
                           placeholder="Town / City"
                         />
@@ -257,12 +449,13 @@ const Checkout = () => {
                     <div>
                       <div>
                         <label className="mb-3 inline-block">
-                          State / County
+                          State <span className="text-red-600">*</span>
                         </label>
                         <input
                           className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base"
                           type="text"
                           value={state}
+                          ref={stateRef}
                           onChange={(e) => setState(e.target.value)}
                           placeholder="State / County"
                         />
@@ -271,12 +464,13 @@ const Checkout = () => {
                     <div>
                       <div>
                         <label className="mb-3 inline-block">
-                          Postcode / ZIP
+                          Postcode / ZIP <span className="text-red-600">*</span>
                         </label>
                         <input
                           className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base"
                           type="text"
                           value={zipCode}
+                          ref={zipCodeRef}
                           onChange={(e) => setZipCode(e.target.value)}
                           placeholder="Postcode / ZIP"
                         />
@@ -297,12 +491,13 @@ const Checkout = () => {
                     <div>
                       <div>
                         <label className="mb-3 inline-block">
-                          Email Address
+                          Email Address <span className="text-red-600">*</span>
                         </label>
                         <input
                           className="border border-solid border-gray-300 w-full py-1 px-5 mb-5 placeholder-current text-dark h-12 focus:outline-none text-base"
                           type="text"
                           value={email}
+                          ref={emailRef}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Email Address"
                         />
@@ -536,13 +731,12 @@ const Checkout = () => {
                   </div>
                 </div>
                 <div className="mt-6">
-                  <Link
+                  <button
                     className="block w-full text-center leading-none uppercase text-white text-sm bg-dark px-5 py-5 transition-all hover:bg-orange font-semibold"
-                    href="#"
-                    onClick={handlePlaceOrder}
+                    onClick={(e) => handlePlaceOrder(e)}
                   >
                     Place Order
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

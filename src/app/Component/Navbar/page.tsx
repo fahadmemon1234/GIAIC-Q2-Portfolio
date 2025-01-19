@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { toast, Slide } from "react-toastify";
 
 interface ImageAsset {
   _id: string;
@@ -125,6 +126,19 @@ const Navbar = () => {
           0
         );
         setTotal(updatedTotal); // Update total
+
+        toast.success('Item removed from cart', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          transition: Slide,
+        });
+
         return updatedList; // Update product list
       });
     } catch (error) {
