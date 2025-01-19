@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
+import { FaTimes } from "react-icons/fa";
 
 interface ImageAsset {
   _id: string;
@@ -72,6 +73,32 @@ const Cart = () => {
     return () => clearInterval(intervalId);
   }, []);
 
+  const handleDelete = async (id: string) => {
+    try {
+      // Delete the cart item document from Sanity
+      debugger;
+      await deleteCartItem(id);
+  
+      // Update the state to reflect the changes
+      setProductList((prevProductList) => {
+        // Filter out the deleted item
+        const updatedList = prevProductList.filter((item) => item._id !== id);
+  
+        // Recalculate the total
+        const updatedTotal = updatedList.reduce(
+          (sum, item) => sum + item.quantity * item.price,
+          0
+        );
+        setTotal(updatedTotal); // Update total
+        return updatedList; // Update product list
+      });
+    } catch (error) {
+      console.log("Error deleting cart item:", error);
+      alert("Failed to remove item from cart");
+    }
+  };
+  
+
   return (
     <>
       <div className="py-14 bg-white"></div>
@@ -123,6 +150,9 @@ const Cart = () => {
                     </th>
                     <th className="bg-gray-300 p-3 border border-solid border-gray-600 text-center font-medium text-sm capitalize">
                       Total
+                    </th>
+                    <th className="bg-gray-300 p-3 border border-solid border-gray-600 text-center font-medium text-sm capitalize">
+                      Remove
                     </th>
                   </tr>
                 </thead>
@@ -181,6 +211,14 @@ const Cart = () => {
                       </td>
                       <td className="p-3 border border-solid border-gray-600 text-center">
                         <span>${product.quantity * product.price}</span>
+                      </td>
+                      <td className="p-3 border border-solid border-gray-600 text-center">
+                        <button
+                          onClick={() => handleDelete(product._id)}
+                          className="inline-block mx-1 hover:text-orange transition-all"
+                        >
+                          <FaTimes />{" "}
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -288,12 +326,12 @@ const Cart = () => {
                 </div>
               </div>
               <div className="mt-8">
-                <Link
+                {/* <Link
                   href="#"
                   className="inline-block bg-dark leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange uppercase font-semibold hover:text-white"
                 >
                   Update Cart
-                </Link>
+                </Link> */}
                 <Link
                   href="/Component/Checkout"
                   className="inline-block bg-dark leading-none py-4 px-5 md:px-8 text-sm text-white transition-all hover:bg-orange uppercase font-semibold hover:text-white ml-4"

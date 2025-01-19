@@ -107,17 +107,25 @@ const Navbar = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const handleDelete = async (id: string) => {
+ const handleDelete = async (id: string) => {
     try {
       // Delete the cart item document from Sanity
       debugger;
       await deleteCartItem(id);
-      // alert('Item removed from cart');
-
-      // Optionally, update the state to reflect the changes
-      setProductList((prevProductList) =>
-        prevProductList.filter((item) => item._id !== id)
-      );
+  
+      // Update the state to reflect the changes
+      setProductList((prevProductList) => {
+        // Filter out the deleted item
+        const updatedList = prevProductList.filter((item) => item._id !== id);
+  
+        // Recalculate the total
+        const updatedTotal = updatedList.reduce(
+          (sum, item) => sum + item.quantity * item.price,
+          0
+        );
+        setTotal(updatedTotal); // Update total
+        return updatedList; // Update product list
+      });
     } catch (error) {
       console.log("Error deleting cart item:", error);
       alert("Failed to remove item from cart");

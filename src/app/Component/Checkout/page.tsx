@@ -1,6 +1,77 @@
+"use client";
 import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
+
+interface ImageAsset {
+  _id: string;
+  url: string;
+}
+
+// Interface for product dimensions
+interface ProductDimensions {
+  width?: number;
+  height?: number;
+  depth?: number;
+  _type: string;
+}
+
+// Interface for product details in the product table
+interface ProductDetails {
+  name?: string;
+  description?: string;
+  features?: string[];
+  dimensions?: ProductDimensions;
+  image?: ImageAsset;
+}
+
+// Interface for a single cart item (addToCart table)
+interface CartItem {
+  _id: string;
+  _type: string;
+  productId: string;
+  productName: string;
+  productImage?: {
+    asset: ImageAsset;
+  };
+  price: number;
+  quantity: number;
+  productImageFromProductTable?: ImageAsset;
+  // Optional: To include product details like name, description, etc., from the related product table
+  productDetails?: ProductDetails;
+}
 
 const Checkout = () => {
+
+ const [productList, setProductList] = useState<CartItem[]>([]);
+
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(async () => {
+      try {
+        debugger;
+        const data = await fetchAllCartData(); // Fetch data
+
+        const grandTotal = data.reduce(
+          (sum, item) => sum + item.quantity * item.price,
+          0
+        );
+
+        setProductList(data); // Update product list
+        // setDataCount(data.length); // Update data count
+        setTotal(grandTotal);
+        clearInterval(intervalId); // Stop interval after fetching the data once
+      } catch (error) {
+        console.log("Error fetching cart data:", error);
+        clearInterval(intervalId); // Stop interval in case of error
+      }
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+
   return (
     <>
       <div className="py-14 bg-white"></div>
@@ -333,10 +404,12 @@ const Checkout = () => {
                       <li className="text-base font-semibold">Total</li>
                     </ul>
                     <ul className="border-t border-b border-gray-600 py-5 my-5">
-                      <li className="flex flex-wrap items-center justify-between">
-                        <span>Product Name X 1</span>
-                        <span>$329 </span>
+                    {productList.map((product) => (
+                      <li key={product._id} className="flex flex-wrap items-center justify-between">
+                        <span>{product.productName} X {product.quantity}</span>
+                        <span>${product.quantity * product.price}</span>
                       </li>
+                    ))}
                     </ul>
                     <ul className="flex flex-wrap items-center justify-between">
                       <li className="text-base font-semibold">Shipping</li>
@@ -344,11 +417,11 @@ const Checkout = () => {
                     </ul>
                     <ul className="flex flex-wrap items-center justify-between border-t border-b border-gray-600 py-5 my-5">
                       <li className="text-base font-semibold">Total</li>
-                      <li className="text-base font-semibold">$329</li>
+                      <li className="text-base font-semibold">${total}</li>
                     </ul>
                   </div>
                   <div className="accordion">
-                    <div className="set mb-4">
+                    {/* <div className="set mb-4">
                       <button
                         className="text-base font-semibold active"
                         aria-label="button"
@@ -361,8 +434,8 @@ const Checkout = () => {
                           Town, Store State / County, Store Postcode.
                         </p>
                       </div>
-                    </div>
-                    <div className="set mb-4">
+                    </div> */}
+                    {/* <div className="set mb-4">
                       <button
                         className="text-base font-semibold"
                         aria-label="button"
@@ -375,7 +448,7 @@ const Checkout = () => {
                           Town, Store State / County, Store Postcode.
                         </p>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="set mb-4">
                       <button
                         className="text-base font-semibold"
@@ -383,12 +456,12 @@ const Checkout = () => {
                       >
                         Cash on delivery
                       </button>
-                      <div className="content overflow-hidden p-4 bg-white mt-3 hidden">
+                      {/* <div className="content overflow-hidden p-4 bg-white mt-3 hidden">
                         <p>
                           Please send a check to Store Name, Store Street, Store
                           Town, Store State / County, Store Postcode.
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
