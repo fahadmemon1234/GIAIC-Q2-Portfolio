@@ -10,7 +10,5 @@ export default function Home() {
   }, []);
 
   if (!isClient) return null;
-  return;
-
-  <Main />;
+  return <Main />;
 }
