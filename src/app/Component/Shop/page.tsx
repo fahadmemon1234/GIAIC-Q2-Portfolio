@@ -119,15 +119,15 @@ const Shop = () => {
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6); // Default items per page
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const totalPages = Math.ceil(productList.length / itemsPerPage);
 
-  // Handle items per page change
+
   const handleItemsPerPageChange = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setItemsPerPage(parseInt(e.target.value)); // Update items per page
-    setCurrentPage(1); // Reset to the first page
+    setItemsPerPage(parseInt(e.target.value));
+    setCurrentPage(1);
   };
 
   // Handle page change
