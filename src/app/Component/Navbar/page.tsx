@@ -127,7 +127,7 @@ const Navbar = () => {
         );
         setTotal(updatedTotal); // Update total
 
-        toast.success('Item removed from cart', {
+        toast.success("Item removed from cart", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: true,
@@ -147,9 +147,28 @@ const Navbar = () => {
     }
   };
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0); // Set to `true` if scrolled
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll); // Cleanup on unmount
+    };
+  }, []);
+
   return (
     <>
-      <header id="sticky-header" className="fixed inset-x-0 top-0 w-full z-20">
+      <header
+        id="sticky-header"
+        className={`fixed inset-x-0 top-0 w-full z-20 transition-all ${
+          isScrolled ? "bg-white shadow-md" : "bg-transparent"
+        }`}
+      >
         <div className="px-4 md:px-10 2xl:px-24 py-6 lg:py-0">
           <div className="flex items-center lg:relative">
             <div className="w-6/12 lg:w-2/12">

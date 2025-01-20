@@ -119,13 +119,25 @@ const Shop = () => {
   };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const [itemsPerPage, setItemsPerPage] = useState(6); // Default items per page
   const totalPages = Math.ceil(productList.length / itemsPerPage);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+  // Handle items per page change
+  const handleItemsPerPageChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setItemsPerPage(parseInt(e.target.value)); // Update items per page
+    setCurrentPage(1); // Reset to the first page
   };
 
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  // Get displayed products based on pagination
   const displayedProducts = productList.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -221,7 +233,11 @@ const Shop = () => {
                   >
                     Show:
                   </label>
-                  <select className="form-control border border-gray-300 rounded-md px-4 py-2 text-sm focus:ring focus:ring-orange-500 focus:outline-none">
+                  <select
+                    onChange={handleItemsPerPageChange}
+                    value={itemsPerPage}
+                    className="form-control border border-gray-300 rounded-md px-4 py-2 text-sm focus:ring focus:ring-orange-500 focus:outline-none"
+                  >
                     <option value="6">6</option>
                     <option value="12">12</option>
                     <option value="24">24</option>
@@ -436,6 +452,7 @@ const Shop = () => {
                       onClick={() =>
                         handlePageChange(Math.max(currentPage - 1, 1))
                       }
+                      disabled={currentPage === 1}
                       className="flex items-center justify-center w-11 h-11 bg-white shadow text-orange transition-all hover:bg-orange hover:text-white"
                     >
                       <FaAngleLeft size={15} />
@@ -446,11 +463,11 @@ const Shop = () => {
                       <li key={page} className="mx-2">
                         <button
                           onClick={() => handlePageChange(page)}
-                          className={`flex items-center justify-center w-11 h-11 bg-white shadow ${
+                          className={`flex items-center justify-center w-11 h-11 rounded-md ${
                             page === currentPage
-                              ? "text-black bg-orange active:bg-orange"
-                              : "text-black"
-                          } transition-all hover:bg-orange hover:text-white`}
+                              ? "bg-orange text-white font-bold" // Active page styles
+                              : "bg-white text-black"
+                          } transition-all duration-300 hover:bg-orange hover:text-white`}
                         >
                           {page}
                         </button>
@@ -459,9 +476,8 @@ const Shop = () => {
                   )}
                   <li className="mx-2">
                     <button
-                      onClick={() =>
-                        handlePageChange(Math.min(currentPage + 1, totalPages))
-                      }
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={currentPage === totalPages}
                       className="flex items-center justify-center w-11 h-11 bg-white shadow text-orange transition-all hover:bg-orange hover:text-white"
                     >
                       <FaAngleRight size={15} />

@@ -113,11 +113,11 @@ const Footer = () => {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="flex order-last md:order-first flex-wrap items-center justify-center md:justify-start">
                 <p className="text-white flex flex-wrap items-center text-sm lg:text-base">
-                  &copy; 2022 Sinp. Made with .
+                  &copy; 2025 Sinp. Made with Fahad Memon.
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center justify-center md:justify-end">
+              {/* <div className="flex flex-wrap items-center justify-center md:justify-end">
                 <Link href="#">
                   <img
                     className="w-full h-full"
@@ -128,7 +128,7 @@ const Footer = () => {
                     height="23"
                   />
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
