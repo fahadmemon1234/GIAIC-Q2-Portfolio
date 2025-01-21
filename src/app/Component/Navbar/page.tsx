@@ -206,14 +206,7 @@ const Navbar = () => {
                     </Link>
                   </li>
 
-                  {/* <li className="main-menu__item group">
-                    <Link
-                      className="block py-10 xl:px-6 md:px-5 capitalize font-normal text-md text-primary hover:text-orange transition-all"
-                      href="/Component/OrderTracking"
-                    >
-                      Tracking Order
-                    </Link>
-                  </li> */}
+                  
 
                   <li className="main-menu__item">
                     <Link
@@ -358,14 +351,7 @@ const Navbar = () => {
                 </Link>
               </li>
 
-              {/* <li className="relative block">
-                <Link
-                  href="/Component/OrderTracking"
-                  className="block capitalize font-normal text-base my-2 py-1 font-roboto"
-                >
-                  Tracking Order
-                </Link>
-              </li> */}
+             
 
               <li className="relative block">
                 <Link
