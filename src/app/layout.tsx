@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// import Navbar from "./Component/Navbar/page";
-// import Footer from "./Component/Footer/page";
+import Script from 'next/script';
 import "tippy.js/dist/tippy.css";
 
 import "./toastify.css";
 import { ToastContainer } from "react-toastify";
+import { Html, Head } from 'next/document';
 
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
+    <Html lang="en">
+      <Head>
         {/* <!-- Favicon --> */}
         <link
           rel="shortcut icon"
@@ -53,7 +53,7 @@ export default function RootLayout({
 
         {/* <!-- Style CSS --> */}
         <link rel="stylesheet" href="/assets/css/style.css" />
-      </head>
+      </Head>
       <body>
         <ToastContainer/>
         <ClerkProvider>{children}</ClerkProvider>
@@ -61,19 +61,19 @@ export default function RootLayout({
         {/* <!-- JS Vendor, Plugins & Activation Script Files --> */}
 
         {/* <!-- Vendors JS --> */}
-        <script src="/assets/js/vendor/modernizr-3.11.7.min.js"></script>
-        <script src="/assets/js/vendor/jquery-3.6.0.min.js"></script>
-        <script src="/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+        <Script src="/assets/js/vendor/modernizr-3.11.7.min.js"></Script>
+        <Script src="/assets/js/vendor/jquery-3.6.0.min.js"></Script>
+        <Script src="/assets/js/vendor/jquery-migrate-3.3.2.min.js"></Script>
         {/* <!-- Plugins JS --> */}
-        <script src="/assets/js/plugins/swiper-bundle.min.js"></script>
-        <script src="/assets/js/plugins/popper.min.js"></script>
-        <script src="/assets/js/plugins/tippy-bundle.umd.min.js"></script>
-        <script src="/assets/js/plugins/jquery.magnific-popup.min.js"></script>
-        <script src="/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+        <Script src="/assets/js/plugins/swiper-bundle.min.js"></Script>
+        <Script src="/assets/js/plugins/popper.min.js"></Script>
+        <Script src="/assets/js/plugins/tippy-bundle.umd.min.js"></Script>
+        <Script src="/assets/js/plugins/jquery.magnific-popup.min.js"></Script>
+        <Script src="/assets/js/plugins/jquery.ajaxchimp.min.js"></Script>
 
         {/* <!-- Activation JS --> */}
-        <script src="/assets/js/main.js"></script>
+        <Script src="/assets/js/main.js"></Script>
       </body>
-    </html>
+    </Html>
   );
 }
