@@ -104,7 +104,7 @@ const ProductSlider = () => {
 
   const [likedProducts, setLikedProducts] = useState([]);
 
-  const toggleLike = (productId) => {
+  const toggleLike = (productId: string) => {
     setLikedProducts(
       (prevLikedProducts) =>
         prevLikedProducts.includes(productId)
