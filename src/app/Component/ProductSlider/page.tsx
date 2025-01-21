@@ -105,11 +105,10 @@ const ProductSlider = () => {
   const [likedProducts, setLikedProducts] = useState([]);
 
   const toggleLike = (productId: string) => {
-    setLikedProducts(
-      (prevLikedProducts) =>
-        prevLikedProducts.includes(productId)
-          ? prevLikedProducts.filter((id) => id !== productId) // Unlike
-          : [...prevLikedProducts, productId] // Like
+    setLikedProducts((prevLikedProducts) =>
+      prevLikedProducts.includes(productId)
+        ? prevLikedProducts.filter((id) => id !== productId) // Unlike
+        : [...prevLikedProducts, productId] // Like
     );
   };
 
