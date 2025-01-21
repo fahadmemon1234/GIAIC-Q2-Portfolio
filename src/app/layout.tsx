@@ -5,7 +5,6 @@ import "tippy.js/dist/tippy.css";
 
 import "./toastify.css";
 import { ToastContainer } from "react-toastify";
-import { Html, Head } from 'next/document';
 
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -19,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Html lang="en">
-      <Head>
+    <html lang="en">
+      <head>
         {/* <!-- Favicon --> */}
         <link
           rel="shortcut icon"
@@ -53,7 +52,7 @@ export default function RootLayout({
 
         {/* <!-- Style CSS --> */}
         <link rel="stylesheet" href="/assets/css/style.css" />
-      </Head>
+      </head>
       <body>
         <ToastContainer/>
         <ClerkProvider>{children}</ClerkProvider>
@@ -74,6 +73,6 @@ export default function RootLayout({
         {/* <!-- Activation JS --> */}
         <Script src="/assets/js/main.js"></Script>
       </body>
-    </Html>
+    </html>
   );
 }
