@@ -91,7 +91,7 @@ const Checkout = () => {
   const firstNameRef = useRef<HTMLInputElement | null>(null);
   const lastNameRef = useRef<HTMLInputElement | null>(null);
   const companyNameRef = useRef<HTMLInputElement | null>(null);
-  const countryRef = useRef<HTMLInputElement | null>(null);
+  const countryRef = useRef<HTMLSelectElement | null>(null);
   const streetAddressRef = useRef<HTMLInputElement | null>(null);
   const cityRef = useRef<HTMLInputElement | null>(null);
   const stateRef = useRef<HTMLInputElement | null>(null);

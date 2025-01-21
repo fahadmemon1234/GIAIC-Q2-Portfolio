@@ -22,7 +22,7 @@ interface TrackingResponse {
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
-) {
+): Promise<void> {
   if (req.method === 'POST') {
     const { trackingNumber } = req.body;
 
@@ -50,3 +50,4 @@ export default async function handler(
     res.status(405).end('Method Not Allowed');
   }
 }
+
