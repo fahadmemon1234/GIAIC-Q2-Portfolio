@@ -6,7 +6,7 @@ import { IoClose } from "react-icons/io5";
 import Link from "next/link";
 import Image from "next/image";
 import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+// import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { toast, Slide } from "react-toastify";
 
 interface ImageAsset {
@@ -237,14 +237,14 @@ const Navbar = () => {
                     <MdOutlineShoppingBag size={25} />
                   </Link>
                 </li>
-                <li className="ml-6 cursor-pointer">
+                {/* <li className="ml-6 cursor-pointer">
                   <SignedOut>
                     <SignInButton />
                   </SignedOut>
                   <SignedIn>
                     <UserButton />
                   </SignedIn>
-                </li>
+                </li> */}
 
                 <li className="ml-6 lg:hidden cursor-pointer">
                   <Link

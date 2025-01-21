@@ -6,7 +6,7 @@ import "tippy.js/dist/tippy.css";
 import "./toastify.css";
 import { ToastContainer } from "react-toastify";
 
-import { ClerkProvider } from "@clerk/nextjs";
+// import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Sinp Ecommerce-Website",
@@ -55,7 +55,8 @@ export default function RootLayout({
       </head>
       <body>
         <ToastContainer/>
-        <ClerkProvider>{children}</ClerkProvider>
+        {/* <ClerkProvider></ClerkProvider> */}
+        {children}
 
         {/* <!-- JS Vendor, Plugins & Activation Script Files --> */}
 

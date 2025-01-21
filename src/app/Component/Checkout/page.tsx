@@ -298,19 +298,16 @@ const Checkout = () => {
 
       setFirstName("");
       setLastName("");
-setCompanyName("");
-setCountry("");
-setStreetAddress("");
-setStreetAddress1("");
-setCity("");
-setState("");
-setZipCode("");
-setEmail("");
-setPhone("");
-setNote("");
-
-  
-
+      setCompanyName("");
+      setCountry("");
+      setStreetAddress("");
+      setStreetAddress1("");
+      setCity("");
+      setState("");
+      setZipCode("");
+      setEmail("");
+      setPhone("");
+      setNote("");
     } catch (error) {
       console.log("Error adding to cart:", error);
     }
