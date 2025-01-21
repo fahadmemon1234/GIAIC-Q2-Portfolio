@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
-import { fetchAllCartData, deleteCartItem } from "@/app/lib/api";
+import { fetchAllCartData, deleteAllCartItems } from "@/app/lib/api";
 import Navbar from "../Navbar/page";
 import Footer from "../Footer/page";
 import { client } from "@/app/lib/sanity";
@@ -293,6 +293,24 @@ const Checkout = () => {
         theme: "colored",
         transition: Slide,
       });
+
+      await deleteAllCartItems();
+
+      setFirstName("");
+      setLastName("");
+setCompanyName("");
+setCountry("");
+setStreetAddress("");
+setStreetAddress1("");
+setCity("");
+setState("");
+setZipCode("");
+setEmail("");
+setPhone("");
+setNote("");
+
+  
+
     } catch (error) {
       console.log("Error adding to cart:", error);
     }

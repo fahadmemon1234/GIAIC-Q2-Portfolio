@@ -126,3 +126,24 @@ export const deleteCartItem = async (id: string) => {
     throw new Error("Failed to delete item from cart");
   }
 };
+
+
+export const deleteAllCartItems = async () => {
+  try {
+    // Fetch all items from the "addToCart" table
+    const items = await client.fetch('*[_type == "addToCart"]');
+    
+    if (items.length > 0) {
+      // Loop through and delete each item
+      const deletePromises = items.map((item: { _id: string }) => client.delete(item._id));
+      await Promise.all(deletePromises);
+      console.log('All cart items have been deleted successfully.');
+    } else {
+      console.log('No items found in the cart to delete.');
+    }
+  } catch (error) {
+    console.error("Error deleting all cart items:", error);
+    throw new Error("Failed to delete all items from the cart");
+  }
+};
+
