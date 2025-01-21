@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse, NextApiHandler } from 'next';
 import axios from 'axios';
 
 interface TrackingResponse {
@@ -19,10 +19,7 @@ interface TrackingResponse {
   }[];
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<void> {
+const handler: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
     const { trackingNumber } = req.body;
 
@@ -49,5 +46,7 @@ export default async function handler(
     res.setHeader('Allow', ['POST']);
     res.status(405).end('Method Not Allowed');
   }
-}
+};
 
+// Explicitly export the handler with its expected type
+export default handler;
