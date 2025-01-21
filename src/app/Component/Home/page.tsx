@@ -140,7 +140,7 @@ const Main = () => {
                 occaecat cupidatat non proident.
               </p>
               <Link
-                href="#"
+                href="/Component/Shop"
                 className="bg-primary transition-all hover:bg-orange
                      hover:text-white px-5 md:px-12 py-3 md:py-4 xl:py-4 
                      rounded-full text-orange capitalize font-medium text-sm 
@@ -174,7 +174,7 @@ const Main = () => {
                 occaecat cupidatat non proident.
               </p>
               <Link
-                href="#"
+                href="/Component/Shop"
                 className="bg-primary transition-all hover:bg-orange 
                     hover:text-white px-5 md:px-12 py-3 md:py-4 xl:py-4 
                     rounded-full text-orange capitalize font-medium text-sm 
@@ -247,7 +247,7 @@ const Main = () => {
                 </li>
               </ul>
               <Link
-                href="#"
+                href="/Component/Shop"
                 className="bg-white transition-all hover:bg-orange hover:text-white px-5 md:px-12 py-3 md:py-4 xl:py-4 rounded-full text-orange capitalize font-medium text-sm lg:text-md inline-block leading-normal"
               >
                 Buy Now
